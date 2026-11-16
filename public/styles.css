@@ -1,0 +1,15 @@
+:root { --ink: #2b2118; --paper: #fbf7ef; --accent: #7a4e1d; --muted: #7b6f62; --card: #fff; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 17px/1.55 Georgia, 'Times New Roman', serif; color: var(--ink); background: var(--paper); }
+.app { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { margin: 0; font-size: 2rem; }
+.tagline, .muted { color: var(--muted); }
+.card { background: var(--card); border: 1px solid #e6dccb; border-radius: 12px; padding: 20px; margin: 20px 0; }
+.option, .field { display: block; margin: 10px 0; }
+.reading { font-size: 1.35rem; margin: 6px 0 12px; }
+.chapters { padding-left: 20px; }
+a { color: var(--accent); }
+button { font: inherit; cursor: pointer; }
+.primary { background: var(--accent); color: #fff; border: 0; border-radius: 8px; padding: 10px 18px; margin-top: 8px; }
+.link { background: none; border: 0; color: var(--accent); text-decoration: underline; padding: 0; margin-top: 12px; }
+footer { margin-top: 32px; font-size: 0.9rem; }
