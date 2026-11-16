@@ -2,7 +2,7 @@
 
 A React Bible study guide: daily reading plans, prayers and prayer times, and a world map of where the events of the Bible happened.
 
-**Status:** in planning. Code is on the way.
+**Status:** in progress. Reading plans, the daily streak and notes work now; prayers and the map are next.
 
 ## Planned features
 
@@ -12,6 +12,16 @@ A React Bible study guide: daily reading plans, prayers and prayer times, and a 
 - A highly interactive world map of biblical events: pan, zoom, filter by book or era, and play events through in order
 - Each place on the map linked to the passages that mention it
 - Works on phones, and saves your progress in the browser
+
+## Run it
+
+```bash
+npm install
+npm run build   # builds the site into docs/
+npm test        # plan, progress and SuperBook sync tests
+```
+
+Open `docs/index.html` in a browser. Each chapter link opens in [SuperBook](https://theoyanvno.github.io/SuperBook/).
 
 ## Built with
 
