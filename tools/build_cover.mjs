@@ -1,7 +1,7 @@
 // Builds the study book's paperback cover for Amazon KDP: back, spine and front as one PDF, 6 x 9 trim,
 // black-and-white interior on white paper, 0.125 in bleed all round. The spine width comes from the page
 // count in src/lib/book.js. KDP adds the barcode at the bottom right of the back, so that corner stays clear.
-// Run with `npm run cover`; it writes book/AbramsTree Study Book - cover.pdf (needs Playwright).
+// Run with `npm run cover`; it writes book/AbrahamsTree Study Book - cover.pdf (needs Playwright).
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
@@ -61,7 +61,7 @@ function qr(link, size) {
   return `<svg style="width:${size};height:${size}" viewBox="0 0 ${n + 2 * q} ${n + 2 * q}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
 }
 
-const html = `<!doctype html><html><head><meta charset="utf-8"><title>AbramsTree Study Book - cover</title><style>
+const html = `<!doctype html><html><head><meta charset="utf-8"><title>AbrahamsTree Study Book - cover</title><style>
 @page { size: ${W}in ${H}in; margin: 0; }
 html, body { margin: 0; }
 body { width: ${W}in; height: ${H}in; position: relative; overflow: hidden; background: #f6eedb; color: #2b2118;
@@ -90,7 +90,7 @@ body { width: ${W}in; height: ${H}in; position: relative; overflow: hidden; back
 <div class="band top"></div><div class="band bottom"></div>
 <div class="back"><div class="inner">
   <h2>Read the whole Bible this year</h2>
-  <p>AbramsTree walks with you through every book of the Bible in 52 weeks, about four chapters a day, with room each week to write what stood out to you and what you are praying about.</p>
+  <p>AbrahamsTree walks with you through every book of the Bible in 52 weeks, about four chapters a day, with room each week to write what stood out to you and what you are praying about.</p>
   <ul>
     <li>A week-by-week plan through the whole Orthodox Bible, with a checkbox for every day</li>
     <li>The hours of prayer, morning to night, and your own prayer list</li>
@@ -98,14 +98,14 @@ body { width: ${W}in; height: ${H}in; position: relative; overflow: hidden; back
     <li>Maps of where it happened, era by era</li>
     <li>Journal pages for what God is teaching you</li>
   </ul>
-  <p>Every section has a QR code that opens the free AbramsTree app at the same spot: read the week's chapters in two translations side by side, pray the hours, and explore the map and timeline.</p>
+  <p>Every section has a QR code that opens the free AbrahamsTree app at the same spot: read the week's chapters in two translations side by side, pray the hours, and explore the map and timeline.</p>
 </div>
-<div class="qr">${qr(APP_URL, '0.9in')}<span>Scan to open the free AbramsTree app</span></div>
+<div class="qr">${qr(APP_URL, '0.9in')}<span>Scan to open the free AbrahamsTree app</span></div>
 </div>
-<div class="spine"><div>AbramsTree &nbsp;·&nbsp; ${AUTHOR}</div></div>
+<div class="spine"><div>AbrahamsTree &nbsp;·&nbsp; ${AUTHOR}</div></div>
 <div class="front">
   <div class="cross">☦</div>
-  <div class="title">AbramsTree</div>
+  <div class="title">AbrahamsTree</div>
   <div class="sub">A Bible-in-a-Year Study Book</div>
   <div class="rule"></div>
   ${tree()}
@@ -116,7 +116,7 @@ body { width: ${W}in; height: ${H}in; position: relative; overflow: hidden; back
 </body></html>`;
 
 await mkdir('book', { recursive: true });
-const htmlPath = 'book/AbramsTree Study Book - cover.html';
+const htmlPath = 'book/AbrahamsTree Study Book - cover.html';
 await writeFile(htmlPath, html);
 console.log(`${pages} pages, spine ${SPINE.toFixed(4)} in, cover ${W.toFixed(4)} x ${H} in`);
 let chromium;
@@ -124,6 +124,6 @@ try { ({ chromium } = require('playwright')); } catch { console.log('Playwright 
 const browser = await chromium.launch();
 const page = await browser.newPage();
 await page.goto(pathToFileURL(resolve(htmlPath)).href, { waitUntil: 'load' });
-await page.pdf({ path: 'book/AbramsTree Study Book - cover.pdf', width: `${W}in`, height: `${H}in`, printBackground: true, preferCSSPageSize: true });
+await page.pdf({ path: 'book/AbrahamsTree Study Book - cover.pdf', width: `${W}in`, height: `${H}in`, printBackground: true, preferCSSPageSize: true });
 await browser.close();
-console.log('→ book/AbramsTree Study Book - cover.pdf');
+console.log('→ book/AbrahamsTree Study Book - cover.pdf');

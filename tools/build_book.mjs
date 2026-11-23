@@ -1,7 +1,7 @@
-// Builds the AbramsTree study book: a 6 x 9 inch PDF ready for Amazon KDP (no bleed, mirrored margins
+// Builds the AbrahamsTree study book: a 6 x 9 inch PDF ready for Amazon KDP (no bleed, mirrored margins
 // with room for the binding), laid out by src/lib/book.js so its page numbers match what the app shows.
 // Every QR code opens the matching spot in the app. Run with `npm run book`; it writes
-// book/AbramsTree Study Book.html and book/AbramsTree Study Book.pdf (the PDF needs Playwright).
+// book/AbrahamsTree Study Book.html and book/AbrahamsTree Study Book.pdf (the PDF needs Playwright).
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
@@ -18,7 +18,7 @@ const QRCode = require('./vendor/qrcode/index.js');
 const QRLevel = require('./vendor/qrcode/QRErrorCorrectLevel.js');
 
 const OUT = 'book';
-const NAME = 'AbramsTree Study Book';
+const NAME = 'AbrahamsTree Study Book';
 const AUTHOR = 'Theo Yanvno';                                       // the pen name every book is published under
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const bookLabel = (id) => bookById(id)?.label ?? id;
@@ -49,7 +49,7 @@ const PAGES = {
   title: () => `
     <div class="center title">
       <div class="cross">☦</div>
-      <h1>AbramsTree</h1>
+      <h1>AbrahamsTree</h1>
       <div class="sub">A Bible-in-a-Year Study Book</div>
       <div class="rule"></div>
       <p class="tag">Read the whole Bible in 52 weeks, pray the hours, and walk through who lived when and where it happened, with a free app at every step.</p>
@@ -58,18 +58,18 @@ const PAGES = {
 
   copyright: () => `
     <div class="small bottom">
-      <p><b>AbramsTree: A Bible-in-a-Year Study Book</b></p>
+      <p><b>AbrahamsTree: A Bible-in-a-Year Study Book</b></p>
       <p>Copyright © 2026 ${AUTHOR}. All rights reserved.</p>
       <p>Scripture quotations are from the World English Bible, which is in the public domain. The prayers are the
       traditional prayers of the Orthodox Church. Maps are drawn from Natural Earth data, which is in the public domain.</p>
       <p>The reading plan follows the books of the Orthodox Bible in the order of SuperBook. Dates before Abraham are
       counted from the ages given in Genesis; later dates are approximate.</p>
-      <p>The AbramsTree app is free: ${esc(APP_URL)}</p>
+      <p>The AbrahamsTree app is free: ${esc(APP_URL)}</p>
     </div>`,
 
   how: (p) => `
     <h2>How to use this book</h2>
-    <p>This book and the free AbramsTree app work together. Read and write here; scan a code when you want more.</p>
+    <p>This book and the free AbrahamsTree app work together. Read and write here; scan a code when you want more.</p>
     <ol class="how">
       <li><b>Read a little every day.</b> Each week has a page of seven days of chapters. Check off each day as you read it.</li>
       <li><b>Write it down.</b> Facing each week is a page for notes and prayers: what stood out, what to pray about.</li>
@@ -78,7 +78,7 @@ const PAGES = {
       <li><b>Pray the hours.</b> Part Two has the prayers for morning, the Third, Sixth and Ninth Hours, evening and night.</li>
       <li><b>See the big picture.</b> Parts Three and Four show who lived when and where it happened.</li>
     </ol>
-    <div class="center">${qrBox(p.link, 'Scan to open AbramsTree')}</div>
+    <div class="center">${qrBox(p.link, 'Scan to open AbrahamsTree')}</div>
     <p class="small center">Or visit ${esc(APP_URL)}</p>`,
 
   contents: () => `

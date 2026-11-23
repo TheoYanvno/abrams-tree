@@ -1,4 +1,4 @@
-// The AbramsTree study book: a 6 x 9 printed companion to the app. This file lays out its pages in
+// The AbrahamsTree study book: a 6 x 9 printed companion to the app. This file lays out its pages in
 // order and gives every page that has a QR code its link into the app, so the book (tools/build_book.mjs)
 // and the app (which shows "Book page N") always agree on page numbers. Pure functions, tested in Node.
 import { planById, schedule, describe } from './plans.js';

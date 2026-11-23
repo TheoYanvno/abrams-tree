@@ -26,7 +26,7 @@ export default function Prayers({ route = {} }) {
     const next = nextReminder(times);
     if (!next) return;
     const id = setTimeout(() => {
-      try { new Notification(`AbramsTree: ${next.hour.name}`, { body: next.hour.verse.text }); } catch { /* not allowed here */ }
+      try { new Notification(`AbrahamsTree: ${next.hour.name}`, { body: next.hour.verse.text }); } catch { /* not allowed here */ }
       setTimes((t) => [...t]);                       // schedule the one after
     }, Math.min(next.at - Date.now(), 2 ** 31 - 1));
     return () => clearTimeout(id);
@@ -116,7 +116,7 @@ export default function Prayers({ route = {} }) {
         <p>
           <button className="primary" disabled={!times.length} onClick={downloadCalendar}>Add to my calendar (.ics)</button>
         </p>
-        <p className="muted">The calendar file works best: your phone or computer reminds you every day, even when AbramsTree is closed.</p>
+        <p className="muted">The calendar file works best: your phone or computer reminds you every day, even when AbrahamsTree is closed.</p>
         {permission === 'default' && <button className="link" onClick={askPermission}>Also remind me here while this page is open</button>}
         {permission === 'granted' && next && <p className="muted">While this page is open, you'll get a reminder for {next.hour.name} at {hhmm(next.at)}.</p>}
         {permission === 'denied' && <p className="muted">Notifications are blocked for this site, so use the calendar file instead.</p>}

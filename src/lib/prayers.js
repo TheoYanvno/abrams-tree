@@ -80,11 +80,11 @@ const ics = (s) => s.replace(/[\;,]/g, (c) => `\\${c}`);
 /**
  * An .ics calendar file with a daily event, and an alert, for each chosen prayer time, starting on
  * `date` ('YYYY-MM-DD'). Imported into a phone or computer calendar, the reminders work even when
- * AbramsTree isn't open. `stamp` is when the file was made, as 'YYYYMMDDTHHMMSSZ'.
+ * AbrahamsTree isn't open. `stamp` is when the file was made, as 'YYYYMMDDTHHMMSSZ'.
  */
 export function prayerCalendar(enabled, date, stamp) {
   const day = date.replaceAll('-', '');
-  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AbramsTree//Prayer times//EN', 'CALSCALE:GREGORIAN'];
+  const lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//AbrahamsTree//Prayer times//EN', 'CALSCALE:GREGORIAN'];
   for (const hour of HOURS.filter((h) => enabled.includes(h.id))) {
     const t = hour.time.replace(':', '');
     lines.push('BEGIN:VEVENT', `UID:abramstree-${hour.id}-${day}@theoyanvno.github.io`, `DTSTAMP:${stamp}`,

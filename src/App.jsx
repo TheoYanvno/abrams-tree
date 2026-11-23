@@ -38,14 +38,14 @@ export default function App() {
   return (
     <div className={`app ${tab === 'map' || tab === 'timeline' ? 'wide' : ''}`}>
       <header>
-        <h1>📜 AbramsTree</h1>
+        <h1>📜 AbrahamsTree</h1>
         <p className="tagline">A Bible study guide: a daily reading plan, prayers, a map of where it happened and a timeline of who lived when.</p>
         <nav className="tabs" aria-label="Sections">
           {TABS.map((t) => (
             <a key={t.id} href={`#${t.id}`} aria-current={t.id === tab ? 'page' : undefined}>{t.label}</a>
           ))}
         </nav>
-        {bookPage && <p className="book-page">📕 This goes with page {bookPage} of the AbramsTree study book.</p>}
+        {bookPage && <p className="book-page">📕 This goes with page {bookPage} of the AbrahamsTree study book.</p>}
       </header>
       <main><Page key={hash} route={route} /></main>
       <footer className="muted">

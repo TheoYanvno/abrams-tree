@@ -2,7 +2,7 @@
 //
 // From Adam to Joseph the years are counted from creation using the ages Genesis gives: how old each
 // father was when his son was born and how long each one lived. These are the Hebrew numbers, the
-// ones in every translation AbramsTree reads (the Greek Septuagint gives some fathers 100 years more).
+// ones in every translation AbrahamsTree reads (the Greek Septuagint gives some fathers 100 years more).
 // Each person stores only what the chapter says; src/lib/timeline.js adds them up.
 //
 // From Abraham to the apostles the years are BC and AD, worked back from Solomon's temple: it was begun
