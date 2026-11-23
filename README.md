@@ -2,6 +2,8 @@
 
 A React Bible study guide: daily reading plans, prayers and prayer times, a world map of where the events of the Bible happened, and a timeline of when the people of the Bible lived.
 
+**Live app:** [theoyanvno.github.io/abrams-tree](https://theoyanvno.github.io/abrams-tree/)
+
 **Status:** finished. Reading plans, translations side by side, prayers, the map and the timeline all work.
 
 ## What it does
