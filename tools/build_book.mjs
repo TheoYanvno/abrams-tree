@@ -21,6 +21,7 @@ import { bookById } from '../src/lib/books.js';
 import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD_TIME, GOD_DAY, span, ticks, percent }
   from '../src/lib/timeline.js';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor } from '../src/data/study.js';
+import { ORTHODOXY } from '../src/data/orthodoxy.js';
 
 const require = createRequire(import.meta.url);
 const QRCode = require('./vendor/qrcode/index.js');
@@ -293,6 +294,19 @@ function volumeHtml(v, fillers, toc) {
     out.push(weekLeft(w), weekRight(w));
     out.push(`<section class="reading">${readingHtml(w)}</section>`);
   }
+  // The Orthodox Faith: what the Church is, its history, beliefs and way of life, and how to become Orthodox.
+  const O = ORTHODOXY;
+  out.push(sheet('part', `${marker('FAITH')}<div class="partno">Come and see</div><h1>The Orthodox Faith</h1><div class="rule"></div>
+    <p>What the Orthodox Church is, where it comes from, what it believes, how it lives, and how to become Orthodox.</p>`, true));
+  out.push(`<section class="faith">
+    <h2>What is the Orthodox Church?</h2>${O.intro.map((t) => `<p>${esc(t)}</p>`).join('')}
+    <h2>A short history</h2><dl>${O.history.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
+    <h2>What Orthodox Christians believe</h2><dl>${O.beliefs.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
+    <h2>The Orthodox way of life</h2><dl>${O.values.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
+    <h2>How to become Orthodox, step by step</h2><p class="note">${esc(O.joinNote)}</p>
+    <ol class="steps">${O.join.map(([k, t]) => `<li><b>${esc(k)}.</b> ${esc(t)} <span class="tick">☐</span></li>`).join('')}</ol>
+    <div class="label">My notes and questions for the priest</div>${lines(8)}
+  </section>`);
   out.push(sheet('part', `${marker('PRAY')}<div class="partno">Pray without ceasing</div><h1>The Hours of Prayer</h1><div class="rule"></div>
     <p>The Church prays through the day: in the morning, at the Third, Sixth and Ninth Hours, in the evening and before sleep.</p>${qrBox(route('pray'))}`, true));
   for (const h of HOURS) out.push(sheet('hour', marker('H' + h.id) + PAGES.hour({ hour: h.id, link: route('pray', 'hour', h.id) })));
@@ -376,6 +390,12 @@ blockquote cite { display: block; font-style: normal; font-size: 8.5pt; margin-t
 .places { font-size: 8.2pt; padding-left: 15pt; margin: 0; } .places li { margin-bottom: 1.5pt; }
 /* the Bible text */
 .reading { break-after: page; }
+.faith { break-after: page; font-size: 9.6pt; line-height: 1.4; }
+.faith h2 { font-size: 13pt; margin: 12pt 0 5pt; break-after: avoid; border-bottom: 1px solid #111; padding-bottom: 2pt; }
+.faith h2:first-child { margin-top: 0; }
+.faith dl { margin: 0; } .faith dt { font-weight: bold; margin-top: 5pt; break-after: avoid; } .faith dd { margin: 1pt 0 0 0.18in; }
+.faith .note { font-style: italic; } .faith .steps { padding-left: 0.22in; } .faith .steps li { margin-bottom: 5pt; break-inside: avoid; }
+.faith .tick { float: right; margin-left: 6pt; }
 .day { margin-bottom: 8pt; }
 .dayhead { font-size: 9pt; font-weight: bold; border-top: 1.5px solid #111; border-bottom: 0.6px solid #111; padding: 2pt 0; margin: 2pt 0 5pt; break-after: avoid; }
 .dayhead span { font-weight: normal; }
@@ -404,7 +424,7 @@ function tocFor(v, found) {
     const wk = WEEKS[w - 1];
     rows.push([`Week ${w} · ${wk.days[0].text.split(',')[0]} – ${wk.days.at(-1).text.split(',').at(-1).trim()}`, found['W' + w]]);
   }
-  rows.push(['The Hours of Prayer', found.PRAY], ['Timeline and Maps', found.TIME], ['Journal', found.JOURNAL]);
+  rows.push(['The Orthodox Faith', found.FAITH], ['The Hours of Prayer', found.PRAY], ['Timeline and Maps', found.TIME], ['Journal', found.JOURNAL]);
   return rows;
 }
 
