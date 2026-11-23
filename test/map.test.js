@@ -53,3 +53,18 @@ test('zooming keeps the point under the pointer, and the view stays on the map',
   assert.ok(c.x + c.w <= FULL.w && c.y >= 0);
   assert.deepStrictEqual(clampView({ x: 5, y: 5, w: 1e6 }), FULL);
 });
+
+import { weeks } from '../src/lib/book.js';
+import { BOOKS } from '../src/lib/books.js';
+import { BOOK_ENDS } from '../src/data/bookEnds.js';
+
+test('every week of the reading plan has places on the map, and every book has its closing summary and timeline', () => {
+  for (const w of weeks()) {
+    const keys = new Set(w.days.flatMap((d) => d.chapters.map((c) => `${c.book}|${c.chapter}`)));
+    assert.ok(EVENTS.some((e) => keys.has(`${e.book}|${e.chapter}`)), `week ${w.week}`);
+  }
+  for (const b of BOOKS) {
+    const end = BOOK_ENDS[b.id];
+    assert.ok(end && end.summary.length > 60 && end.span.length === 2 && end.events.length, b.id);
+  }
+});

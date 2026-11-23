@@ -4,6 +4,8 @@ import { bookById, superbookLink } from './lib/books.js';
 import Translations from './Translations.jsx';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from './data/study.js';
 import { platesInWeek, leadFor, plateRef } from './lib/dore.js';
+import { EVENTS, placeById } from './lib/map.js';
+import { BOOK_ENDS } from './data/bookEnds.js';
 
 const ALL = weeks();
 
@@ -40,6 +42,7 @@ export default function BookWeek({ week }) {
       </section>
       <StudyNotes w={w} />
       <Pictures w={w} />
+      <Places w={w} />
       <Translations chapters={day.chapters} />
     </>
   );
@@ -94,6 +97,30 @@ function Pictures({ w }) {
         ))}
       </div>
       <p className="muted small">Engravings by Gustave Doré, <i>La Grande Bible de Tours</i> (1866), public domain. Derived from AionianBible.org by Nainoia Inc.</p>
+    </section>
+  );
+}
+
+/** The places of this week's readings (the same as the map on the printed week's second page), and the
+ *  summary of any book that ends this week. */
+function Places({ w }) {
+  const keys = new Set(w.days.flatMap((d) => d.chapters.map((c) => `${c.book}|${c.chapter}`)));
+  const events = EVENTS.filter((e) => keys.has(`${e.book}|${e.chapter}`));
+  const ending = [...new Set(w.days.flatMap((d) => d.chapters.filter((c) => c.chapter === bookById(c.book).chapters).map((c) => c.book)))];
+  return (
+    <section className="card" aria-labelledby="places">
+      <h2 id="places">This week on the map</h2>
+      <ol>
+        {events.map((e) => (
+          <li key={e.id}><a href={route('map', 'era', e.era)}>{placeById(e.place).name}</a>: {e.title} <span className="muted">({bookById(e.book).label} {e.chapter})</span></li>
+        ))}
+      </ol>
+      {ending.filter((b) => BOOK_ENDS[b]).map((b) => (
+        <div key={b}>
+          <h3>The end of {bookById(b).label}</h3>
+          <p>{BOOK_ENDS[b].summary}</p>
+        </div>
+      ))}
     </section>
   );
 }

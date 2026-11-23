@@ -37,63 +37,63 @@
  ],
  "#read/week/10": [
   1,
-  340
+  342
  ],
  "#read/week/11": [
   1,
-  376
+  378
  ],
  "#read/week/12": [
   1,
-  422
+  424
  ],
  "#read/week/13": [
   1,
-  464
+  466
  ],
  "#pray/hour/morning": [
   1,
-  507
+  510
  ],
  "#pray/hour/third": [
   1,
-  508
+  511
  ],
  "#pray/hour/sixth": [
   1,
-  509
+  512
  ],
  "#pray/hour/ninth": [
   1,
-  510
+  513
  ],
  "#pray/hour/evening": [
   1,
-  511
+  514
  ],
  "#pray/hour/night": [
   1,
-  512
+  515
  ],
  "#timeline/week": [
   1,
-  516
+  519
  ],
  "#timeline/genesis": [
   1,
-  518
+  521
  ],
  "#map/era/patriarchs": [
   1,
-  519
+  522
  ],
  "#map/era/exodus": [
   1,
-  520
+  523
  ],
  "#map/era/kings": [
   1,
-  521
+  524
  ],
  "#read/week/14": [
   2,
@@ -109,51 +109,51 @@
  ],
  "#read/week/17": [
   2,
-  110
+  112
  ],
  "#read/week/18": [
   2,
-  142
+  146
  ],
  "#read/week/19": [
   2,
-  200
+  204
  ],
  "#read/week/20": [
   2,
-  228
+  232
  ],
  "#read/week/21": [
   2,
-  248
+  252
  ],
  "#read/week/22": [
   2,
-  268
+  272
  ],
  "#read/week/23": [
   2,
-  288
+  292
  ],
  "#read/week/24": [
   2,
-  310
+  314
  ],
  "#read/week/25": [
   2,
-  330
+  334
  ],
  "#read/week/26": [
   2,
-  356
+  360
  ],
  "#timeline/later": [
   2,
-  407
+  411
  ],
  "#map/era/exile": [
   2,
-  409
+  413
  ],
  "#read/week/27": [
   3,
@@ -177,35 +177,35 @@
  ],
  "#read/week/32": [
   3,
-  156
+  158
  ],
  "#read/week/33": [
   3,
-  180
+  184
  ],
  "#read/week/34": [
   3,
-  206
+  210
  ],
  "#read/week/35": [
   3,
-  240
+  244
  ],
  "#read/week/36": [
   3,
-  276
+  280
  ],
  "#read/week/37": [
   3,
-  312
+  316
  ],
  "#read/week/38": [
   3,
-  352
+  358
  ],
  "#read/week/39": [
   3,
-  392
+  398
  ],
  "#read/week/40": [
   4,
@@ -241,30 +241,30 @@
  ],
  "#read/week/48": [
   4,
-  252
+  254
  ],
  "#read/week/49": [
   4,
-  270
+  274
  ],
  "#read/week/50": [
   4,
-  286
+  292
  ],
  "#read/week/51": [
   4,
-  304
+  312
  ],
  "#read/week/52": [
   4,
-  322
+  332
  ],
  "#map/era/jesus": [
   4,
-  368
+  379
  ],
  "#map/era/church": [
   4,
-  369
+  380
  ]
 }

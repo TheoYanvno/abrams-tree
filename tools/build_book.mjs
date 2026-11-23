@@ -2,9 +2,9 @@
 // year, in four 6 x 9 volumes of 13 weeks each, ready for Amazon KDP (no bleed, mirrored margins with
 // room for the binding). Each week opens with a two-page spread: the week, the lesson of the week, a
 // saint's words and short life, a "Did you know?" with a Doré engraving and the lesson plan on the left;
-// any new books, a prayer to learn by heart and room for notes on the right. The week's chapters follow
+// any new books, a prayer to learn by heart and the week's map on the right. The week's chapters follow
 // in two columns, with Gustave Doré's engravings beside the verses they show and three lines for notes at
-// the foot of every page, and each week ends with a notes page. Each volume ends with the hours of prayer,
+// the foot of every page, a summary and timeline at the end of each book, and each week ends with a notes page. Each volume ends with the hours of prayer,
 // a prayer list, that part's timeline and
 // maps, and journal pages. Every QR code opens the same spot in the free app, and the build writes the
 // page numbers the app shows to src/data/bookPages.json.
@@ -19,7 +19,8 @@ import { resolve, dirname, join } from 'node:path';
 import { weeks, route, APP_URL, PLAN } from '../src/lib/book.js';
 import { HOURS, hourById } from '../src/lib/prayers.js';
 import { BASEMAP, ERAS, EVENTS, FULL, project, placeById } from '../src/lib/map.js';
-import { bookById } from '../src/lib/books.js';
+import { bookById, BOOKS } from '../src/lib/books.js';
+import { BOOK_ENDS } from '../src/data/bookEnds.js';
 import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD_TIME, GOD_DAY, span, ticks, percent }
   from '../src/lib/timeline.js';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from '../src/data/study.js';
@@ -178,6 +179,74 @@ function eraPage(p) {
 }
 
 
+/** A view box around some map points, with the given aspect, kept inside the base map. */
+function fitView(pts, aspect, minW = 34, minH = 26, pad = 1.35) {
+  const x0 = Math.min(...pts.map((q) => q.x)), x1 = Math.max(...pts.map((q) => q.x));
+  const y0 = Math.min(...pts.map((q) => q.y)), y1 = Math.max(...pts.map((q) => q.y));
+  let w = Math.max(x1 - x0, minW) * pad, h = Math.max(y1 - y0, minH) * pad;
+  if (w / h > aspect) h = w / aspect; else w = h * aspect;
+  const edge = 4, maxW = FULL.w - 2 * edge, maxH = FULL.h - 2 * edge;
+  if (w > maxW) { w = maxW; h = w / aspect; }
+  if (h > maxH) { h = maxH; w = h * aspect; }
+  const cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  return { x: Math.max(edge, Math.min(FULL.w - edge - w, cx - w / 2)), y: Math.max(edge, Math.min(FULL.h - edge - h, cy - h / 2)), w, h };
+}
+
+/** Each week's map: the places of that week's readings, numbered and joined in the order they come, over
+ *  grey dots for every place the reading has already been, so the map follows the reader through the Bible. */
+function weekMap(w) {
+  const inWeek = new Set(w.days.flatMap((d) => d.chapters.map((c) => `${c.book}|${c.chapter}`)));
+  const order = [...inWeek];
+  const events = EVENTS.filter((e) => inWeek.has(`${e.book}|${e.chapter}`))
+    .sort((a, b) => order.indexOf(`${a.book}|${a.chapter}`) - order.indexOf(`${b.book}|${b.chapter}`) || a.id - b.id);
+  if (!events.length) return '';
+  const before = new Set(WEEKS.slice(0, w.week - 1).flatMap((x) => x.days.flatMap((d) => d.chapters.map((c) => `${c.book}|${c.chapter}`))));
+  const places = [...new Set(events.map((e) => e.place))].map(placeById);
+  const seen = [...new Set(EVENTS.filter((e) => before.has(`${e.book}|${e.chapter}`)).map((e) => e.place))].filter((id) => !places.some((p) => p.id === id)).map(placeById);
+  const near = (pl) => pl.lon > 34 && pl.lon < 36.6 && pl.lat > 30.6 && pl.lat < 33.6;   // the land of Israel
+  let vb = fitView(places.map(project), 4.75 / 3.1, 40, 28, 1.5);
+  const cluster = places.filter(near);
+  const useInset = cluster.length >= 2 && vb.w > 160;
+  const main = useInset ? places.filter((p) => !near(p)) : places;
+  if (useInset) vb = fitView([...main, ...cluster].map(project), 4.75 / 3.1, 40, 28, 1.5);
+  const u = vb.w / 470;
+  const num = new Map(places.map((pl, i) => [pl.id, i + 1]));
+  const path = places.map(project).map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ');
+  const svg = `<svg class="map" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}" preserveAspectRatio="xMidYMid slice">
+      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#e8eef2"/>
+      ${BASEMAP.land.map((d) => `<path d="${d}" fill="#fff" stroke="#666" stroke-width="${0.8 * u}" fill-rule="evenodd"/>`).join('')}
+      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#e8eef2" stroke="#666" stroke-width="${0.6 * u}"/>`).join('')}
+      ${BASEMAP.rivers.map((r) => `<path d="${r.d}" fill="none" stroke="#888" stroke-width="${1.1 * u}"/>`).join('')}
+      ${seen.map((pl) => { const q = project(pl); return `<circle cx="${q.x}" cy="${q.y}" r="${3.2 * u}" fill="#fff" stroke="#888" stroke-width="${1 * u}"/>`; }).join('')}
+      ${places.length > 1 ? `<path d="${path}" fill="none" stroke="#000" stroke-width="${1.2 * u}" stroke-dasharray="${4 * u} ${3 * u}"/>` : ''}
+      ${(useInset ? main : places).map((pl) => dot(pl, u)).join('')}
+      ${useInset ? (() => { const b = fitView(cluster.map(project), 1, 6, 6, 1.6); return `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" fill="none" stroke="#000" stroke-width="${1.2 * u}"/>`; })() : ''}
+    </svg>`;
+  function dot(pl, uu) { const q = project(pl); const n = num.get(pl.id); return `<circle cx="${q.x}" cy="${q.y}" r="${7 * uu}" fill="#000"/>
+        <text x="${q.x}" y="${q.y + 3.3 * uu}" font-size="${9 * uu}" fill="#fff" text-anchor="middle" font-weight="bold">${n}</text>`; }
+  let inset = '', corner = 'tl';
+  if (useInset) {
+    // put the inset in the corner that hides the fewest places
+    const box = (c) => { const iw = vb.w * 0.4, ih = vb.w * 0.4; const x = c[1] === 'l' ? vb.x : vb.x + vb.w - iw, y = c[0] === 't' ? vb.y : vb.y + vb.h - ih; return { x, y, iw, ih }; };
+    const hidden = (c) => { const b = box(c); return [...main, ...cluster, ...seen].filter((pl) => { const q = project(pl); return q.x >= b.x && q.x <= b.x + b.iw && q.y >= b.y && q.y <= b.y + b.ih; }).length; };
+    corner = ['tl', 'tr', 'bl', 'br'].reduce((best, c) => (hidden(c) < hidden(best) ? c : best), 'tl');
+    const ib = fitView(cluster.map(project), 1, 26, 26, 1.4);
+    const iu = ib.w / 150;
+    const ipath = cluster.map(project).map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ');
+    inset = `<svg class="inset" viewBox="${ib.x} ${ib.y} ${ib.w} ${ib.h}">
+      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#e8eef2"/>
+      ${BASEMAP.land.map((d) => `<path d="${d}" fill="#fff" stroke="#666" stroke-width="${0.8 * iu}" fill-rule="evenodd"/>`).join('')}
+      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#e8eef2" stroke="#666" stroke-width="${0.6 * iu}"/>`).join('')}
+      ${BASEMAP.rivers.map((r) => `<path d="${r.d}" fill="none" stroke="#888" stroke-width="${1.1 * iu}"/>`).join('')}
+      <path d="${ipath}" fill="none" stroke="#000" stroke-width="${1.2 * iu}" stroke-dasharray="${4 * iu} ${3 * iu}"/>
+      ${cluster.map((pl) => dot(pl, iu)).join('')}
+      <text x="${ib.x + 5 * iu}" y="${ib.y + 12 * iu}" font-size="${9 * iu}" font-style="italic">The land of Israel</text></svg>`;
+  }
+  return `<div class="wmap"><div class="label">This week on the map</div><div class="mapbox">${svg}${inset.replace('class="inset"', `class="inset ${corner}"`)}</div>
+    <ol class="places">${places.map((pl) => `<li><b>${esc(pl.name)}</b>: ${events.filter((e) => e.place === pl.id).map((e) => `${esc(e.title)} <i>(${esc(bookLabel(e.book).replace(/ \(.*\)/, ''))} ${e.chapter})</i>`).join('; ')}</li>`).join('')}</ol>
+    ${seen.length ? '<p class="key">Open circles: places the reading has already visited.</p>' : ''}</div>`;
+}
+
 // ---- the volumes ---------------------------------------------------------------------------------
 
 const BIBLE = JSON.parse(gunzipSync(await readFile(join(HERE, 'data/web.json.gz'))).toString('utf8'));
@@ -206,6 +275,47 @@ const booksStarting = (w) => [...new Set(w.days.flatMap((d) => d.chapters.filter
 
 const marker = (id) => `<span class="mk">@@${id}@@</span>`;
 const sheet = (cls, inner, plain = false) => `<section class="sheet ${cls}${plain ? ' plain' : ''}">${inner}</section>`;
+
+// ---- the end of each book: its summary and its place on the timeline of the whole Bible ----------
+
+const TL = { w: 340, x0: 50, x1: 334, from: -2200, to: 100 };
+const tlX = (y) => (y === 'pre' ? 10 : y === 'pre2' ? 30 : TL.x0 + ((y - TL.from) / (TL.to - TL.from)) * (TL.x1 - TL.x0));
+const TL_ERAS = [[-2200, -1876, 'Patriarchs'], [-1876, -1446, 'In Egypt'], [-1446, -1406, ''], [-1406, -1050, 'Judges'],
+  [-1050, -586, 'Kings and prophets'], [-586, -538, ''], [-538, -332, 'Persia'], [-332, -63, 'Greeks'], [-63, 100, 'Rome']];
+const yearLabel = (y) => (y < 0 ? `${-y} BC` : `AD ${y}`);
+
+/** The timeline at the end of a book: the whole span of the Bible's history, the books read so far in grey,
+ *  and this book in black with its events, so the timeline fills in as the reader goes. */
+function bookTimeline(id) {
+  const end = BOOK_ENDS[id];
+  const so = BOOKS.slice(0, BOOKS.findIndex((b) => b.id === id)).map((b) => BOOK_ENDS[b.id]).filter(Boolean);
+  const bar = (span, y, h, fill, extra = '') => {
+    const a = tlX(span[0]), b = tlX(span[1]);
+    return b - a < 3 ? `<rect x="${(a + b) / 2 - 1.6}" y="${y}" width="3.2" height="${h}" fill="${fill}" ${extra}/>` : `<rect x="${a}" y="${y}" width="${b - a}" height="${h}" fill="${fill}" ${extra}/>`;
+  };
+  const eras = TL_ERAS.map(([a, b, name], i) => `<rect x="${tlX(a)}" y="12" width="${tlX(b) - tlX(a)}" height="11" fill="${i % 2 ? '#e4e4e4' : '#f2f2f2'}"/>`
+    + (name ? `<text x="${(tlX(a) + tlX(b)) / 2}" y="20" font-size="6.2" text-anchor="middle" fill="#444">${name}</text>` : '')).join('');
+  const ticks = [-2000, -1000, 1].map((y) => `<text x="${tlX(y)}" y="8" font-size="5.6" text-anchor="middle" fill="#555">${y === 1 ? 'AD 1' : yearLabel(y)}</text><line x1="${tlX(y)}" y1="9.5" x2="${tlX(y)}" y2="12" stroke="#777" stroke-width="0.5"/>`).join('');
+  const pre = `<rect x="2" y="12" width="44" height="11" fill="#f7f7f7" stroke="#bbb" stroke-width="0.4" stroke-dasharray="1.5 1"/><text x="24" y="20" font-size="5.2" text-anchor="middle" fill="#444">Before Abraham</text>`;
+  const read = so.map((e) => bar(e.span, 27, 5, '#bbb')).join('');
+  const me = bar(end.span, 35, 7, end.uncertain ? 'url(#tlhatch)' : '#000', end.uncertain ? 'stroke="#000" stroke-width="0.6" stroke-dasharray="2 1"' : '');
+  const evs = end.events.map(([y, label], i) => {
+    const x = tlX(y), ly = [54, 63, 72][i % 3];
+    const anchor = x < 70 ? 'start' : x > 290 ? 'end' : 'middle';
+    return `<line x1="${x}" y1="42" x2="${x}" y2="${ly - 6}" stroke="#000" stroke-width="0.5"/><text x="${x}" y="${ly}" font-size="6.8" text-anchor="${anchor}">${esc(label)}${typeof y === 'number' ? ` <tspan fill="#555">(${yearLabel(y)})</tspan>` : ''}</text>`;
+  }).join('');
+  return `<svg class="tl" viewBox="0 0 ${TL.w} 76"><defs><pattern id="tlhatch" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="3" stroke="#000" stroke-width="0.8"/></pattern></defs>
+    ${ticks}${pre}${eras}<text x="0" y="31.5" font-size="5" fill="#777">read so far</text>${read}${me}${evs}</svg>`;
+}
+
+/** The box that closes each book: a summary and the timeline. */
+function bookEndHtml(id) {
+  const end = BOOK_ENDS[id];
+  if (!end) return '';
+  const name = bookLabel(id);
+  return `<div class="bookend"><div class="label">The end of ${esc(name)}</div><p>${esc(end.summary)}</p>${bookTimeline(id)}
+    <p class="tcap">Black: ${esc(name.replace(/ \(.*\)/, ''))}${end.uncertain ? ' (date uncertain)' : ''}. Grey: the books read so far. Dates are approximate.</p></div>`;
+}
 
 /** A Doré engraving set in the Bible text, a column wide, with its title and the verse it shows. */
 const plateHtml = (p) => `<figure class="plate"><img src="${plateSrc(p)}" width="${p.w}" height="${p.h}"><figcaption>${esc(p.title)} <span>· ${esc(plateRef(p))}</span></figcaption></figure>`;
@@ -243,7 +353,9 @@ function readingHtml(w) {
       const first = ch === '1';
       const name = bookLabel(book);
       const label = book === 'Psalms' ? `Psalm ${ch}` : book === 'Baruch' && ch === '6' ? 'Baruch 6' : `${name.replace(/ \(.*\)/, '')} ${ch}`;
-      return `${first ? `<h3 class="book">${esc(name)}</h3>` : ''}<h4 class="ch">${esc(label)}</h4>${verseHtml(BIBLE[book][ch] || [], ch, PLATES[`${book}|${ch}`])}`;
+      const last = EXTRA[book] ? ch === EXTRA[book] : Number(ch) === bookById(book).chapters;
+      return `${first ? `<h3 class="book">${esc(name)}</h3>` : ''}<h4 class="ch">${esc(label)}</h4>${verseHtml(BIBLE[book][ch] || [], ch, PLATES[`${book}|${ch}`])}`
+        + (last ? `</div>${bookEndHtml(book)}<div class="cols">` : '');
     }).join('');
     return `<div class="day"><div class="dayhead">☐ Day ${d.day} <span>· ${esc(d.text)}</span></div><div class="cols">${text}</div></div>`;
   }).join('');
@@ -268,7 +380,7 @@ function weekLeft(w) {
     <p class="each">Each day: read the chapters, say the prayer you are learning, and write down one verse.</p></div>`);
 }
 
-/** The second page of each week: introductions to new books, the prayer to learn by heart, and notes. */
+/** The second page of each week: introductions to new books, the prayer to learn by heart, and the week's map. */
 function weekRight(w) {
   const intros = booksStarting(w).filter((b) => INTROS[b]);
   const { prayer: [title, text], step } = memoryFor(w.week);
@@ -276,7 +388,7 @@ function weekRight(w) {
     ${intros.length ? `<div class="intros"><div class="label">New this week</div>${intros.map((b) => `<p><b>${esc(bookLabel(b))}.</b> ${esc(INTROS[b])}</p>`).join('')}</div>` : ''}
     <div class="memory"><div class="label">Pray it by heart · week ${step} of 4</div><h4>${esc(title)}</h4><p class="ptext">${esc(text)}</p>
       <p class="step">${esc(MEMORY_STEPS[step - 1])}</p><div class="ticks">${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => `<span>☐ ${d}</span>`).join('')}</div></div>
-    <div class="notes"><div class="label">Notes and prayers</div><div class="nlines">${lines(22)}</div></div>`);
+    ${weekMap(w)}`);
 }
 
 /** The notes page that closes each week's reading. */
@@ -309,7 +421,8 @@ function volumeHtml(v, fillers, toc) {
   out.push(sheet('how', `${marker('HOW')}<h2>How to use this book</h2>
     <p>This is the whole Bible, read in a year in four volumes of 13 weeks. This volume has weeks ${v.weeks[0]} to ${v.weeks[1]}.</p>
     <ol class="how">
-      <li><b>Start each week</b> with its two pages: the lesson of the week, a saint's words and life, a "Did you know?" and the lesson plan, then any new books and a prayer to learn by heart.</li>
+      <li><b>Start each week</b> with its two pages: the lesson of the week, a saint's words and life, a "Did you know?" and the lesson plan, then any new books, a prayer to learn by heart, and a map of the week's places that fills in as you go.</li>
+      <li><b>At the end of each book</b> you'll find a short summary and a timeline showing where the book fits in the Bible's story, with the books you've read so far.</li>
       <li><b>Write as you go:</b> every page of Scripture has three lines for notes at the foot, and each week ends with a notes page.</li>
       <li><b>Read each day</b> in the pages that follow. Each day is marked; tick it when you've read it.</li>
       <li><b>Write it down</b> in the notes space beside each week.</li>
@@ -428,7 +541,9 @@ p { margin: 0 0 6pt; }
 .memory { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt; margin-bottom: 8pt; font-size: 8.6pt; }
 .memory h4 { margin: 0 0 3pt; font-size: 10.5pt; } .memory .ptext { margin: 0 0 4pt; line-height: 1.32; }
 .memory .step { font-style: italic; margin: 0 0 3pt; } .ticks { display: flex; justify-content: space-between; font-size: 8pt; }
-.notes { flex: 1; overflow: hidden; } .nlines .line { height: 0.27in; }
+.notes { flex: 1; overflow: hidden; }
+.wmap { flex: 1; min-height: 0; display: flex; flex-direction: column; } .wmap .mapbox { flex: 1; min-height: 1.6in; margin-bottom: 4pt; } .wmap .map { width: 100%; height: 100%; } .wmap .mapbox { position: relative; } .wmap .inset { position: absolute; width: 38%; height: auto; border: 1px solid #000; background: #fff; } .inset.tl { top: 5pt; left: 5pt; } .inset.tr { top: 5pt; right: 5pt; } .inset.bl { bottom: 5pt; left: 5pt; } .inset.br { bottom: 5pt; right: 5pt; }
+.wmap .places { font-size: 7.8pt; line-height: 1.25; } .wmap .key { font-size: 7pt; font-style: italic; color: #555; margin: 2pt 0 0; } .nlines .line { height: 0.27in; }
 .filler .nlines .line { height: 0.32in; }
 .line { border-bottom: 1px solid #aaa; height: 0.3in; }
 .fill { display: inline-block; border-bottom: 1px solid #333; width: 2.4in; height: 1em; }
@@ -461,6 +576,10 @@ blockquote cite { display: block; font-style: normal; font-size: 8.5pt; margin-t
 .faith .refs span { font-style: normal; font-weight: bold; color: #555; font-size: 7pt; text-transform: uppercase; letter-spacing: .06em; }
 .faith .when { font-weight: normal; font-style: italic; color: #555; font-size: 8.5pt; margin-left: 4pt; }
 .day { margin-bottom: 8pt; }
+.bookend { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt 4pt; margin: 6pt 0 8pt; break-inside: avoid; font-size: 8.4pt; line-height: 1.3; }
+.bookend p { margin: 0 0 4pt; } .bookend .tl { width: 100%; height: auto; display: block; margin: 2pt 0 1pt; }
+.bookend .tcap { font-size: 6.8pt; font-style: italic; color: #555; margin: 0; }
+.cols:empty { display: none; }
 .dayhead { font-size: 9pt; font-weight: bold; border-top: 1.5px solid #111; border-bottom: 0.6px solid #111; padding: 2pt 0; margin: 2pt 0 5pt; break-after: avoid; }
 .dayhead span { font-weight: normal; }
 .cols { column-count: 2; column-gap: 0.2in; column-rule: 0.4px solid #bbb; font-size: 8.4pt; line-height: 1.24; text-align: justify; hyphens: auto; }
