@@ -89,11 +89,23 @@ export const GOD_TIME = [
   ['2pe3', '2 Peter 3:8', '2 Peter', 3, 'But don\'t forget this one thing, beloved, that one day is with the Lord as a thousand years, and a thousand years as one day.',
     'God is not slow: He is patient, and His day is a thousand of our years.'],
   ['gen2', 'Genesis 2:17', 'Genesis', 2, 'But you shall not eat of the tree of the knowledge of good and evil; for in the day that you eat of it, you will surely die.',
-    'Adam died at 930, before the first thousand years, God\'s first "day", had ended. St. Justin Martyr and St. Irenaeus both taught this.'],
+    'Adam died at 930, before the first thousand years after he was made, one "day" to God, had ended. St. Justin Martyr and St. Irenaeus both taught this.'],
   ['gen1', 'Genesis 2:2', 'Genesis', 2, 'On the seventh day God finished his work which he had done; and he rested on the seventh day from all his work which he had done.',
-    'Six days of creation. Some early Christian writers, among them St. Irenaeus, saw in them six thousand years of the world before God\'s rest.'],
+    'God made the world in six days and rested on the seventh. With a thousand years to each of God\'s days, that is 6,000 of our years of making and 7,000 years with the day of rest. St. Irenaeus also read the six days as six thousand years.'],
   ['hos6', 'Hosea 6:2', 'Hosea', 6, 'After two days he will revive us. On the third day he will raise us up, and we will live before him.',
     'Two days in God\'s time are 2,000 years. The Church reads this first of Christ rising on the third day.'],
   ['rev20', 'Revelation 20:4', 'Revelation', 20, 'They lived and reigned with Christ for a thousand years.',
     'A thousand years with Christ are, to God, a single day.'],
+];
+
+// The days of creation (Genesis 1:1 to 2:3), each one of God's days: a thousand of our years.
+// [day, what God made, chapter:verse where the day ends]
+export const CREATION_WEEK = [
+  [1, 'Light, and day and night', '1:5'],
+  [2, 'The sky', '1:8'],
+  [3, 'Land, seas and plants', '1:13'],
+  [4, 'Sun, moon and stars', '1:19'],
+  [5, 'Fish and birds', '1:23'],
+  [6, 'Animals, and man and woman', '1:31'],
+  [7, 'God rested and blessed the day', '2:3'],
 ];

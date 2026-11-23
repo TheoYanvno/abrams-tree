@@ -1,7 +1,7 @@
 // The timeline of people in the Bible: when each one lived, who was alive at the same time, and how
 // long their lives were in God's time, where "one day is with the Lord as a thousand years" (2 Peter 3:8).
 // Pure functions, tested in Node.
-import { GENESIS_LINE, GENESIS_OTHERS, FLOOD, LATER, GOD_TIME } from '../data/people.js';
+import { GENESIS_LINE, GENESIS_OTHERS, FLOOD, LATER, GOD_TIME, CREATION_WEEK } from '../data/people.js';
 
 export { GOD_TIME };
 
@@ -92,3 +92,10 @@ export const ticks = ({ from, to }, step) => {
   for (let y = Math.ceil(from / step) * step; y <= to; y += step) out.push(y);
   return out;
 };
+
+/** The week of creation in our years: each day God made the world is one of His days, a thousand years. */
+export const creationWeek = (week = CREATION_WEEK) =>
+  week.map(([day, made, ref]) => ({ day, made, ref, rest: day === 7, from: (day - 1) * GOD_DAY, to: day * GOD_DAY }));
+
+/** "1st", "2nd", "3rd", "4th". */
+export const ordinal = (n) => `${n}${['th', 'st', 'nd', 'rd'][(n % 100 >= 11 && n % 100 <= 13) || n % 10 > 3 ? 0 : n % 10]}`;

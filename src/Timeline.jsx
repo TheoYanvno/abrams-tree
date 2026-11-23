@@ -1,9 +1,10 @@
 import { useMemo, useState } from 'react';
 import { genesisPeople, floodYear, laterPeople, formatBcAd, formatFromCreation, formatGodTime, godDays, contemporaries,
-  span, percent, ticks, GOD_TIME, GOD_DAY } from './lib/timeline.js';
+  span, percent, ticks, creationWeek, ordinal, GOD_TIME, GOD_DAY } from './lib/timeline.js';
 import { bookById, superbookLink } from './lib/books.js';
 
 const GENESIS = genesisPeople();
+const WEEK = creationWeek();
 const LATER = laterPeople();
 
 const CHARTS = {
@@ -30,7 +31,7 @@ const CHARTS = {
 /** The bands along the top: one of God's days for every thousand of our years. */
 function dayBands(chart, s) {
   if (chart === 'genesis') {
-    return godDays(s.from, s.to).map((d) => ({ ...d, label: `God's day ${d.day}`, full: d.to - d.from === GOD_DAY }));
+    return godDays(s.from, s.to).map((d) => ({ ...d, label: `${ordinal(d.day)} 1,000 years`, full: d.to - d.from === GOD_DAY }));
   }
   const edges = [s.from, ...ticks(s, GOD_DAY).filter((y) => y > s.from && y < s.to), s.to];
   return edges.slice(1).map((to, i) => ({ from: edges[i], to, label: 'one day to God', full: to - edges[i] === GOD_DAY }));
@@ -127,6 +128,19 @@ export default function Timeline() {
       <section className="card" aria-labelledby="godtime">
         <h2 id="godtime">A day with the Lord</h2>
         <p>“One day is with the Lord as a thousand years, and a thousand years as one day.” So whenever God speaks about time, we remember His day is a thousand of our years: a year of ours is about a minute and a half of His day.</p>
+        <h3>The week of creation</h3>
+        <p>God made the heavens and the earth in six days and rested on the seventh. Each of God's days is a thousand of our years, so the six days of making are 6,000 years, and the whole week with the day of rest is 7,000 years.</p>
+        <ol className="week">
+          {WEEK.map((d) => (
+            <li key={d.day} className={d.rest ? 'rest' : undefined}>
+              <strong>Day {d.day}</strong>
+              <span>{d.made}</span>
+              <span className="muted small">{(d.to - d.from).toLocaleString('en-US')} years · <a href={superbookLink('Genesis', Number(d.ref.split(':')[0]))} target="_blank" rel="noreferrer">Genesis {d.ref}</a></span>
+            </li>
+          ))}
+        </ol>
+        <p className="week-total">6 days of making = <strong>6,000 years</strong> · with the day of rest, 7 days = <strong>{WEEK.at(-1).to.toLocaleString('en-US')} years</strong></p>
+        <h3>When God speaks about time</h3>
         {GOD_TIME.map(([id, ref, book, chapter, text, meaning]) => (
           <blockquote key={id}>
             {text}

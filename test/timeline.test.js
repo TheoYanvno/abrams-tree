@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert';
 import { genesisPeople, floodYear, laterPeople, lifespan, formatBcAd, formatFromCreation, godTime, formatGodTime,
-  godDayOf, godDays, contemporaries, span, percent, ticks, GOD_TIME, GOD_DAY } from '../src/lib/timeline.js';
+  godDayOf, godDays, contemporaries, span, percent, ticks, creationWeek, ordinal, GOD_TIME, GOD_DAY } from '../src/lib/timeline.js';
 import { bookById } from '../src/lib/books.js';
 
 const G = genesisPeople();
@@ -78,4 +78,13 @@ test('chart maths', () => {
   assert.strictEqual(percent(1200, s), 50);
   assert.deepStrictEqual(ticks({ from: -2200, to: 100 }, 1000), [-2000, -1000, 0]);
   assert.deepStrictEqual(span(L, 100), { from: -2200, to: 100 });
+});
+
+test('six days of making and a day of rest: 7,000 of our years', () => {
+  const week = creationWeek();
+  assert.strictEqual(week.length, 7);
+  assert.strictEqual(week.filter((d) => !d.rest).at(-1).to, 6000, 'six days of making are 6,000 years');
+  assert.strictEqual(week.at(-1).to, 7000, 'with the day of rest, 7,000 years');
+  assert.ok(week.at(-1).rest && week.slice(0, 6).every((d) => !d.rest));
+  assert.deepStrictEqual([1, 2, 3, 4, 11, 12, 13, 21, 22].map(ordinal), ['1st', '2nd', '3rd', '4th', '11th', '12th', '13th', '21st', '22nd']);
 });
