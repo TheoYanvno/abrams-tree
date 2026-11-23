@@ -9,8 +9,8 @@ const TIMES_KEY = 'abramstree.prayerTimes';
 const hhmm = (d) => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
 const canNotify = () => typeof Notification !== 'undefined';
 
-export default function Prayers() {
-  const [hourId, setHourId] = useState(() => currentHour(hhmm(new Date())).id);
+export default function Prayers({ route = {} }) {
+  const [hourId, setHourId] = useState(() => (route.kind === 'hour' && hourById(route.id) ? route.id : currentHour(hhmm(new Date())).id));
   const [list, setList] = useState(() => load(LIST_KEY, emptyList()));
   const [times, setTimes] = useState(() => load(TIMES_KEY, []));
   const [text, setText] = useState('');

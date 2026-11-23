@@ -97,3 +97,8 @@ button:disabled { opacity: .5; cursor: default; }
 .week strong { color: var(--accent); }
 .week-total { text-align: center; }
 @media (max-width: 700px) { .week { grid-template-columns: repeat(2, 1fr); } .week li.rest { grid-column: 1 / -1; } }
+.book-page { margin: 12px 0 0; padding: 8px 12px; background: #fbefc9; border: 1px solid #d9a441; border-radius: 8px; font-size: 0.95rem; }
+.week-days { padding-left: 0; list-style: none; }
+.week-days li { padding: 6px 0; border-top: 1px solid #f0e8d8; }
+.week-days li.on > .link { font-weight: bold; }
+.week-days .link { margin-top: 0; text-align: left; }

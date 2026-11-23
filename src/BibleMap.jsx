@@ -4,9 +4,9 @@ import { bookById, superbookLink } from './lib/books.js';
 
 const PLAY_MS = 2500;
 
-export default function BibleMap() {
+export default function BibleMap({ route = {} }) {
   const [view, setView] = useState(FULL);
-  const [era, setEra] = useState('all');
+  const [era, setEra] = useState(() => (route.kind === 'era' && ERAS.some((x) => x.id === route.id) ? route.id : 'all'));
   const [book, setBook] = useState('all');
   const [placeId, setPlaceId] = useState(null);
   const [playing, setPlaying] = useState(null);          // index into the filtered events, or null

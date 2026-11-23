@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { genesisPeople, floodYear, laterPeople, formatBcAd, formatFromCreation, formatGodTime, godDays, contemporaries,
   span, percent, ticks, creationWeek, ordinal, GOD_TIME, GOD_DAY } from './lib/timeline.js';
 import { bookById, superbookLink } from './lib/books.js';
@@ -37,9 +37,13 @@ function dayBands(chart, s) {
   return edges.slice(1).map((to, i) => ({ from: edges[i], to, label: 'one day to God', full: to - edges[i] === GOD_DAY }));
 }
 
-export default function Timeline() {
-  const [chart, setChart] = useState('genesis');
-  const [selectedId, setSelectedId] = useState('adam');
+export default function Timeline({ route = {} }) {
+  const start = CHARTS[route.kind] ? route.kind : 'genesis';         // #timeline/genesis, #timeline/later
+  const [chart, setChart] = useState(start);
+  const [selectedId, setSelectedId] = useState(CHARTS[start].people[0].id);
+  useEffect(() => {                                                  // #timeline/week opens at the week of creation
+    if (route.kind === 'week') document.getElementById('godtime')?.scrollIntoView();
+  }, [route.kind]);
   const [age, setAge] = useState('');
   const c = CHARTS[chart];
   const s = useMemo(() => span(c.people, c.step), [c]);
