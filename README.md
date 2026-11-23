@@ -16,7 +16,7 @@ A React Bible study guide: daily reading plans, prayers and prayer times, a worl
   - **Abraham to the apostles:** years BC and AD, worked back from 1 Kings 6:1 (the temple begun 480 years after the Exodus) and Exodus 12:40. Approximate dates are marked c.
   - **God's time:** "one day is with the Lord as a thousand years" (2 Peter 3:8), so a band along the top marks every thousand years as one of God's days. Each person's life is also shown in God's time: Methuselah's 969 years are 23 hours 15 minutes of one day.
   - **Alive together:** tap a name to see who was alive at the same time, and read their chapter.
-  - **A day with the Lord:** the verses where God speaks of time, read with the thousand-year day.
+  - **A day with the Lord:** the week of creation as God's days (six days of making are 6,000 of our years, and with the seventh day of rest, 7,000 years), and the verses where God speaks of time, read with the thousand-year day.
 - Everything is saved in your browser, and it works on phones.
 
 ## Run it

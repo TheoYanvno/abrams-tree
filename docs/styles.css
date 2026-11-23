@@ -91,3 +91,9 @@ button:disabled { opacity: .5; cursor: default; }
 .tl-axis .tl-track span:first-child { transform: none; }
 .tl-axis .tl-track span:last-child { transform: translateX(-100%); }
 @media (max-width: 560px) { .timeline { --name: 6.5rem; } .tl-name { font-size: 0.82rem; } .tl-bar span { display: none; } }
+.week { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 10px 0; }
+.week li { background: #f6ecd3; border: 1px solid #e0cfa8; border-radius: 8px; padding: 8px 6px; display: grid; gap: 4px; align-content: start; text-align: center; font-size: 0.9rem; }
+.week li.rest { background: #fbefc9; border-color: #d9a441; }
+.week strong { color: var(--accent); }
+.week-total { text-align: center; }
+@media (max-width: 700px) { .week { grid-template-columns: repeat(2, 1fr); } .week li.rest { grid-column: 1 / -1; } }
