@@ -69,3 +69,25 @@ blockquote cite { display: block; font-style: normal; color: var(--muted); font-
 .events .link { margin-top: 0; text-align: left; }
 input:focus-visible, select:focus-visible, .map:focus-visible { outline: 3px solid #d9a441; outline-offset: 2px; }
 button:disabled { opacity: .5; cursor: default; }
+.small { font-size: 0.9rem; }
+.timeline { --name: 9.5rem; margin: 12px 0 4px; }
+.tl-row { display: grid; grid-template-columns: var(--name) 1fr; align-items: center; min-height: 26px; }
+.tl-track { position: relative; height: 22px; }
+.tl-name { margin: 0; text-align: left; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 8px; }
+.tl-bar { position: absolute; top: 3px; height: 16px; min-width: 6px; border: 0; border-radius: 8px; background: #c08a4a; padding: 0; color: #fff; font-size: 0.72rem; line-height: 16px; overflow: hidden; }
+.tl-bar.about { background: repeating-linear-gradient(135deg, #c08a4a 0 6px, #cf9c5e 6px 12px); }
+.tl-row.on .tl-bar { background: var(--accent); box-shadow: 0 0 0 2px #d9a441; }
+.tl-row.on .tl-name { font-weight: bold; }
+.tl-row.dim .tl-bar { opacity: 0.35; }
+.tl-row.dim .tl-name { color: var(--muted); }
+.tl-flood { position: absolute; top: -2px; bottom: -2px; width: 2px; background: #3f7fa8; }
+.flood-key { display: inline-block; width: 2px; height: 1em; background: #3f7fa8; vertical-align: middle; margin-right: 4px; }
+.tl-days .tl-track { height: 26px; }
+.tl-day { position: absolute; top: 0; height: 24px; border: 1px solid #e0cfa8; background: #f6ecd3; border-radius: 6px; font-size: 0.78rem; line-height: 22px; text-align: center; color: var(--accent); white-space: nowrap; overflow: hidden; }
+.tl-day:nth-child(even) { background: #efe0bb; }
+.tl-day.part { opacity: 0.6; }
+.tl-axis .tl-track { height: 20px; border-top: 1px solid #e6dccb; }
+.tl-axis .tl-track span { position: absolute; transform: translateX(-50%); font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+.tl-axis .tl-track span:first-child { transform: none; }
+.tl-axis .tl-track span:last-child { transform: translateX(-100%); }
+@media (max-width: 560px) { .timeline { --name: 6.5rem; } .tl-name { font-size: 0.82rem; } .tl-bar span { display: none; } }

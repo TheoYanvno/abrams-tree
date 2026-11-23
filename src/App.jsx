@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import ReadingPlan from './ReadingPlan.jsx';
 import Prayers from './Prayers.jsx';
 import BibleMap from './BibleMap.jsx';
+import Timeline from './Timeline.jsx';
 
 const TABS = [
   { id: 'read', label: '📖 Read', Page: ReadingPlan },
   { id: 'pray', label: '🙏 Pray', Page: Prayers },
   { id: 'map', label: '🗺️ Map', Page: BibleMap },
+  { id: 'timeline', label: '⏳ Timeline', Page: Timeline },
 ];
 const fromHash = () => TABS.find((t) => `#${t.id}` === globalThis.location?.hash)?.id ?? 'read';
 
@@ -20,10 +22,10 @@ export default function App() {
   const { Page } = TABS.find((t) => t.id === tab);
 
   return (
-    <div className={`app ${tab === 'map' ? 'wide' : ''}`}>
+    <div className={`app ${tab === 'map' || tab === 'timeline' ? 'wide' : ''}`}>
       <header>
         <h1>📜 AbramsTree</h1>
-        <p className="tagline">A Bible study guide: a daily reading plan, prayers and a map of where it happened.</p>
+        <p className="tagline">A Bible study guide: a daily reading plan, prayers, a map of where it happened and a timeline of who lived when.</p>
         <nav className="tabs" aria-label="Sections">
           {TABS.map((t) => (
             <a key={t.id} href={`#${t.id}`} aria-current={t.id === tab ? 'page' : undefined}>{t.label}</a>
