@@ -8,7 +8,8 @@
     "build": "node build.mjs",
     "start": "node build.mjs --serve",
     "test": "node --test \"test/*.test.js\"",
-    "book": "node tools/build_book.mjs"
+    "book": "node tools/build_book.mjs",
+    "cover": "node tools/build_cover.mjs"
   },
   "dependencies": {
     "react": "^19.2.0",

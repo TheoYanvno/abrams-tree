@@ -28,6 +28,7 @@ npm start       # builds and serves it at http://localhost:8000
 npm test        # plans, progress, prayers, translations, the map, the timeline and the SuperBook sync
 npm run build   # builds the site into docs/ for GitHub Pages
 npm run book    # builds the study book into book/ (the PDF needs Playwright)
+npm run cover   # builds its KDP paperback cover (back, spine and front) into book/
 ```
 
 It works the same on Windows, macOS and Linux (in the VS Code terminal on Windows). The translations come from [bible-api.com](https://bible-api.com/), the same free service SuperBook reads, so comparing translations needs an internet connection.
