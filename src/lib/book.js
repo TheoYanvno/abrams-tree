@@ -1,16 +1,19 @@
-// The AbrahamsTree study book: a 6 x 9 printed companion to the app. This file lays out its pages in
-// order and gives every page that has a QR code its link into the app, so the book (tools/build_book.mjs)
-// and the app (which shows "Book page N") always agree on page numbers. Pure functions, tested in Node.
+// The AbrahamsTree Study Bible: the whole Bible read in a year, printed in four 6 x 9 volumes of 13 weeks
+// (tools/build_book.mjs). This file holds the weeks of the reading plan and the links its QR codes open,
+// and finds the volume and page that go with a link, from the page map the build writes, so the book
+// and the app always agree. Pure functions, tested in Node.
 import { planById, schedule, describe } from './plans.js';
-import { HOURS } from './prayers.js';
-import { ERAS } from './map.js';
+import PAGES from '../data/bookPages.json' with { type: 'json' };
 
 /** Where the app lives; every QR code in the book opens a page under it. */
 export const APP_URL = 'https://theoyanvno.github.io/abrams-tree/';
 
 export const PLAN = planById('bible-year');
 export const WEEKS = 52;
-export const JOURNAL_PAGES = 12;
+export const WEEKS_PER_VOLUME = 13;
+
+/** Which volume a week is printed in. */
+export const volumeOf = (week) => Math.ceil(week / WEEKS_PER_VOLUME);
 
 /** The reading plan in weeks: 52 weeks of 7 days, with day 365 added to the last week. */
 export function weeks(days = schedule(PLAN)) {
@@ -33,62 +36,9 @@ export function parseRoute(hash = '') {
   return { tab, kind, id };
 }
 
-/**
- * Every page of the book in order, numbered from 1 (the title page, a right-hand page). Each is
- * { n, kind, ...data, link? }; `link` is the app route its QR code opens. Spreads that must face each
- * other (a week's readings on the left, its notes on the right) start on an even page, and every part
- * opens on a right-hand page, with blank pages added where needed.
- */
-export function layout() {
-  const pages = [];
-  const add = (kind, data = {}) => pages.push({ n: pages.length + 1, kind, ...data });
-  const toOdd = () => { if (pages.length % 2 === 1) add('blank'); };    // the next page is odd (right-hand)
-  const toEven = () => { if (pages.length % 2 === 0) add('blank'); };   // the next page is even (left-hand)
-
-  add('title');
-  add('copyright');
-  add('how', { link: route('read') });
-  add('contents');
-  add('start');
-
-  toOdd();
-  add('part', { part: 1, title: 'A Year in the Word', subtitle: 'The whole Bible in 52 weeks', link: route('read') });
-  for (const w of weeks()) {
-    toEven();
-    add('week', { ...w, link: route('read', 'week', w.week) });
-    add('notes', { week: w.week });
-  }
-
-  toOdd();
-  add('part', { part: 2, title: 'Pray Without Ceasing', subtitle: 'The hours of prayer through the day', link: route('pray') });
-  for (const h of HOURS) add('hour', { hour: h.id, link: route('pray', 'hour', h.id) });
-  add('requests', { sheet: 1 });
-  add('requests', { sheet: 2 });
-
-  toOdd();
-  add('part', { part: 3, title: 'Who Lived When', subtitle: 'A timeline of the people of the Bible', link: route('timeline') });
-  add('creation', { link: route('timeline', 'week') });
-  add('godtime', { link: route('timeline', 'week') });
-  add('chart', { chart: 'genesis', link: route('timeline', 'genesis') });
-  add('chart', { chart: 'later', link: route('timeline', 'later') });
-
-  toOdd();
-  add('part', { part: 4, title: 'Where It Happened', subtitle: 'Maps of the events of the Bible', link: route('map') });
-  for (const e of ERAS) add('era', { era: e.id, link: route('map', 'era', e.id) });
-
-  toOdd();
-  add('part', { part: 5, title: 'Journal', subtitle: 'For what God is teaching you', link: null });
-  for (let i = 0; i < JOURNAL_PAGES; i++) add('journal');
-  if (pages.length % 2 === 1) add('blank');                            // an even number of pages in all
-  return pages;
-}
-
-/** The book page a route in the app belongs to ('#read/week/12' → its page number), or null. */
-export function pageFor(hash, pages = layout()) {
+/** The volume and page that go with an app link ('#read/week/12' → { volume: 1, page: 312 }), or null. */
+export function pageFor(hash, pages = PAGES) {
   const want = hash.startsWith('#') ? hash : `#${hash}`;
-  const exact = pages.find((p) => p.link === want);
-  return exact ? exact.n : null;
+  const hit = pages[want];
+  return hit ? { volume: hit[0], page: hit[1] } : null;
 }
-
-/** The contents: each part and where it starts. */
-export const contents = (pages = layout()) => pages.filter((p) => p.kind === 'part').map(({ part, title, n }) => ({ part, title, n }));

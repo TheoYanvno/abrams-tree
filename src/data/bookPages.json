@@ -1,0 +1,270 @@
+{
+ "#read/week/1": [
+  1,
+  6
+ ],
+ "#read/week/2": [
+  1,
+  34
+ ],
+ "#read/week/3": [
+  1,
+  66
+ ],
+ "#read/week/4": [
+  1,
+  98
+ ],
+ "#read/week/5": [
+  1,
+  130
+ ],
+ "#read/week/6": [
+  1,
+  168
+ ],
+ "#read/week/7": [
+  1,
+  200
+ ],
+ "#read/week/8": [
+  1,
+  230
+ ],
+ "#read/week/9": [
+  1,
+  264
+ ],
+ "#read/week/10": [
+  1,
+  294
+ ],
+ "#read/week/11": [
+  1,
+  324
+ ],
+ "#read/week/12": [
+  1,
+  364
+ ],
+ "#read/week/13": [
+  1,
+  402
+ ],
+ "#pray/hour/morning": [
+  1,
+  431
+ ],
+ "#pray/hour/third": [
+  1,
+  432
+ ],
+ "#pray/hour/sixth": [
+  1,
+  433
+ ],
+ "#pray/hour/ninth": [
+  1,
+  434
+ ],
+ "#pray/hour/evening": [
+  1,
+  435
+ ],
+ "#pray/hour/night": [
+  1,
+  436
+ ],
+ "#timeline/week": [
+  1,
+  440
+ ],
+ "#timeline/genesis": [
+  1,
+  442
+ ],
+ "#map/era/patriarchs": [
+  1,
+  443
+ ],
+ "#map/era/exodus": [
+  1,
+  444
+ ],
+ "#map/era/kings": [
+  1,
+  445
+ ],
+ "#read/week/14": [
+  2,
+  6
+ ],
+ "#read/week/15": [
+  2,
+  34
+ ],
+ "#read/week/16": [
+  2,
+  70
+ ],
+ "#read/week/17": [
+  2,
+  98
+ ],
+ "#read/week/18": [
+  2,
+  126
+ ],
+ "#read/week/19": [
+  2,
+  178
+ ],
+ "#read/week/20": [
+  2,
+  202
+ ],
+ "#read/week/21": [
+  2,
+  220
+ ],
+ "#read/week/22": [
+  2,
+  238
+ ],
+ "#read/week/23": [
+  2,
+  256
+ ],
+ "#read/week/24": [
+  2,
+  276
+ ],
+ "#read/week/25": [
+  2,
+  292
+ ],
+ "#read/week/26": [
+  2,
+  316
+ ],
+ "#timeline/later": [
+  2,
+  352
+ ],
+ "#map/era/exile": [
+  2,
+  354
+ ],
+ "#read/week/27": [
+  3,
+  6
+ ],
+ "#read/week/28": [
+  3,
+  28
+ ],
+ "#read/week/29": [
+  3,
+  58
+ ],
+ "#read/week/30": [
+  3,
+  86
+ ],
+ "#read/week/31": [
+  3,
+  114
+ ],
+ "#read/week/32": [
+  3,
+  138
+ ],
+ "#read/week/33": [
+  3,
+  160
+ ],
+ "#read/week/34": [
+  3,
+  184
+ ],
+ "#read/week/35": [
+  3,
+  214
+ ],
+ "#read/week/36": [
+  3,
+  246
+ ],
+ "#read/week/37": [
+  3,
+  280
+ ],
+ "#read/week/38": [
+  3,
+  316
+ ],
+ "#read/week/39": [
+  3,
+  352
+ ],
+ "#read/week/40": [
+  4,
+  6
+ ],
+ "#read/week/41": [
+  4,
+  26
+ ],
+ "#read/week/42": [
+  4,
+  54
+ ],
+ "#read/week/43": [
+  4,
+  84
+ ],
+ "#read/week/44": [
+  4,
+  116
+ ],
+ "#read/week/45": [
+  4,
+  144
+ ],
+ "#read/week/46": [
+  4,
+  172
+ ],
+ "#read/week/47": [
+  4,
+  194
+ ],
+ "#read/week/48": [
+  4,
+  212
+ ],
+ "#read/week/49": [
+  4,
+  228
+ ],
+ "#read/week/50": [
+  4,
+  244
+ ],
+ "#read/week/51": [
+  4,
+  260
+ ],
+ "#read/week/52": [
+  4,
+  276
+ ],
+ "#map/era/jesus": [
+  4,
+  306
+ ],
+ "#map/era/church": [
+  4,
+  307
+ ]
+}

@@ -45,7 +45,7 @@ export default function App() {
             <a key={t.id} href={`#${t.id}`} aria-current={t.id === tab ? 'page' : undefined}>{t.label}</a>
           ))}
         </nav>
-        {bookPage && <p className="book-page">📕 This goes with page {bookPage} of the AbrahamsTree study book.</p>}
+        {bookPage && <p className="book-page">📕 This goes with Volume {bookPage.volume}, page {bookPage.page} of the AbrahamsTree Study Bible.</p>}
       </header>
       <main><Page key={hash} route={route} /></main>
       <footer className="muted">
