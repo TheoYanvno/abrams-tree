@@ -17,6 +17,7 @@ A React Bible study guide: daily reading plans, prayers and prayer times, a worl
   - **God's time:** "one day is with the Lord as a thousand years" (2 Peter 3:8), so a band along the top marks every thousand years as one of God's days. Each person's life is also shown in God's time: Methuselah's 969 years are 23 hours 15 minutes of one day.
   - **Alive together:** tap a name to see who was alive at the same time, and read their chapter.
   - **A day with the Lord:** the week of creation as God's days (six days of making are 6,000 of our years, and with the seventh day of rest, 7,000 years), and the verses where God speaks of time, read with the thousand-year day.
+- **📕 Study book:** a printed 6 × 9 companion, *AbramsTree: A Bible-in-a-Year Study Book* (150 pages). It has 52 weekly reading pages, each facing a page for notes and prayers, plus the hours of prayer, a prayer list, the timeline and the week of creation, a map for each era and journal pages. Every section has a QR code that opens the same spot in the app: that week's chapters side by side in two translations, that hour's prayers, that chart or that era on the map. The app tells you which page of the book you're on.
 - Everything is saved in your browser, and it works on phones.
 
 ## Run it
@@ -26,6 +27,7 @@ npm install
 npm start       # builds and serves it at http://localhost:8000
 npm test        # plans, progress, prayers, translations, the map, the timeline and the SuperBook sync
 npm run build   # builds the site into docs/ for GitHub Pages
+npm run book    # builds the study book into book/ (the PDF needs Playwright)
 ```
 
 It works the same on Windows, macOS and Linux (in the VS Code terminal on Windows). The translations come from [bible-api.com](https://bible-api.com/), the same free service SuperBook reads, so comparing translations needs an internet connection.
@@ -40,6 +42,7 @@ It works the same on Windows, macOS and Linux (in the VS Code terminal on Window
 | `src/lib/prayers.js` | The hours of prayer, the prayer list, the next reminder, and the `.ics` calendar file |
 | `src/lib/map.js`, `src/data/places.js` | Places and events, filtering, and the pan and zoom maths |
 | `src/lib/timeline.js`, `src/data/people.js` | Lives added up from Genesis, BC and AD dates, who was alive together, and God's time (a thousand years to a day) |
+| `src/lib/book.js`, `tools/build_book.mjs` | The study book's pages in order with each QR code's app link, and the 6 × 9 PDF built from them |
 | `src/data/basemap.json` | Land, lakes and rivers from [Natural Earth](https://www.naturalearthdata.com/) (public domain), made by `tools/build_basemap.py` |
 
 The logic is plain functions tested with `node --test`; the React components only draw it and save it.
