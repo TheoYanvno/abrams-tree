@@ -1,0 +1,1658 @@
+{
+ "1": {
+  "title": "The Creation of Light",
+  "book": "Genesis",
+  "chapter": 1,
+  "verse": 3,
+  "w": 720,
+  "h": 971
+ },
+ "2": {
+  "title": "The Creation of Eve",
+  "book": "Genesis",
+  "chapter": 2,
+  "verse": 21,
+  "w": 720,
+  "h": 975
+ },
+ "3": {
+  "title": "Adam and Eve Are Driven out of Eden",
+  "book": "Genesis",
+  "chapter": 3,
+  "verse": 23,
+  "w": 720,
+  "h": 984
+ },
+ "4": {
+  "title": "Cain and Abel Offer Their Sacrifices",
+  "book": "Genesis",
+  "chapter": 4,
+  "verse": 3,
+  "w": 720,
+  "h": 986
+ },
+ "5": {
+  "title": "Cain Slays Abel",
+  "book": "Genesis",
+  "chapter": 4,
+  "verse": 8,
+  "w": 720,
+  "h": 1003
+ },
+ "6": {
+  "title": "The World is Destroyed by Water",
+  "book": "Genesis",
+  "chapter": 7,
+  "verse": 17,
+  "w": 720,
+  "h": 992
+ },
+ "8": {
+  "title": "A Dove is Sent Forth from the Ark",
+  "book": "Genesis",
+  "chapter": 8,
+  "verse": 8,
+  "w": 720,
+  "h": 1005
+ },
+ "9": {
+  "title": "Noah Curses Ham and Canaan",
+  "book": "Genesis",
+  "chapter": 9,
+  "verse": 25,
+  "w": 720,
+  "h": 996
+ },
+ "10": {
+  "title": "The Tower of Babel",
+  "book": "Genesis",
+  "chapter": 11,
+  "verse": 4,
+  "w": 720,
+  "h": 1008
+ },
+ "11": {
+  "title": "Abraham Goes to the Land of Canaan",
+  "book": "Genesis",
+  "chapter": 12,
+  "verse": 5,
+  "w": 720,
+  "h": 654
+ },
+ "12": {
+  "title": "Abraham and the Three Angels",
+  "book": "Genesis",
+  "chapter": 18,
+  "verse": 2,
+  "w": 720,
+  "h": 990
+ },
+ "13": {
+  "title": "Lot Flees as Sodom and Gomorrah Burn",
+  "book": "Genesis",
+  "chapter": 19,
+  "verse": 24,
+  "w": 720,
+  "h": 1001
+ },
+ "15": {
+  "title": "Hagar and Ishmael in the Wilderness",
+  "book": "Genesis",
+  "chapter": 21,
+  "verse": 15,
+  "w": 720,
+  "h": 1009
+ },
+ "16": {
+  "title": "The Testing of Abraham’s Faith",
+  "book": "Genesis",
+  "chapter": 22,
+  "verse": 6,
+  "w": 720,
+  "h": 1009
+ },
+ "17": {
+  "title": "The Burial of Sarah",
+  "book": "Genesis",
+  "chapter": 23,
+  "verse": 19,
+  "w": 720,
+  "h": 1002
+ },
+ "18": {
+  "title": "Eliezer and Rebekah at the Well",
+  "book": "Genesis",
+  "chapter": 24,
+  "verse": 15,
+  "w": 720,
+  "h": 1002
+ },
+ "19": {
+  "title": "The Meeting of Isaac and Rebekah",
+  "book": "Genesis",
+  "chapter": 24,
+  "verse": 63,
+  "w": 720,
+  "h": 989
+ },
+ "20": {
+  "title": "Isaac Blesses Jacob",
+  "book": "Genesis",
+  "chapter": 27,
+  "verse": 27,
+  "w": 720,
+  "h": 995
+ },
+ "21": {
+  "title": "Jacob’s Dream",
+  "book": "Genesis",
+  "chapter": 28,
+  "verse": 12,
+  "w": 720,
+  "h": 1006
+ },
+ "22": {
+  "title": "Jacob Tends Laban’s Flocks and Meets Rachel",
+  "book": "Genesis",
+  "chapter": 29,
+  "verse": 10,
+  "w": 720,
+  "h": 986
+ },
+ "23": {
+  "title": "Jacob Prays for Protection",
+  "book": "Genesis",
+  "chapter": 32,
+  "verse": 9,
+  "w": 720,
+  "h": 999
+ },
+ "24": {
+  "title": "Jacob Wrestles with the Angel",
+  "book": "Genesis",
+  "chapter": 32,
+  "verse": 24,
+  "w": 720,
+  "h": 1002
+ },
+ "25": {
+  "title": "Jacob and Esau Meet",
+  "book": "Genesis",
+  "chapter": 33,
+  "verse": 4,
+  "w": 720,
+  "h": 994
+ },
+ "26": {
+  "title": "Joseph is Sold by His Brothers",
+  "book": "Genesis",
+  "chapter": 37,
+  "verse": 28,
+  "w": 720,
+  "h": 996
+ },
+ "27": {
+  "title": "Joseph Interprets Pharaoh’s Dream",
+  "book": "Genesis",
+  "chapter": 41,
+  "verse": 25,
+  "w": 720,
+  "h": 995
+ },
+ "28": {
+  "title": "Joseph Reveals Himself to His Brothers",
+  "book": "Genesis",
+  "chapter": 45,
+  "verse": 3,
+  "w": 720,
+  "h": 1000
+ },
+ "29": {
+  "title": "Jacob Goes to Egypt",
+  "book": "Genesis",
+  "chapter": 46,
+  "verse": 5,
+  "w": 720,
+  "h": 1027
+ },
+ "30": {
+  "title": "The Child Moses on the Nile",
+  "book": "Exodus",
+  "chapter": 2,
+  "verse": 3,
+  "w": 720,
+  "h": 654
+ },
+ "31": {
+  "title": "The Finding of Moses",
+  "book": "Exodus",
+  "chapter": 2,
+  "verse": 6,
+  "w": 720,
+  "h": 983
+ },
+ "32": {
+  "title": "Moses and Aaron Appear before Pharaoh",
+  "book": "Exodus",
+  "chapter": 7,
+  "verse": 10,
+  "w": 720,
+  "h": 986
+ },
+ "33": {
+  "title": "The Fifth Plague Livestock Disease",
+  "book": "Exodus",
+  "chapter": 9,
+  "verse": 3,
+  "w": 720,
+  "h": 636
+ },
+ "34": {
+  "title": "The Ninth Plague Darkness",
+  "book": "Exodus",
+  "chapter": 10,
+  "verse": 22,
+  "w": 720,
+  "h": 632
+ },
+ "36": {
+  "title": "The Egyptians Ask Moses to Depart",
+  "book": "Exodus",
+  "chapter": 12,
+  "verse": 31,
+  "w": 720,
+  "h": 992
+ },
+ "37": {
+  "title": "The Egyptians Drown in the Sea",
+  "book": "Exodus",
+  "chapter": 14,
+  "verse": 27,
+  "w": 720,
+  "h": 636
+ },
+ "38": {
+  "title": "Moses Strikes the Rock at Horeb",
+  "book": "Exodus",
+  "chapter": 17,
+  "verse": 6,
+  "w": 720,
+  "h": 988
+ },
+ "39": {
+  "title": "The Giving of the Law on Mount Sinai",
+  "book": "Exodus",
+  "chapter": 19,
+  "verse": 18,
+  "w": 720,
+  "h": 644
+ },
+ "40": {
+  "title": "Moses Comes Down from Mount Sinai",
+  "book": "Exodus",
+  "chapter": 34,
+  "verse": 29,
+  "w": 720,
+  "h": 984
+ },
+ "41": {
+  "title": "Moses Breaks the Tablets of the Law",
+  "book": "Exodus",
+  "chapter": 32,
+  "verse": 19,
+  "w": 720,
+  "h": 990
+ },
+ "42": {
+  "title": "The Spies Return from the Promised Land",
+  "book": "Numbers",
+  "chapter": 13,
+  "verse": 23,
+  "w": 720,
+  "h": 1010
+ },
+ "43": {
+  "title": "The Death of Korah Dathan and Abiram",
+  "book": "Numbers",
+  "chapter": 16,
+  "verse": 32,
+  "w": 720,
+  "h": 999
+ },
+ "44": {
+  "title": "The Bronze Serpent",
+  "book": "Numbers",
+  "chapter": 21,
+  "verse": 9,
+  "w": 720,
+  "h": 1002
+ },
+ "45": {
+  "title": "An Angel Appears to Balaam",
+  "book": "Numbers",
+  "chapter": 22,
+  "verse": 31,
+  "w": 720,
+  "h": 994
+ },
+ "46": {
+  "title": "The Israelites Cross the Jordan River",
+  "book": "Joshua",
+  "chapter": 3,
+  "verse": 17,
+  "w": 720,
+  "h": 638
+ },
+ "47": {
+  "title": "An Angel Appears to the Israelites",
+  "book": "Judges",
+  "chapter": 2,
+  "verse": 1,
+  "w": 720,
+  "h": 995
+ },
+ "48": {
+  "title": "The Walls of Jericho Fall Down",
+  "book": "Joshua",
+  "chapter": 6,
+  "verse": 20,
+  "w": 720,
+  "h": 990
+ },
+ "49": {
+  "title": "Joshua Spares Rahab",
+  "book": "Joshua",
+  "chapter": 2,
+  "verse": 15,
+  "w": 720,
+  "h": 992
+ },
+ "51": {
+  "title": "Joshua Burns the Town of Ai",
+  "book": "Joshua",
+  "chapter": 8,
+  "verse": 28,
+  "w": 720,
+  "h": 995
+ },
+ "53": {
+  "title": "Joshua Commands the Sun to Stand Still",
+  "book": "Joshua",
+  "chapter": 10,
+  "verse": 12,
+  "w": 720,
+  "h": 641
+ },
+ "55": {
+  "title": "Deborah Praises Jael",
+  "book": "Judges",
+  "chapter": 5,
+  "verse": 1,
+  "w": 720,
+  "h": 997
+ },
+ "56": {
+  "title": "Gideon Chooses 300 Soldiers",
+  "book": "Judges",
+  "chapter": 7,
+  "verse": 5,
+  "w": 720,
+  "h": 650
+ },
+ "57": {
+  "title": "The Midianites Are Routed",
+  "book": "Judges",
+  "chapter": 7,
+  "verse": 21,
+  "w": 720,
+  "h": 639
+ },
+ "60": {
+  "title": "Jephthah’s Daughter Comes to Meet Her Father",
+  "book": "Judges",
+  "chapter": 11,
+  "verse": 34,
+  "w": 720,
+  "h": 983
+ },
+ "62": {
+  "title": "Samson Slays a Lion",
+  "book": "Judges",
+  "chapter": 14,
+  "verse": 6,
+  "w": 720,
+  "h": 993
+ },
+ "63": {
+  "title": "Samson Destroys the Philistines with an Donkey’s Jawbone",
+  "book": "Judges",
+  "chapter": 15,
+  "verse": 15,
+  "w": 720,
+  "h": 984
+ },
+ "64": {
+  "title": "Samson Carries away the Gates of Gaza",
+  "book": "Judges",
+  "chapter": 16,
+  "verse": 3,
+  "w": 720,
+  "h": 639
+ },
+ "65": {
+  "title": "Samson and Delilah",
+  "book": "Judges",
+  "chapter": 16,
+  "verse": 19,
+  "w": 720,
+  "h": 993
+ },
+ "66": {
+  "title": "The Death of Samson",
+  "book": "Judges",
+  "chapter": 16,
+  "verse": 30,
+  "w": 720,
+  "h": 986
+ },
+ "70": {
+  "title": "Naomi and Her Daughters in Law",
+  "book": "Ruth",
+  "chapter": 1,
+  "verse": 14,
+  "w": 720,
+  "h": 980
+ },
+ "71": {
+  "title": "Ruth and Boaz",
+  "book": "Ruth",
+  "chapter": 2,
+  "verse": 8,
+  "w": 720,
+  "h": 989
+ },
+ "72": {
+  "title": "The Ark is Returned to Beth-shemesh",
+  "book": "1 Samuel",
+  "chapter": 6,
+  "verse": 13,
+  "w": 720,
+  "h": 627
+ },
+ "73": {
+  "title": "Samuel Blesses Saul",
+  "book": "1 Samuel",
+  "chapter": 10,
+  "verse": 1,
+  "w": 720,
+  "h": 988
+ },
+ "76": {
+  "title": "Saul Attempts to Kill David",
+  "book": "1 Samuel",
+  "chapter": 18,
+  "verse": 11,
+  "w": 720,
+  "h": 976
+ },
+ "77": {
+  "title": "David Escapes through a Window",
+  "book": "1 Samuel",
+  "chapter": 19,
+  "verse": 12,
+  "w": 720,
+  "h": 977
+ },
+ "78": {
+  "title": "David and Jonathan",
+  "book": "1 Samuel",
+  "chapter": 20,
+  "verse": 41,
+  "w": 720,
+  "h": 997
+ },
+ "79": {
+  "title": "David Shows Saul How He Spared His Life",
+  "book": "1 Samuel",
+  "chapter": 24,
+  "verse": 8,
+  "w": 720,
+  "h": 985
+ },
+ "80": {
+  "title": "Saul and the Witch of Endor",
+  "book": "1 Samuel",
+  "chapter": 28,
+  "verse": 13,
+  "w": 720,
+  "h": 988
+ },
+ "83": {
+  "title": "Combat between Soldiers of Ish bosheth and David",
+  "book": "2 Samuel",
+  "chapter": 2,
+  "verse": 16,
+  "w": 720,
+  "h": 998
+ },
+ "84": {
+  "title": "David Attacks the Ammonites",
+  "book": "2 Samuel",
+  "chapter": 12,
+  "verse": 29,
+  "w": 720,
+  "h": 654
+ },
+ "85": {
+  "title": "The Death of Absalom",
+  "book": "2 Samuel",
+  "chapter": 18,
+  "verse": 9,
+  "w": 720,
+  "h": 997
+ },
+ "86": {
+  "title": "David Mourns the Death of Absalom",
+  "book": "2 Samuel",
+  "chapter": 18,
+  "verse": 33,
+  "w": 720,
+  "h": 996
+ },
+ "88": {
+  "title": "The Plague of Jerusalem",
+  "book": "2 Samuel",
+  "chapter": 24,
+  "verse": 16,
+  "w": 720,
+  "h": 986
+ },
+ "89": {
+  "title": "Abishai Saves David’s Life",
+  "book": "2 Samuel",
+  "chapter": 21,
+  "verse": 17,
+  "w": 720,
+  "h": 980
+ },
+ "90": {
+  "title": "The Judgment of Solomon",
+  "book": "1 Kings",
+  "chapter": 3,
+  "verse": 24,
+  "w": 720,
+  "h": 982
+ },
+ "91": {
+  "title": "Cedars Are Cut Down for the Jerusalem Temple",
+  "book": "1 Kings",
+  "chapter": 5,
+  "verse": 6,
+  "w": 720,
+  "h": 996
+ },
+ "92": {
+  "title": "Solomon Receives the Queen of Sheba",
+  "book": "1 Kings",
+  "chapter": 10,
+  "verse": 1,
+  "w": 720,
+  "h": 991
+ },
+ "93": {
+  "title": "King Solomon in Old Age",
+  "book": "1 Kings",
+  "chapter": 11,
+  "verse": 4,
+  "w": 720,
+  "h": 968
+ },
+ "94": {
+  "title": "The Disobedient Prophet is Slain by a Lion",
+  "book": "1 Kings",
+  "chapter": 13,
+  "verse": 24,
+  "w": 720,
+  "h": 997
+ },
+ "95": {
+  "title": "Elijah Raises the Son of the Widow of Zarephath",
+  "book": "1 Kings",
+  "chapter": 17,
+  "verse": 22,
+  "w": 720,
+  "h": 998
+ },
+ "97": {
+  "title": "Elijah is Nourished by an Angel",
+  "book": "1 Kings",
+  "chapter": 19,
+  "verse": 5,
+  "w": 720,
+  "h": 990
+ },
+ "100": {
+  "title": "The Death of Ahab",
+  "book": "1 Kings",
+  "chapter": 22,
+  "verse": 35,
+  "w": 720,
+  "h": 985
+ },
+ "101": {
+  "title": "Elijah Destroys the Messengers of Ahaziah",
+  "book": "2 Kings",
+  "chapter": 1,
+  "verse": 10,
+  "w": 720,
+  "h": 984
+ },
+ "102": {
+  "title": "Elijah Ascends to Heaven in a Chariot of Fire",
+  "book": "2 Kings",
+  "chapter": 2,
+  "verse": 11,
+  "w": 720,
+  "h": 1005
+ },
+ "104": {
+  "title": "A Famine in Samaria",
+  "book": "2 Kings",
+  "chapter": 6,
+  "verse": 25,
+  "w": 720,
+  "h": 1018
+ },
+ "109": {
+  "title": "The Prophet Amos",
+  "book": "Amos",
+  "chapter": 1,
+  "verse": 1,
+  "w": 720,
+  "h": 989
+ },
+ "110": {
+  "title": "The Prophet Isaiah",
+  "book": "Isaiah",
+  "chapter": 1,
+  "verse": 1,
+  "w": 720,
+  "h": 995
+ },
+ "111": {
+  "title": "Micah Exhorts the Israelites to Repent",
+  "book": "Micah",
+  "chapter": 6,
+  "verse": 1,
+  "w": 720,
+  "h": 652
+ },
+ "112": {
+  "title": "Sennacherib’s Army is Destroyed",
+  "book": "Isaiah",
+  "chapter": 37,
+  "verse": 36,
+  "w": 720,
+  "h": 995
+ },
+ "114": {
+  "title": "The Prophet Jeremiah",
+  "book": "Jeremiah",
+  "chapter": 1,
+  "verse": 1,
+  "w": 720,
+  "h": 986
+ },
+ "115": {
+  "title": "Baruch Writes Jeremiah’s Prophecies",
+  "book": "Jeremiah",
+  "chapter": 36,
+  "verse": 4,
+  "w": 720,
+  "h": 989
+ },
+ "116": {
+  "title": "People Mourn over the Destruction of Jerusalem",
+  "book": "Lamentations",
+  "chapter": 1,
+  "verse": 1,
+  "w": 720,
+  "h": 977
+ },
+ "117": {
+  "title": "The Prophet Ezekiel",
+  "book": "Ezekiel",
+  "chapter": 2,
+  "verse": 1,
+  "w": 720,
+  "h": 993
+ },
+ "118": {
+  "title": "Ezekiel’s Vision of the Valley of Dry Bones",
+  "book": "Ezekiel",
+  "chapter": 37,
+  "verse": 1,
+  "w": 720,
+  "h": 961
+ },
+ "119": {
+  "title": "Queen Vashti Refuses to Obey Ahasuerus Command",
+  "book": "Esther",
+  "chapter": 1,
+  "verse": 12,
+  "w": 720,
+  "h": 999
+ },
+ "120": {
+  "title": "The Triumph of Mordecai",
+  "book": "Esther",
+  "chapter": 6,
+  "verse": 11,
+  "w": 720,
+  "h": 984
+ },
+ "121": {
+  "title": "Esther Accuses Haman",
+  "book": "Esther",
+  "chapter": 7,
+  "verse": 6,
+  "w": 720,
+  "h": 996
+ },
+ "122": {
+  "title": "Daniel among the Exiles",
+  "book": "Daniel",
+  "chapter": 1,
+  "verse": 6,
+  "w": 720,
+  "h": 971
+ },
+ "123": {
+  "title": "Shadrach Meshach and Abednego in the Furnace",
+  "book": "Daniel",
+  "chapter": 3,
+  "verse": 21,
+  "w": 720,
+  "h": 984
+ },
+ "124": {
+  "title": "Daniel Interprets the Writing on the Wall",
+  "book": "Daniel",
+  "chapter": 5,
+  "verse": 5,
+  "w": 720,
+  "h": 982
+ },
+ "125": {
+  "title": "Daniel in the Lions’ Den",
+  "book": "Daniel",
+  "chapter": 6,
+  "verse": 16,
+  "w": 720,
+  "h": 988
+ },
+ "126": {
+  "title": "Daniel’s Vision of the Four Beasts",
+  "book": "Daniel",
+  "chapter": 7,
+  "verse": 3,
+  "w": 720,
+  "h": 637
+ },
+ "127": {
+  "title": "Isaiah’s Vision of the Destruction of Babylon",
+  "book": "Isaiah",
+  "chapter": 13,
+  "verse": 19,
+  "w": 720,
+  "h": 626
+ },
+ "128": {
+  "title": "The Destruction of Leviathan",
+  "book": "Isaiah",
+  "chapter": 27,
+  "verse": 1,
+  "w": 720,
+  "h": 989
+ },
+ "129": {
+  "title": "Zechariah’s Vision of Four Chariots",
+  "book": "Zechariah",
+  "chapter": 6,
+  "verse": 1,
+  "w": 720,
+  "h": 983
+ },
+ "130": {
+  "title": "Cyrus Restores the Vessels of the Temple",
+  "book": "Ezra",
+  "chapter": 1,
+  "verse": 7,
+  "w": 720,
+  "h": 984
+ },
+ "131": {
+  "title": "Artaxerxes Grants Freedom to the Jews",
+  "book": "Ezra",
+  "chapter": 7,
+  "verse": 11,
+  "w": 720,
+  "h": 985
+ },
+ "132": {
+  "title": "Ezra Kneels in Prayer",
+  "book": "Ezra",
+  "chapter": 9,
+  "verse": 5,
+  "w": 720,
+  "h": 994
+ },
+ "133": {
+  "title": "Ezra Reads the Law to the People",
+  "book": "Nehemiah",
+  "chapter": 8,
+  "verse": 3,
+  "w": 720,
+  "h": 981
+ },
+ "134": {
+  "title": "Nehemiah Views the Ruins of Jerusalem’s Walls",
+  "book": "Nehemiah",
+  "chapter": 2,
+  "verse": 13,
+  "w": 720,
+  "h": 987
+ },
+ "135": {
+  "title": "The Rebuilding of the Temple is Begun",
+  "book": "Ezra",
+  "chapter": 3,
+  "verse": 10,
+  "w": 720,
+  "h": 987
+ },
+ "136": {
+  "title": "Job Hears of His Misfortunes",
+  "book": "Job",
+  "chapter": 1,
+  "verse": 13,
+  "w": 720,
+  "h": 982
+ },
+ "137": {
+  "title": "Job Speaks with His Friends",
+  "book": "Job",
+  "chapter": 2,
+  "verse": 11,
+  "w": 720,
+  "h": 979
+ },
+ "138": {
+  "title": "Jonah is Spewed Forth by the Whale",
+  "book": "Jonah",
+  "chapter": 2,
+  "verse": 10,
+  "w": 720,
+  "h": 970
+ },
+ "139": {
+  "title": "Jonah Preaches to the Ninevites",
+  "book": "Jonah",
+  "chapter": 3,
+  "verse": 4,
+  "w": 720,
+  "h": 986
+ },
+ "140": {
+  "title": "Tobias and the Angel",
+  "book": "Tobit",
+  "chapter": 6,
+  "verse": 1,
+  "w": 720,
+  "h": 988
+ },
+ "141": {
+  "title": "The Angel Raphael and the Family of Tobit",
+  "book": "Tobit",
+  "chapter": 12,
+  "verse": 15,
+  "w": 720,
+  "h": 971
+ },
+ "142": {
+  "title": "Judith and Holofernes",
+  "book": "Judith",
+  "chapter": 13,
+  "verse": 6,
+  "w": 720,
+  "h": 985
+ },
+ "144": {
+  "title": "Esther Before the King",
+  "book": "Esther",
+  "chapter": 5,
+  "verse": 1,
+  "w": 720,
+  "h": 970
+ },
+ "145": {
+  "title": "Baruch",
+  "book": "Baruch",
+  "chapter": 1,
+  "verse": 1,
+  "w": 720,
+  "h": 982
+ },
+ "147": {
+  "title": "The Justification of Susanna",
+  "book": "sus",
+  "chapter": 1,
+  "verse": 45,
+  "w": 720,
+  "h": 977
+ },
+ "148": {
+  "title": "Daniel Confounds the Priests of Bel",
+  "book": "Bel and the Dragon",
+  "chapter": 1,
+  "verse": 19,
+  "w": 720,
+  "h": 960
+ },
+ "149": {
+  "title": "Mattathias and the Apostate",
+  "book": "1 Maccabees",
+  "chapter": 2,
+  "verse": 24,
+  "w": 720,
+  "h": 982
+ },
+ "151": {
+  "title": "Judas Maccabeus Pursues Timotheus",
+  "book": "1 Maccabees",
+  "chapter": 5,
+  "verse": 34,
+  "w": 720,
+  "h": 640
+ },
+ "152": {
+  "title": "The Death of Eleazar",
+  "book": "1 Maccabees",
+  "chapter": 6,
+  "verse": 46,
+  "w": 720,
+  "h": 989
+ },
+ "153": {
+  "title": "Jonathan Destroys the Temple of Dagon",
+  "book": "1 Maccabees",
+  "chapter": 10,
+  "verse": 84,
+  "w": 720,
+  "h": 980
+ },
+ "154": {
+  "title": "Heliodorus is Cast Down",
+  "book": "2 Maccabees",
+  "chapter": 3,
+  "verse": 25,
+  "w": 720,
+  "h": 975
+ },
+ "155": {
+  "title": "The Army Appears in the Heavens",
+  "book": "2 Maccabees",
+  "chapter": 5,
+  "verse": 2,
+  "w": 720,
+  "h": 649
+ },
+ "156": {
+  "title": "The Martyrdom of Eleazar the Scribe",
+  "book": "2 Maccabees",
+  "chapter": 6,
+  "verse": 18,
+  "w": 720,
+  "h": 986
+ },
+ "157": {
+  "title": "The Courage of a Mother",
+  "book": "2 Maccabees",
+  "chapter": 7,
+  "verse": 20,
+  "w": 720,
+  "h": 976
+ },
+ "159": {
+  "title": "The Angel is Sent to Deliver Israel",
+  "book": "2 Maccabees",
+  "chapter": 11,
+  "verse": 8,
+  "w": 720,
+  "h": 635
+ },
+ "160": {
+  "title": "Judas Maccabeus before the Army of Nicanor",
+  "book": "2 Maccabees",
+  "chapter": 15,
+  "verse": 21,
+  "w": 720,
+  "h": 656
+ },
+ "161": {
+  "title": "The Annunciation",
+  "book": "Luke",
+  "chapter": 1,
+  "verse": 28,
+  "w": 720,
+  "h": 976
+ },
+ "162": {
+  "title": "The Birth of Jesus",
+  "book": "Luke",
+  "chapter": 2,
+  "verse": 7,
+  "w": 720,
+  "h": 977
+ },
+ "163": {
+  "title": "Wise Men Are Guided by a Star",
+  "book": "Matthew",
+  "chapter": 2,
+  "verse": 9,
+  "w": 720,
+  "h": 978
+ },
+ "164": {
+  "title": "Joseph Leads Mary and Jesus into Egypt",
+  "book": "Matthew",
+  "chapter": 2,
+  "verse": 14,
+  "w": 720,
+  "h": 992
+ },
+ "166": {
+  "title": "Jesus Questions the Doctors",
+  "book": "Luke",
+  "chapter": 2,
+  "verse": 46,
+  "w": 720,
+  "h": 962
+ },
+ "167": {
+  "title": "John the Baptist Preaches in the Wilderness",
+  "book": "Matthew",
+  "chapter": 3,
+  "verse": 1,
+  "w": 720,
+  "h": 970
+ },
+ "168": {
+  "title": "The Baptism of Jesus",
+  "book": "Mark",
+  "chapter": 1,
+  "verse": 10,
+  "w": 720,
+  "h": 978
+ },
+ "169": {
+  "title": "The Temptation of Jesus",
+  "book": "Matthew",
+  "chapter": 4,
+  "verse": 8,
+  "w": 720,
+  "h": 992
+ },
+ "170": {
+  "title": "The Wedding at Cana",
+  "book": "John",
+  "chapter": 2,
+  "verse": 7,
+  "w": 720,
+  "h": 971
+ },
+ "171": {
+  "title": "Jesus and the Woman of Samaria",
+  "book": "John",
+  "chapter": 4,
+  "verse": 7,
+  "w": 720,
+  "h": 970
+ },
+ "172": {
+  "title": "Jesus Preaches in the Synagogue",
+  "book": "Luke",
+  "chapter": 4,
+  "verse": 16,
+  "w": 720,
+  "h": 990
+ },
+ "173": {
+  "title": "Jesus Heals a Demoniac",
+  "book": "Mark",
+  "chapter": 5,
+  "verse": 6,
+  "w": 720,
+  "h": 969
+ },
+ "174": {
+  "title": "Jesus Preaches at the Sea of Galilee",
+  "book": "Mark",
+  "chapter": 4,
+  "verse": 1,
+  "w": 720,
+  "h": 999
+ },
+ "175": {
+  "title": "The Sermon on the Mount",
+  "book": "Matthew",
+  "chapter": 5,
+  "verse": 1,
+  "w": 720,
+  "h": 976
+ },
+ "176": {
+  "title": "The Disciples Pluck Grain on the Sabbath",
+  "book": "Mark",
+  "chapter": 2,
+  "verse": 23,
+  "w": 720,
+  "h": 983
+ },
+ "177": {
+  "title": "A Sinful Woman Repents",
+  "book": "Luke",
+  "chapter": 7,
+  "verse": 37,
+  "w": 720,
+  "h": 979
+ },
+ "178": {
+  "title": "Jesus Heals a Blind Man",
+  "book": "John",
+  "chapter": 9,
+  "verse": 6,
+  "w": 720,
+  "h": 963
+ },
+ "179": {
+  "title": "Jesus Stills the Storm",
+  "book": "Matthew",
+  "chapter": 8,
+  "verse": 26,
+  "w": 720,
+  "h": 980
+ },
+ "180": {
+  "title": "Jesus Raises the Daughter of Jairus",
+  "book": "Mark",
+  "chapter": 5,
+  "verse": 41,
+  "w": 720,
+  "h": 937
+ },
+ "181": {
+  "title": "Jesus at the House of Martha and Mary",
+  "book": "Luke",
+  "chapter": 10,
+  "verse": 40,
+  "w": 720,
+  "h": 974
+ },
+ "183": {
+  "title": "Jesus Preaches to the Multitude",
+  "book": "Luke",
+  "chapter": 6,
+  "verse": 17,
+  "w": 720,
+  "h": 976
+ },
+ "184": {
+  "title": "Jesus Feeds the Multitudes",
+  "book": "Matthew",
+  "chapter": 14,
+  "verse": 19,
+  "w": 720,
+  "h": 981
+ },
+ "185": {
+  "title": "Jesus Walks on the Sea",
+  "book": "Mark",
+  "chapter": 6,
+  "verse": 48,
+  "w": 720,
+  "h": 614
+ },
+ "186": {
+  "title": "Jesus Heals the Sick",
+  "book": "Matthew",
+  "chapter": 15,
+  "verse": 30,
+  "w": 720,
+  "h": 969
+ },
+ "187": {
+  "title": "The Transfiguration",
+  "book": "Matthew",
+  "chapter": 17,
+  "verse": 2,
+  "w": 720,
+  "h": 973
+ },
+ "188": {
+  "title": "Jesus Heals the Epileptic Demoniac",
+  "book": "Mark",
+  "chapter": 9,
+  "verse": 20,
+  "w": 720,
+  "h": 960
+ },
+ "189": {
+  "title": "Jesus and the Woman Taken in Adultery",
+  "book": "John",
+  "chapter": 8,
+  "verse": 3,
+  "w": 720,
+  "h": 963
+ },
+ "190": {
+  "title": "The Parable of the Good Samaritan",
+  "book": "Luke",
+  "chapter": 10,
+  "verse": 30,
+  "w": 720,
+  "h": 1008
+ },
+ "192": {
+  "title": "Jesus Blesses the Little Children",
+  "book": "Mark",
+  "chapter": 10,
+  "verse": 13,
+  "w": 720,
+  "h": 962
+ },
+ "194": {
+  "title": "The Prodigal Son in His Father’s Arms",
+  "book": "Luke",
+  "chapter": 15,
+  "verse": 20,
+  "w": 720,
+  "h": 972
+ },
+ "195": {
+  "title": "Lazarus outside the Rich Man’s House",
+  "book": "Luke",
+  "chapter": 16,
+  "verse": 20,
+  "w": 720,
+  "h": 989
+ },
+ "196": {
+  "title": "The Pharisee and the Publican",
+  "book": "Luke",
+  "chapter": 18,
+  "verse": 10,
+  "w": 720,
+  "h": 968
+ },
+ "197": {
+  "title": "The Raising of Lazarus",
+  "book": "John",
+  "chapter": 11,
+  "verse": 43,
+  "w": 720,
+  "h": 964
+ },
+ "198": {
+  "title": "Jesus Enters into Jerusalem",
+  "book": "Luke",
+  "chapter": 19,
+  "verse": 36,
+  "w": 720,
+  "h": 954
+ },
+ "199": {
+  "title": "Buyers and Sellers Are Driven Out of the Temple",
+  "book": "Matthew",
+  "chapter": 21,
+  "verse": 12,
+  "w": 720,
+  "h": 969
+ },
+ "200": {
+  "title": "Jesus Replies about the Tribute Money",
+  "book": "Matthew",
+  "chapter": 22,
+  "verse": 19,
+  "w": 720,
+  "h": 960
+ },
+ "201": {
+  "title": "The Widow’s Mite",
+  "book": "Mark",
+  "chapter": 12,
+  "verse": 42,
+  "w": 720,
+  "h": 978
+ },
+ "202": {
+  "title": "The Last Supper",
+  "book": "Luke",
+  "chapter": 22,
+  "verse": 19,
+  "w": 720,
+  "h": 967
+ },
+ "203": {
+  "title": "Jesus Prays in the Garden",
+  "book": "Matthew",
+  "chapter": 26,
+  "verse": 39,
+  "w": 720,
+  "h": 978
+ },
+ "204": {
+  "title": "An Angel Appears to Jesus in the Garden",
+  "book": "Luke",
+  "chapter": 22,
+  "verse": 43,
+  "w": 720,
+  "h": 964
+ },
+ "205": {
+  "title": "Judas Betrays Jesus",
+  "book": "Mark",
+  "chapter": 14,
+  "verse": 45,
+  "w": 720,
+  "h": 969
+ },
+ "206": {
+  "title": "Peter Denies Knowing Jesus",
+  "book": "John",
+  "chapter": 18,
+  "verse": 25,
+  "w": 720,
+  "h": 973
+ },
+ "207": {
+  "title": "Jesus is Scourged",
+  "book": "Mark",
+  "chapter": 15,
+  "verse": 15,
+  "w": 720,
+  "h": 950
+ },
+ "208": {
+  "title": "Jesus is Crowned with Thorns",
+  "book": "Matthew",
+  "chapter": 27,
+  "verse": 29,
+  "w": 720,
+  "h": 956
+ },
+ "209": {
+  "title": "Jesus is Mocked",
+  "book": "Luke",
+  "chapter": 22,
+  "verse": 63,
+  "w": 720,
+  "h": 973
+ },
+ "210": {
+  "title": "Jesus is Presented to the People",
+  "book": "John",
+  "chapter": 19,
+  "verse": 5,
+  "w": 720,
+  "h": 961
+ },
+ "211": {
+  "title": "Jesus Falls Beneath the Cross",
+  "book": "Luke",
+  "chapter": 23,
+  "verse": 26,
+  "w": 720,
+  "h": 945
+ },
+ "212": {
+  "title": "Jesus Arrives at Calvary",
+  "book": "John",
+  "chapter": 19,
+  "verse": 17,
+  "w": 720,
+  "h": 622
+ },
+ "213": {
+  "title": "Jesus is Nailed to the Cross",
+  "book": "Luke",
+  "chapter": 23,
+  "verse": 33,
+  "w": 720,
+  "h": 972
+ },
+ "214": {
+  "title": "The Cross is Lifted Up",
+  "book": "Mark",
+  "chapter": 15,
+  "verse": 25,
+  "w": 720,
+  "h": 968
+ },
+ "215": {
+  "title": "The Crucifixion of Jesus and Two Criminals",
+  "book": "Matthew",
+  "chapter": 27,
+  "verse": 38,
+  "w": 720,
+  "h": 963
+ },
+ "216": {
+  "title": "Darkness at the Crucifixion",
+  "book": "Luke",
+  "chapter": 23,
+  "verse": 44,
+  "w": 720,
+  "h": 965
+ },
+ "217": {
+  "title": "Jesus’ Body is Removed from the Cross",
+  "book": "John",
+  "chapter": 19,
+  "verse": 38,
+  "w": 720,
+  "h": 957
+ },
+ "218": {
+  "title": "Disciples Mourn over the Dead Jesus",
+  "book": "Matthew",
+  "chapter": 27,
+  "verse": 59,
+  "w": 720,
+  "h": 949
+ },
+ "219": {
+  "title": "Jesus is Buried in the Tomb",
+  "book": "Luke",
+  "chapter": 23,
+  "verse": 53,
+  "w": 720,
+  "h": 975
+ },
+ "220": {
+  "title": "The Angel and Women at the Empty Tomb",
+  "book": "Mark",
+  "chapter": 16,
+  "verse": 5,
+  "w": 720,
+  "h": 967
+ },
+ "221": {
+  "title": "Jesus and Two Disciples Go to Emmaus",
+  "book": "Luke",
+  "chapter": 24,
+  "verse": 15,
+  "w": 720,
+  "h": 948
+ },
+ "222": {
+  "title": "The Miraculous Catch of Fish",
+  "book": "John",
+  "chapter": 21,
+  "verse": 6,
+  "w": 720,
+  "h": 975
+ },
+ "223": {
+  "title": "Jesus Ascends to Heaven",
+  "book": "Acts",
+  "chapter": 1,
+  "verse": 9,
+  "w": 720,
+  "h": 960
+ },
+ "224": {
+  "title": "The Holy Spirit Descends on the Disciples",
+  "book": "Acts",
+  "chapter": 2,
+  "verse": 3,
+  "w": 720,
+  "h": 957
+ },
+ "225": {
+  "title": "The Apostles Preach the Gospel",
+  "book": "Acts",
+  "chapter": 5,
+  "verse": 42,
+  "w": 720,
+  "h": 979
+ },
+ "226": {
+  "title": "Peter and John at the Beautiful Gate",
+  "book": "Acts",
+  "chapter": 3,
+  "verse": 6,
+  "w": 720,
+  "h": 981
+ },
+ "227": {
+  "title": "The Death of Ananias",
+  "book": "Acts",
+  "chapter": 5,
+  "verse": 5,
+  "w": 720,
+  "h": 964
+ },
+ "228": {
+  "title": "The Martyrdom of Stephen",
+  "book": "Acts",
+  "chapter": 7,
+  "verse": 59,
+  "w": 720,
+  "h": 966
+ },
+ "229": {
+  "title": "The Conversion of Saul",
+  "book": "Acts",
+  "chapter": 9,
+  "verse": 4,
+  "w": 720,
+  "h": 959
+ },
+ "230": {
+  "title": "Peter Preaches in the House of Cornelius",
+  "book": "Acts",
+  "chapter": 10,
+  "verse": 34,
+  "w": 720,
+  "h": 989
+ },
+ "231": {
+  "title": "Peter is Delivered from Prison",
+  "book": "Acts",
+  "chapter": 12,
+  "verse": 7,
+  "w": 720,
+  "h": 994
+ },
+ "232": {
+  "title": "Paul Preaches to the Thessalonians",
+  "book": "Acts",
+  "chapter": 17,
+  "verse": 2,
+  "w": 720,
+  "h": 951
+ },
+ "233": {
+  "title": "Paul Preaches at Ephesus",
+  "book": "Acts",
+  "chapter": 19,
+  "verse": 8,
+  "w": 720,
+  "h": 966
+ },
+ "234": {
+  "title": "Paul is Rescued from the Crowd",
+  "book": "Acts",
+  "chapter": 21,
+  "verse": 32,
+  "w": 720,
+  "h": 958
+ },
+ "235": {
+  "title": "Paul is Shipwrecked",
+  "book": "Acts",
+  "chapter": 27,
+  "verse": 41,
+  "w": 720,
+  "h": 970
+ },
+ "236": {
+  "title": "John on Patmos",
+  "book": "Revelation",
+  "chapter": 1,
+  "verse": 9,
+  "w": 720,
+  "h": 958
+ },
+ "237": {
+  "title": "The Pale Horse of Death",
+  "book": "Revelation",
+  "chapter": 6,
+  "verse": 8,
+  "w": 720,
+  "h": 982
+ },
+ "238": {
+  "title": "The Virgin is Crowned",
+  "book": "Revelation",
+  "chapter": 12,
+  "verse": 1,
+  "w": 720,
+  "h": 997
+ },
+ "239": {
+  "title": "Babylon Has Fallen",
+  "book": "Revelation",
+  "chapter": 18,
+  "verse": 2,
+  "w": 720,
+  "h": 962
+ },
+ "240": {
+  "title": "The Last Judgment",
+  "book": "Revelation",
+  "chapter": 20,
+  "verse": 12,
+  "w": 720,
+  "h": 970
+ },
+ "241": {
+  "title": "The New Jerusalem",
+  "book": "Revelation",
+  "chapter": 21,
+  "verse": 10,
+  "w": 720,
+  "h": 970
+ }
+}

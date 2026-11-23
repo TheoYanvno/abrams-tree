@@ -3,6 +3,7 @@ import { weeks, WEEKS, route } from './lib/book.js';
 import { bookById, superbookLink } from './lib/books.js';
 import Translations from './Translations.jsx';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor } from './data/study.js';
+import { platesInWeek, leadFor, plateRef } from './lib/dore.js';
 
 const ALL = weeks();
 
@@ -38,6 +39,7 @@ export default function BookWeek({ week }) {
         </p>
       </section>
       <StudyNotes w={w} />
+      <Pictures w={w} />
       <Translations chapters={day.chapters} />
     </>
   );
@@ -65,6 +67,28 @@ function StudyNotes({ w }) {
       <h3>Pray it by heart: {title} <span className="muted">(week {step} of 4)</span></h3>
       <p>{text}</p>
       <p className="muted">{MEMORY_STEPS[step - 1]}</p>
+    </section>
+  );
+}
+
+/** The week's Doré engravings, the same ones printed beside these chapters in the book. */
+function Pictures({ w }) {
+  const inWeek = platesInWeek(w);
+  const lead = leadFor(w);
+  const all = lead && !inWeek.some((p) => p.n === lead.n) ? [lead, ...inWeek] : inWeek;
+  if (!all.length) return null;
+  return (
+    <section className="card" aria-labelledby="pictures">
+      <h2 id="pictures">Pictures this week</h2>
+      <div className="plates">
+        {all.map((p) => (
+          <figure key={p.n} className="plate">
+            <img src={`dore/${String(p.n).padStart(3, '0')}.jpg`} alt={`${p.title}, engraving by Gustave Doré`} loading="lazy" width={p.w} height={p.h} />
+            <figcaption>{p.title} <span className="muted">· {plateRef(p)}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+      <p className="muted small">Engravings by Gustave Doré, <i>La Grande Bible de Tours</i> (1866), public domain. Derived from AionianBible.org by Nainoia Inc.</p>
     </section>
   );
 }

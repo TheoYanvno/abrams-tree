@@ -18,7 +18,8 @@ A React Bible study guide: daily reading plans, prayers and prayer times, a worl
   - **Alive together:** tap a name to see who was alive at the same time, and read their chapter.
   - **A day with the Lord:** the week of creation as God's days (six days of making are 6,000 of our years, and with the seventh day of rest, 7,000 years), and the verses where God speaks of time, read with the thousand-year day.
 - **📕 Study Bible:** the *AbrahamsTree Study Bible* prints the whole Bible (the World English Bible, with every book of the Orthodox Old Testament) in four 6 × 9 volumes of 13 weeks each, ready for Amazon KDP.
-  - **Each week opens with two pages:** the week's readings with a checkbox for each day, an introduction to any book that starts that week, a "Did you know?", a drawing from Colors of Eden, a saint's words, a prayer to learn by heart over four weeks, and room for notes and prayers.
+  - **Each week opens with two pages:** the week's readings with a checkbox for each day, an introduction to any book that starts that week, a "Did you know?", an engraving by Gustave Doré, a saint's words, a prayer to learn by heart over four weeks, and room for notes and prayers.
+  - **Doré's engravings in the text:** 207 of Gustave Doré's Bible engravings sit beside the verses they show, and the app shows each week's pictures too.
   - **Then the Bible text itself,** day by day, in two columns.
   - **Each volume ends with:** the hours of prayer, a prayer list, that part's timeline and maps, and journal pages.
   - **QR codes:** every week, hour, chart and map has one that opens the same spot in the app, and the app tells you which volume and page you're on.
@@ -49,6 +50,7 @@ It works the same on Windows, macOS and Linux (in the VS Code terminal on Window
 | `src/lib/timeline.js`, `src/data/people.js` | Lives added up from Genesis, BC and AD dates, who was alive together, and God's time (a thousand years to a day) |
 | `src/lib/book.js`, `src/data/study.js` | The weeks of the plan, the links the QR codes open, the volume and page for each, and the study notes (introductions, quotes, prayers to learn, facts) |
 | `tools/parse_web.py`, `tools/build_book.mjs`, `tools/build_cover.mjs` | The World English Bible put into the Orthodox order, and the four volumes and their covers built from it |
+| `tools/make_dore.py`, `src/lib/dore.js` | The Doré engravings: which verse each one belongs to, print copies for the book and small copies for the app |
 | `src/data/basemap.json` | Land, lakes and rivers from [Natural Earth](https://www.naturalearthdata.com/) (public domain), made by `tools/build_basemap.py` |
 
 The logic is plain functions tested with `node --test`; the React components only draw it and save it.
@@ -59,7 +61,7 @@ React, JavaScript, SVG, the Notifications API, iCalendar files, bible-api.com, N
 
 ## Credits
 
-Built with help from AI coding tools; every feature is reviewed and tested before it ships. Prayers are the traditional prayers of the Church, and verses are from the World English Bible, both in the public domain.
+Built with help from AI coding tools; every feature is reviewed and tested before it ships. Prayers are the traditional prayers of the Church, and verses are from the World English Bible, both in the public domain. Illustrations are engravings by Gustave Doré from *La Grande Bible de Tours* (1866, public domain); scans compiled by Felix Just, S.J., derived from AionianBible.org by Nainoia Inc.
 
 ## License
 

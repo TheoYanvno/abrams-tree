@@ -102,3 +102,8 @@ button:disabled { opacity: .5; cursor: default; }
 .week-days li { padding: 6px 0; border-top: 1px solid #f0e8d8; }
 .week-days li.on > .link { font-weight: bold; }
 .week-days .link { margin-top: 0; text-align: left; }
+
+.plates { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.plate { margin: 0; }
+.plate img { width: 100%; height: auto; display: block; border-radius: 6px; border: 1px solid #e6dccb; background: #f4f0e8; }
+.plate figcaption { font-size: 0.85em; margin-top: 4px; line-height: 1.3; }

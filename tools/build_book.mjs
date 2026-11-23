@@ -1,9 +1,9 @@
 // Builds the AbrahamsTree Study Bible: the whole Bible (World English Bible, public domain) read in a
 // year, in four 6 x 9 volumes of 13 weeks each, ready for Amazon KDP (no bleed, mirrored margins with
 // room for the binding). Each week opens with a two-page spread: that week's readings with checkboxes,
-// an introduction to any book that starts that week, a "Did you know?" and a drawing on the left; a
+// an introduction to any book that starts that week, a "Did you know?" and a Doré engraving on the left; a
 // saint's words, a prayer to learn by heart and room for notes on the right. The week's chapters follow
-// in two columns. Each volume ends with the hours of prayer, a prayer list, that part's timeline and
+// in two columns, with Gustave Doré's engravings set beside the verses they show. Each volume ends with the hours of prayer, a prayer list, that part's timeline and
 // maps, and journal pages. Every QR code opens the same spot in the free app, and the build writes the
 // page numbers the app shows to src/data/bookPages.json.
 //
@@ -22,6 +22,7 @@ import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD
   from '../src/lib/timeline.js';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor } from '../src/data/study.js';
 import { ORTHODOXY } from '../src/data/orthodoxy.js';
+import { platesByChapter, leadFor, plateRef } from '../src/lib/dore.js';
 
 const require = createRequire(import.meta.url);
 const QRCode = require('./vendor/qrcode/index.js');
@@ -178,7 +179,8 @@ function eraPage(p) {
 // ---- the volumes ---------------------------------------------------------------------------------
 
 const BIBLE = JSON.parse(gunzipSync(await readFile(join(HERE, 'data/web.json.gz'))).toString('utf8'));
-const ILLUS = JSON.parse(await readFile(join(HERE, 'data/illustrations/index.json'), 'utf8'));
+const PLATES = platesByChapter();
+const plateSrc = (p) => pathToFileURL(join(HERE, 'data/dore/print', `${String(p.n).padStart(3, '0')}.jpg`)).href;
 const WEEKS = weeks();
 const LAST_CHAPTER = { Psalms: 150, Baruch: 5 };                     // the plan's last chapter; 151 and 6 follow it
 const EXTRA = { Psalms: '151', Baruch: '6' };
@@ -203,9 +205,19 @@ const booksStarting = (w) => [...new Set(w.days.flatMap((d) => d.chapters.filter
 const marker = (id) => `<span class="mk">@@${id}@@</span>`;
 const sheet = (cls, inner, plain = false) => `<section class="sheet ${cls}${plain ? ' plain' : ''}">${inner}</section>`;
 
-function verseHtml(blocks, chapterKey) {
+/** A Doré engraving set in the Bible text, a column wide, with its title and the verse it shows. */
+const plateHtml = (p) => `<figure class="plate"><img src="${plateSrc(p)}" width="${p.w}" height="${p.h}"><figcaption>${esc(p.title)} <span>· ${esc(plateRef(p))}</span></figcaption></figure>`;
+
+function verseHtml(blocks, chapterKey, plates = []) {
   const seen = new Set();
+  const left = [...plates];
   return blocks.map(([kind, parts]) => {
+    let before = '';
+    while (left.length && parts.some(([v]) => v === left[0].verse)) before += plateHtml(left.shift());
+    return before + block(kind, parts);
+  }).join('') + left.map(plateHtml).join('');
+
+  function block(kind, parts) {
     const body = parts.map(([v, t]) => {
       let num = '';
       if (v && !seen.has(v)) { seen.add(v); num = `<sup>${String(v).replace(/^S/, '')}</sup>`; }
@@ -215,7 +227,7 @@ function verseHtml(blocks, chapterKey) {
     if (kind === 'd') return `<div class="d">${body}</div>`;
     if (kind === 's') return `<div class="s">${body}</div>`;
     return `<p>${body}</p>`;
-  }).join('');
+  }
 }
 
 function readingHtml(w) {
@@ -229,7 +241,7 @@ function readingHtml(w) {
       const first = ch === '1';
       const name = bookLabel(book);
       const label = book === 'Psalms' ? `Psalm ${ch}` : book === 'Baruch' && ch === '6' ? 'Baruch 6' : `${name.replace(/ \(.*\)/, '')} ${ch}`;
-      return `${first ? `<h3 class="book">${esc(name)}</h3>` : ''}<h4 class="ch">${esc(label)}</h4>${verseHtml(BIBLE[book][ch] || [], ch)}`;
+      return `${first ? `<h3 class="book">${esc(name)}</h3>` : ''}<h4 class="ch">${esc(label)}</h4>${verseHtml(BIBLE[book][ch] || [], ch, PLATES[`${book}|${ch}`])}`;
     }).join('');
     return `<div class="day"><div class="dayhead">☐ Day ${d.day} <span>· ${esc(d.text)}</span></div><div class="cols">${text}</div></div>`;
   }).join('');
@@ -238,8 +250,8 @@ function readingHtml(w) {
 function weekLeft(w) {
   const intros = booksStarting(w).filter((b) => INTROS[b]);
   const [fact, factRef] = FACTS[w.week - 1];
-  const ill = ILLUS[w.week];
-  const img = ill ? `<figure><img src="${pathToFileURL(join(HERE, 'data/illustrations', ill.file)).href}"><figcaption>${esc(ill.title)}</figcaption></figure>` : '';
+  const lead = leadFor(w);
+  const img = lead ? `<figure><img src="${plateSrc(lead)}"><figcaption>${esc(lead.title)} · ${esc(plateRef(lead))}</figcaption></figure>` : '';
   return sheet('wleft', `${marker('W' + w.week)}
     <div class="head"><div><div class="kicker">${esc(PLAN.name)} · Days ${w.days[0].day}–${w.days.at(-1).day}</div><h2>Week ${w.week}</h2></div>${qrBox(route('read', 'week', w.week), 'Read this week in the app')}</div>
     <table class="days">${w.days.map((d) => `<tr><td class="box">☐</td><td class="dn">Day ${d.day}</td><td class="rd">${esc(d.text)}</td><td class="dt">____</td></tr>`).join('')}</table>
@@ -271,7 +283,9 @@ function volumeHtml(v, fillers, toc) {
       <p>The Bible text is the World English Bible (WEB), which is in the public domain, with the books of the Orthodox
       Old Testament: the Song of the Three Holy Children in Daniel 3, the Letter of Jeremiah as Baruch 6, and Psalm 151.
       Psalms are numbered as in the Hebrew. The prayers are the traditional prayers of the Orthodox Church. Maps are drawn
-      from Natural Earth data (public domain). Drawings are from Colors of Eden by ${AUTHOR}.</p>
+      from Natural Earth data (public domain).</p>
+      <p>Illustrations: engravings by Gustave Doré from <i>La Grande Bible de Tours</i> (1866), public domain. Scans compiled by
+      Felix Just, S.J.; derived from AionianBible.org by Nainoia Inc.</p>
       <p>The free AbrahamsTree app: ${esc(APP_URL)}</p></div>`, true));
   out.push(sheet('how', `${marker('HOW')}<h2>How to use this book</h2>
     <p>This is the whole Bible, read in a year in four volumes of 13 weeks. This volume has weeks ${v.weeks[0]} to ${v.weeks[1]}.</p>
@@ -370,7 +384,11 @@ p { margin: 0 0 6pt; }
 .fact { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt; font-size: 8.6pt; line-height: 1.33; overflow: hidden; }
 .fact p { margin: 0; }
 .fact figure { float: right; width: 1.8in; margin: 0 0 3pt 8pt; text-align: center; }
-.fact img { width: 100%; height: auto; max-height: 2.1in; object-fit: contain; display: block; }
+.fact img { width: 100%; height: auto; max-height: 2.3in; object-fit: contain; display: block; }
+.plate { break-inside: avoid; margin: 5pt 0 6pt; text-align: center; }
+.plate img { width: 100%; height: auto; display: block; border: 0.5px solid #333; }
+.plate figcaption { font-size: 6.6pt; font-style: italic; line-height: 1.2; margin-top: 2pt; text-indent: 0; text-align: center; hyphens: none; }
+.plate figcaption span { font-style: normal; color: #444; }
 .fact figcaption { font-size: 6.5pt; font-style: italic; color: #444; margin-top: 2pt; }
 .wright { display: flex; flex-direction: column; }
 .quote { border-left: 2.5px solid #111; padding: 2pt 0 2pt 9pt; margin-bottom: 9pt; }
