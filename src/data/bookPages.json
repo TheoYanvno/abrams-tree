@@ -53,47 +53,47 @@
  ],
  "#pray/hour/morning": [
   1,
-  431
+  443
  ],
  "#pray/hour/third": [
   1,
-  432
+  444
  ],
  "#pray/hour/sixth": [
   1,
-  433
+  445
  ],
  "#pray/hour/ninth": [
   1,
-  434
+  446
  ],
  "#pray/hour/evening": [
   1,
-  435
+  447
  ],
  "#pray/hour/night": [
   1,
-  436
+  448
  ],
  "#timeline/week": [
   1,
-  440
+  452
  ],
  "#timeline/genesis": [
   1,
-  442
+  454
  ],
  "#map/era/patriarchs": [
   1,
-  443
+  455
  ],
  "#map/era/exodus": [
   1,
-  444
+  456
  ],
  "#map/era/kings": [
   1,
-  445
+  457
  ],
  "#read/week/14": [
   2,
@@ -149,11 +149,11 @@
  ],
  "#timeline/later": [
   2,
-  352
+  364
  ],
  "#map/era/exile": [
   2,
-  354
+  366
  ],
  "#read/week/27": [
   3,
@@ -261,10 +261,10 @@
  ],
  "#map/era/jesus": [
   4,
-  306
+  318
  ],
  "#map/era/church": [
   4,
-  307
+  319
  ]
 }

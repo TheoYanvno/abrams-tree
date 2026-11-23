@@ -298,13 +298,23 @@ function volumeHtml(v, fillers, toc) {
   const O = ORTHODOXY;
   out.push(sheet('part', `${marker('FAITH')}<div class="partno">Come and see</div><h1>The Orthodox Faith</h1><div class="rule"></div>
     <p>What the Orthodox Church is, where it comes from, what it believes, how it lives, and how to become Orthodox.</p>`, true));
+  const refs = (r) => (r ? `<div class="refs"><span>Scripture:</span> ${esc(r[0])}<br><span>Saints and the Church:</span> ${esc(r[1])}</div>` : '');
+  const items = (list) => `<dl>${list.map(([k, t, r]) => `<dt>${esc(k)}</dt><dd>${esc(t)}${refs(r)}</dd>`).join('')}</dl>`;
   out.push(`<section class="faith">
     <h2>What is the Orthodox Church?</h2>${O.intro.map((t) => `<p>${esc(t)}</p>`).join('')}
-    <h2>A short history</h2><dl>${O.history.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
-    <h2>What Orthodox Christians believe</h2><dl>${O.beliefs.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
-    <h2>The Orthodox way of life</h2><dl>${O.values.map(([k, t]) => `<dt>${esc(k)}</dt><dd>${esc(t)}</dd>`).join('')}</dl>
+    <h2>A short history</h2>${items(O.history)}
+    <h2>What Orthodox Christians believe</h2>${items(O.beliefs)}
+    <h2>The Orthodox way of life</h2>${items(O.values)}
+    <h2>The Orthodox year: feasts and fasts</h2><p class="note">${esc(O.calendarNote)}</p>
+    <h3>${esc(O.pascha[0])}</h3><p>${esc(O.pascha[1])}</p>${refs(O.pascha[2])}
+    <h3>The Twelve Great Feasts</h3>
+    <dl>${O.feasts.map(([when, name, t, r]) => `<dt>${esc(name)} <span class="when">${esc(when)}</span></dt><dd>${esc(t)}${refs(r)}</dd>`).join('')}</dl>
+    <h3>Holy Week</h3>${items(O.holyWeek)}
+    <h3>Other feasts through the year</h3>
+    <dl>${O.otherFeasts.map(([when, name, r]) => `<dt>${esc(name)} <span class="when">${esc(when)}</span></dt><dd>${refs(r)}</dd>`).join('')}</dl>
+    <h3>The fasts</h3>${items(O.fasts)}
     <h2>How to become Orthodox, step by step</h2><p class="note">${esc(O.joinNote)}</p>
-    <ol class="steps">${O.join.map(([k, t]) => `<li><b>${esc(k)}.</b> ${esc(t)} <span class="tick">☐</span></li>`).join('')}</ol>
+    <ol class="steps">${O.join.map(([k, t, r]) => `<li><b>${esc(k)}.</b> ${esc(t)} <span class="tick">☐</span>${refs(r)}</li>`).join('')}</ol>
     <div class="label">My notes and questions for the priest</div>${lines(8)}
   </section>`);
   out.push(sheet('part', `${marker('PRAY')}<div class="partno">Pray without ceasing</div><h1>The Hours of Prayer</h1><div class="rule"></div>
@@ -396,6 +406,10 @@ blockquote cite { display: block; font-style: normal; font-size: 8.5pt; margin-t
 .faith dl { margin: 0; } .faith dt { font-weight: bold; margin-top: 5pt; break-after: avoid; } .faith dd { margin: 1pt 0 0 0.18in; }
 .faith .note { font-style: italic; } .faith .steps { padding-left: 0.22in; } .faith .steps li { margin-bottom: 5pt; break-inside: avoid; }
 .faith .tick { float: right; margin-left: 6pt; }
+.faith h3 { font-size: 11pt; margin: 9pt 0 2pt; break-after: avoid; }
+.faith .refs { font-size: 7.8pt; line-height: 1.3; color: #333; font-style: italic; margin: 1.5pt 0 0; break-before: avoid; }
+.faith .refs span { font-style: normal; font-weight: bold; color: #555; font-size: 7pt; text-transform: uppercase; letter-spacing: .06em; }
+.faith .when { font-weight: normal; font-style: italic; color: #555; font-size: 8.5pt; margin-left: 4pt; }
 .day { margin-bottom: 8pt; }
 .dayhead { font-size: 9pt; font-weight: bold; border-top: 1.5px solid #111; border-bottom: 0.6px solid #111; padding: 2pt 0; margin: 2pt 0 5pt; break-after: avoid; }
 .dayhead span { font-weight: normal; }
@@ -441,7 +455,8 @@ const render = async (html, base) => {
   return markerPages(`${base}.pdf`);
 };
 
-const map = JSON.parse(await readFile('src/data/bookPages.json', 'utf8').catch(() => '{}'));
+// A full build starts the page map fresh; building one volume keeps the others' entries.
+const map = only.length ? JSON.parse(await readFile('src/data/bookPages.json', 'utf8').catch(() => '{}')) : {};
 for (const v of VOLUMES) {
   if (only.length && !only.includes(v.n)) continue;
   const base = `${OUT}/${NAME} - Volume ${v.n}`;

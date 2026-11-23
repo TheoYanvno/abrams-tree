@@ -17,3 +17,20 @@ test('thirteen prayers, four weeks each, cover the year', () => {
   assert.deepStrictEqual(memoryFor(8), { prayer: MEMORY[1], step: 4 });
   assert.deepStrictEqual(memoryFor(52), { prayer: MEMORY[12], step: 4 });
 });
+
+import { ORTHODOXY } from '../src/data/orthodoxy.js';
+
+test('the Orthodox Faith section has Scripture and saints for every point, and the twelve Great Feasts', () => {
+  const O = ORTHODOXY;
+  for (const list of [O.history, O.beliefs, O.values, O.join, O.holyWeek, O.fasts]) {
+    for (const item of list) {
+      const [scripture, saints] = item.at(-1);
+      assert.ok(scripture && saints, item[0]);
+    }
+  }
+  assert.strictEqual(O.feasts.length, 12);
+  for (const [when, name, text, [scripture, saints]] of O.feasts) assert.ok(when && name && text && scripture && saints, name);
+  for (const [, name, [scripture, saints]] of O.otherFeasts) assert.ok(scripture && saints, name);
+  assert.ok(O.pascha[2][0] && O.pascha[2][1]);
+  assert.strictEqual(O.join.length, 11);
+});
