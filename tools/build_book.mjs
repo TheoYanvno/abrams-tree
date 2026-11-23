@@ -1,9 +1,11 @@
 // Builds the AbrahamsTree Study Bible: the whole Bible (World English Bible, public domain) read in a
 // year, in four 6 x 9 volumes of 13 weeks each, ready for Amazon KDP (no bleed, mirrored margins with
-// room for the binding). Each week opens with a two-page spread: that week's readings with checkboxes,
-// an introduction to any book that starts that week, a "Did you know?" and a Doré engraving on the left; a
-// saint's words, a prayer to learn by heart and room for notes on the right. The week's chapters follow
-// in two columns, with Gustave Doré's engravings set beside the verses they show. Each volume ends with the hours of prayer, a prayer list, that part's timeline and
+// room for the binding). Each week opens with a two-page spread: the week, the lesson of the week, a
+// saint's words and short life, a "Did you know?" with a Doré engraving and the lesson plan on the left;
+// any new books, a prayer to learn by heart and room for notes on the right. The week's chapters follow
+// in two columns, with Gustave Doré's engravings beside the verses they show and three lines for notes at
+// the foot of every page, and each week ends with a notes page. Each volume ends with the hours of prayer,
+// a prayer list, that part's timeline and
 // maps, and journal pages. Every QR code opens the same spot in the free app, and the build writes the
 // page numbers the app shows to src/data/bookPages.json.
 //
@@ -20,7 +22,7 @@ import { BASEMAP, ERAS, EVENTS, FULL, project, placeById } from '../src/lib/map.
 import { bookById } from '../src/lib/books.js';
 import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD_TIME, GOD_DAY, span, ticks, percent }
   from '../src/lib/timeline.js';
-import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor } from '../src/data/study.js';
+import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from '../src/data/study.js';
 import { ORTHODOXY } from '../src/data/orthodoxy.js';
 import { platesByChapter, leadFor, plateRef } from '../src/lib/dore.js';
 
@@ -247,26 +249,43 @@ function readingHtml(w) {
   }).join('');
 }
 
+/** The page that opens each week: the week, its lesson, the saint's words and life, a "Did you know?" and the lesson plan. */
 function weekLeft(w) {
-  const intros = booksStarting(w).filter((b) => INTROS[b]);
-  const [fact, factRef] = FACTS[w.week - 1];
+  const [fact] = FACTS[w.week - 1];
+  const [q, who, src] = QUOTES[w.week - 1];
+  const [lesson, lessonText, lessonRef] = LESSONS[w.week - 1];
+  const life = saintLife(who);
   const lead = leadFor(w);
   const img = lead ? `<figure><img src="${plateSrc(lead)}"><figcaption>${esc(lead.title)} · ${esc(plateRef(lead))}</figcaption></figure>` : '';
   return sheet('wleft', `${marker('W' + w.week)}
     <div class="head"><div><div class="kicker">${esc(PLAN.name)} · Days ${w.days[0].day}–${w.days.at(-1).day}</div><h2>Week ${w.week}</h2></div>${qrBox(route('read', 'week', w.week), 'Read this week in the app')}</div>
+    <div class="lesson"><div class="label">Lesson of the week</div><h3>${esc(lesson)}</h3><p>${esc(lessonText)} <span class="ref">${esc(lessonRef)}</span></p></div>
+    <div class="quote"><div class="label">This week's saint</div><p>“${esc(q)}”</p><cite>${esc(who)}${src ? `, <i>${esc(src)}</i>` : ''}</cite></div>
+    ${life ? `<div class="life"><div class="label">About ${esc(who)}</div><p>${esc(life[0])}${life[1] ? ` <i>Feast day: ${esc(life[1])}.</i>` : ''}</p></div>` : ''}
+    <div class="fact">${img}<div class="label">Did you know?</div><p>${esc(fact)}</p></div>
+    <div class="plan"><div class="label">Lesson plan</div>
     <table class="days">${w.days.map((d) => `<tr><td class="box">☐</td><td class="dn">Day ${d.day}</td><td class="rd">${esc(d.text)}</td><td class="dt">____</td></tr>`).join('')}</table>
-    ${intros.length ? `<div class="intros"><div class="label">New this week</div>${intros.map((b) => `<p><b>${esc(bookLabel(b))}.</b> ${esc(INTROS[b])}</p>`).join('')}</div>` : ''}
-    <div class="fact">${img}<div class="label">Did you know?</div><p>${esc(fact)}</p></div>`);
+    <p class="each">Each day: read the chapters, say the prayer you are learning, and write down one verse.</p></div>`);
 }
 
+/** The second page of each week: introductions to new books, the prayer to learn by heart, and notes. */
 function weekRight(w) {
-  const [q, who, src] = QUOTES[w.week - 1];
+  const intros = booksStarting(w).filter((b) => INTROS[b]);
   const { prayer: [title, text], step } = memoryFor(w.week);
   return sheet('wright', `
-    <div class="quote"><div class="label">This week's saint</div><p>“${esc(q)}”</p><cite>${esc(who)}${src ? `, <i>${esc(src)}</i>` : ''}</cite></div>
+    ${intros.length ? `<div class="intros"><div class="label">New this week</div>${intros.map((b) => `<p><b>${esc(bookLabel(b))}.</b> ${esc(INTROS[b])}</p>`).join('')}</div>` : ''}
     <div class="memory"><div class="label">Pray it by heart · week ${step} of 4</div><h4>${esc(title)}</h4><p class="ptext">${esc(text)}</p>
       <p class="step">${esc(MEMORY_STEPS[step - 1])}</p><div class="ticks">${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => `<span>☐ ${d}</span>`).join('')}</div></div>
-    <div class="notes"><div class="label">Notes and prayers</div><div class="nlines">${lines(18)}</div></div>`);
+    <div class="notes"><div class="label">Notes and prayers</div><div class="nlines">${lines(22)}</div></div>`);
+}
+
+/** The notes page that closes each week's reading. */
+function weekNotes(w) {
+  return sheet('wnotes', `<h2>Week ${w.week} notes</h2>
+    <div class="label">A verse to remember</div><div class="nlines">${lines(2)}</div>
+    <div class="label">What I learned this week</div><div class="nlines">${lines(6)}</div>
+    <div class="label">Questions for my priest or study group</div><div class="nlines">${lines(4)}</div>
+    <div class="label">Prayers</div><div class="nlines grow">${lines(10)}</div>`);
 }
 
 const filler = () => sheet('filler', `<div class="label">Notes</div><div class="nlines">${lines(22)}</div>`);
@@ -290,7 +309,8 @@ function volumeHtml(v, fillers, toc) {
   out.push(sheet('how', `${marker('HOW')}<h2>How to use this book</h2>
     <p>This is the whole Bible, read in a year in four volumes of 13 weeks. This volume has weeks ${v.weeks[0]} to ${v.weeks[1]}.</p>
     <ol class="how">
-      <li><b>Start each week</b> with its two pages: the week's readings, an introduction to any new book, a "Did you know?", a saint's words and a prayer to learn by heart.</li>
+      <li><b>Start each week</b> with its two pages: the lesson of the week, a saint's words and life, a "Did you know?" and the lesson plan, then any new books and a prayer to learn by heart.</li>
+      <li><b>Write as you go:</b> every page of Scripture has three lines for notes at the foot, and each week ends with a notes page.</li>
       <li><b>Read each day</b> in the pages that follow. Each day is marked; tick it when you've read it.</li>
       <li><b>Write it down</b> in the notes space beside each week.</li>
       <li><b>Learn a prayer</b> over four weeks: read it, then say part, then nearly all, then all of it by heart.</li>
@@ -306,7 +326,7 @@ function volumeHtml(v, fillers, toc) {
   for (const w of ws) {
     if (fillers.has(w.week)) out.push(filler());
     out.push(weekLeft(w), weekRight(w));
-    out.push(`<section class="reading">${readingHtml(w)}</section>`);
+    out.push(`<section class="reading">${readingHtml(w)}</section>`, weekNotes(w));
   }
   // The Orthodox Faith: what the Church is, its history, beliefs and way of life, and how to become Orthodox.
   const O = ORTHODOXY;
@@ -354,6 +374,10 @@ const CSS = `
   @bottom-center { content: counter(page); font-family: 'TeX Gyre Pagella', Georgia, serif; font-size: 8.5pt; } }
 @page :left { margin-left: 0.5in; margin-right: 0.75in; }
 @page plain { @bottom-center { content: none; } }
+/* pages of Scripture: the page number moves to the top outer corner, and three lines for notes sit at the foot */
+@page scripture { margin-bottom: 1.2in; @bottom-center { content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='456' height='70' viewBox='0 0 456 70'><text x='0' y='9' font-size='7' font-family='Georgia, serif' letter-spacing='1.2' fill='%23555'>NOTES</text><line x1='0' y1='30' x2='456' y2='30' stroke='%23999' stroke-width='0.7'/><line x1='0' y1='49' x2='456' y2='49' stroke='%23999' stroke-width='0.7'/><line x1='0' y1='68' x2='456' y2='68' stroke='%23999' stroke-width='0.7'/></svg>"); vertical-align: top; padding-top: 0.1in; } }
+@page scripture:left { @top-left { content: counter(page); font-family: 'TeX Gyre Pagella', Georgia, serif; font-size: 8.5pt; vertical-align: bottom; padding-bottom: 0.2in; } }
+@page scripture:right { @top-right { content: counter(page); font-family: 'TeX Gyre Pagella', Georgia, serif; font-size: 8.5pt; vertical-align: bottom; padding-bottom: 0.2in; } }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body { font-family: 'TeX Gyre Pagella', 'Palatino Linotype', Georgia, serif; color: #111; font-size: 10pt; line-height: 1.38; }
@@ -380,11 +404,19 @@ p { margin: 0 0 6pt; }
 .days { width: 100%; border-collapse: collapse; margin: 2pt 0 8pt; font-size: 9.5pt; }
 .days td { border-bottom: 1px solid #aaa; padding: 4.5pt 2pt; vertical-align: top; }
 .days .box { width: 14pt; font-size: 11pt; line-height: 1; } .days .dn { width: 42pt; font-weight: bold; white-space: nowrap; } .days .dt { width: 32pt; color: #888; text-align: right; }
-.intros { font-size: 8.4pt; line-height: 1.3; margin-bottom: 7pt; } .intros p { margin: 0 0 2.5pt; }
+.intros { font-size: 8.4pt; line-height: 1.3; margin-bottom: 7pt; }
+.wleft { display: flex; flex-direction: column; }
+.lesson { margin: 0 0 6pt; font-size: 8.8pt; line-height: 1.3; } .lesson h3 { font-size: 11pt; margin: 0 0 2pt; } .lesson p { margin: 0; } .lesson .ref { font-style: italic; color: #444; white-space: nowrap; }
+.wleft .quote { margin-bottom: 5pt; } .wleft .quote p { font-size: 9.6pt; }
+.life { font-size: 8.3pt; line-height: 1.3; margin-bottom: 6pt; } .life p { margin: 0; }
+.wleft .fact { margin-bottom: 6pt; font-size: 8.3pt; line-height: 1.3; }
+.plan .days { margin: 1pt 0 3pt; font-size: 9pt; } .plan .days td { padding: 2.6pt 2pt; } .plan .each { font-size: 7.6pt; font-style: italic; color: #444; margin: 0; }
+.wnotes { display: flex; flex-direction: column; } .wnotes h2 { margin-bottom: 8pt; } .wnotes .label { margin-top: 8pt; } .wnotes .nlines .line { height: 0.3in; }
+.wnotes .grow { flex: 1; overflow: hidden; } .intros p { margin: 0 0 2.5pt; }
 .fact { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt; font-size: 8.6pt; line-height: 1.33; overflow: hidden; }
 .fact p { margin: 0; }
-.fact figure { float: right; width: 1.8in; margin: 0 0 3pt 8pt; text-align: center; }
-.fact img { width: 100%; height: auto; max-height: 2.3in; object-fit: contain; display: block; }
+.fact figure { float: right; width: 1.25in; margin: 0 0 2pt 7pt; text-align: center; }
+.fact img { width: 100%; height: auto; max-height: 1.6in; object-fit: contain; display: block; }
 .plate { break-inside: avoid; margin: 5pt 0 6pt; text-align: center; }
 .plate img { width: 100%; height: auto; display: block; border: 0.5px solid #333; }
 .plate figcaption { font-size: 6.6pt; font-style: italic; line-height: 1.2; margin-top: 2pt; text-indent: 0; text-align: center; hyphens: none; }
@@ -417,7 +449,7 @@ blockquote cite { display: block; font-style: normal; font-size: 8.5pt; margin-t
 .mapbox { border: 1px solid #333; margin-bottom: 6pt; line-height: 0; overflow: hidden; } .map { width: 100%; height: auto; display: block; }
 .places { font-size: 8.2pt; padding-left: 15pt; margin: 0; } .places li { margin-bottom: 1.5pt; }
 /* the Bible text */
-.reading { break-after: page; }
+.reading { break-after: page; page: scripture; }
 .faith { break-after: page; font-size: 9.6pt; line-height: 1.4; }
 .faith h2 { font-size: 13pt; margin: 12pt 0 5pt; break-after: avoid; border-bottom: 1px solid #111; padding-bottom: 2pt; }
 .faith h2:first-child { margin-top: 0; }

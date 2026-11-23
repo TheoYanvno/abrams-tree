@@ -18,7 +18,9 @@ A React Bible study guide: daily reading plans, prayers and prayer times, a worl
   - **Alive together:** tap a name to see who was alive at the same time, and read their chapter.
   - **A day with the Lord:** the week of creation as God's days (six days of making are 6,000 of our years, and with the seventh day of rest, 7,000 years), and the verses where God speaks of time, read with the thousand-year day.
 - **📕 Study Bible:** the *AbrahamsTree Study Bible* prints the whole Bible (the World English Bible, with every book of the Orthodox Old Testament) in four 6 × 9 volumes of 13 weeks each, ready for Amazon KDP.
-  - **Each week opens with two pages:** the week's readings with a checkbox for each day, an introduction to any book that starts that week, a "Did you know?", an engraving by Gustave Doré, a saint's words, a prayer to learn by heart over four weeks, and room for notes and prayers.
+  - **Each week opens with two pages:** the week number, the lesson of the week, a saint's words and a short life of the saint, a "Did you know?" with an engraving by Gustave Doré, and the lesson plan with a checkbox for each day; then an introduction to any book that starts that week, a prayer to learn by heart over four weeks, and room for notes.
+  - **Room to write:** three lines for notes at the foot of every page of Scripture, and a notes page at the end of every week.
+  - **The books outside the Protestant Bible:** in the weeks that read them, the "Did you know?" explains when and why they were set aside, and why the Orthodox Church keeps them.
   - **Doré's engravings in the text:** 207 of Gustave Doré's Bible engravings sit beside the verses they show, and the app shows each week's pictures too.
   - **Then the Bible text itself,** day by day, in two columns.
   - **Each volume ends with:** the hours of prayer, a prayer list, that part's timeline and maps, and journal pages.

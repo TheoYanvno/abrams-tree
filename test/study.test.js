@@ -34,3 +34,12 @@ test('the Orthodox Faith section has Scripture and saints for every point, and t
   assert.ok(O.pascha[2][0] && O.pascha[2][1]);
   assert.strictEqual(O.join.length, 11);
 });
+
+import { LESSONS, SAINTS, saintLife } from '../src/data/study.js';
+
+test('every week has a lesson, and every saint quoted has a short life', () => {
+  assert.strictEqual(LESSONS.length, 52);
+  for (const [lesson, text, ref] of LESSONS) assert.ok(lesson && text && ref, lesson);
+  for (const [, who] of QUOTES) assert.ok(saintLife(who), who);
+  for (const [life] of Object.values(SAINTS)) assert.ok(life.length > 40);
+});

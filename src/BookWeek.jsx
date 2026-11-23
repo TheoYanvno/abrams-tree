@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { weeks, WEEKS, route } from './lib/book.js';
 import { bookById, superbookLink } from './lib/books.js';
 import Translations from './Translations.jsx';
-import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor } from './data/study.js';
+import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from './data/study.js';
 import { platesInWeek, leadFor, plateRef } from './lib/dore.js';
 
 const ALL = weeks();
@@ -45,25 +45,30 @@ export default function BookWeek({ week }) {
   );
 }
 
-/** The same study notes the printed week has: new books, a "Did you know?", a saint's words and a prayer to learn. */
+/** The same study notes the printed week has: the lesson, a saint's words and life, a "Did you know?", new books and a prayer to learn. */
 function StudyNotes({ w }) {
   const [fact] = FACTS[w.week - 1];
   const [quote, who, source] = QUOTES[w.week - 1];
+  const [lesson, lessonText, lessonRef] = LESSONS[w.week - 1];
+  const life = saintLife(who);
   const { prayer: [title, text], step } = memoryFor(w.week);
   const intros = starting(w).filter((b) => INTROS[b]);
   return (
     <section className="card" aria-labelledby="studynotes">
-      <h2 id="studynotes">This week</h2>
+      <h2 id="studynotes">Week {w.week}</h2>
+      <h3>Lesson of the week: {lesson}</h3>
+      <p>{lessonText} <span className="muted">{lessonRef}</span></p>
+      <h3>This week's saint</h3>
+      <blockquote>“{quote}”<cite>{who}{source ? `, ${source}` : ''}</cite></blockquote>
+      {life && <p><strong>About {who}.</strong> {life[0]}{life[1] && <span className="muted"> Feast day: {life[1]}.</span>}</p>}
+      <h3>Did you know?</h3>
+      <p>{fact}</p>
       {intros.length > 0 && (
         <>
           <h3>New this week</h3>
           {intros.map((b) => <p key={b}><strong>{bookById(b).label}.</strong> {INTROS[b]}</p>)}
         </>
       )}
-      <h3>Did you know?</h3>
-      <p>{fact}</p>
-      <h3>This week's saint</h3>
-      <blockquote>“{quote}”<cite>{who}{source ? `, ${source}` : ''}</cite></blockquote>
       <h3>Pray it by heart: {title} <span className="muted">(week {step} of 4)</span></h3>
       <p>{text}</p>
       <p className="muted">{MEMORY_STEPS[step - 1]}</p>
