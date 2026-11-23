@@ -165,9 +165,9 @@ function eraPage(p) {
   const num = new Map(places.map((pl, i) => [pl.id, i + 1]));
   const svg = `
     <div class="mapbox"><svg class="map" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}">
-      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#e8eef2"/>
+      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#ebebeb"/>
       ${BASEMAP.land.map((d) => `<path d="${d}" fill="#fff" stroke="#666" stroke-width="${0.8 * u}" fill-rule="evenodd"/>`).join('')}
-      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#e8eef2" stroke="#666" stroke-width="${0.6 * u}"/>`).join('')}
+      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#ebebeb" stroke="#666" stroke-width="${0.6 * u}"/>`).join('')}
       ${BASEMAP.rivers.map((r) => `<path d="${r.d}" fill="none" stroke="#888" stroke-width="${1.1 * u}"/>`).join('')}
       ${places.map((pl) => { const q = project(pl); const n = num.get(pl.id); return `<circle cx="${q.x}" cy="${q.y}" r="${7 * u}" fill="#000"/>
         <text x="${q.x}" y="${q.y + 3.3 * u}" font-size="${9 * u}" fill="#fff" text-anchor="middle" font-weight="bold">${n}</text>`; }).join('')}
@@ -213,9 +213,9 @@ function weekMap(w) {
   const num = new Map(places.map((pl, i) => [pl.id, i + 1]));
   const path = places.map(project).map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ');
   const svg = `<svg class="map" viewBox="${vb.x} ${vb.y} ${vb.w} ${vb.h}" preserveAspectRatio="xMidYMid slice">
-      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#e8eef2"/>
+      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#ebebeb"/>
       ${BASEMAP.land.map((d) => `<path d="${d}" fill="#fff" stroke="#666" stroke-width="${0.8 * u}" fill-rule="evenodd"/>`).join('')}
-      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#e8eef2" stroke="#666" stroke-width="${0.6 * u}"/>`).join('')}
+      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#ebebeb" stroke="#666" stroke-width="${0.6 * u}"/>`).join('')}
       ${BASEMAP.rivers.map((r) => `<path d="${r.d}" fill="none" stroke="#888" stroke-width="${1.1 * u}"/>`).join('')}
       ${seen.map((pl) => { const q = project(pl); return `<circle cx="${q.x}" cy="${q.y}" r="${3.2 * u}" fill="#fff" stroke="#888" stroke-width="${1 * u}"/>`; }).join('')}
       ${places.length > 1 ? `<path d="${path}" fill="none" stroke="#000" stroke-width="${1.2 * u}" stroke-dasharray="${4 * u} ${3 * u}"/>` : ''}
@@ -234,9 +234,9 @@ function weekMap(w) {
     const iu = ib.w / 150;
     const ipath = cluster.map(project).map((q, i) => `${i ? 'L' : 'M'}${q.x.toFixed(1)},${q.y.toFixed(1)}`).join(' ');
     inset = `<svg class="inset" viewBox="${ib.x} ${ib.y} ${ib.w} ${ib.h}">
-      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#e8eef2"/>
+      <rect x="0" y="0" width="${FULL.w}" height="${FULL.h}" fill="#ebebeb"/>
       ${BASEMAP.land.map((d) => `<path d="${d}" fill="#fff" stroke="#666" stroke-width="${0.8 * iu}" fill-rule="evenodd"/>`).join('')}
-      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#e8eef2" stroke="#666" stroke-width="${0.6 * iu}"/>`).join('')}
+      ${BASEMAP.lakes.map((l) => `<path d="${l.d}" fill="#ebebeb" stroke="#666" stroke-width="${0.6 * iu}"/>`).join('')}
       ${BASEMAP.rivers.map((r) => `<path d="${r.d}" fill="none" stroke="#888" stroke-width="${1.1 * iu}"/>`).join('')}
       <path d="${ipath}" fill="none" stroke="#000" stroke-width="${1.2 * iu}" stroke-dasharray="${4 * iu} ${3 * iu}"/>
       ${cluster.map((pl) => dot(pl, iu)).join('')}

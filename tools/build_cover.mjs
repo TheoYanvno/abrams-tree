@@ -98,7 +98,7 @@ body { width: ${W}in; height: ${H}in; position: relative; overflow: hidden; colo
 .feat div:first-child { border-left: 0; }
 .feat svg { width: 0.32in; height: 0.32in; }
 .feat span { font-size: 6.9pt; line-height: 1.12; font-weight: bold; margin-top: 0.02in; }
-.phone { position: absolute; top: 5.25in; left: 4.42in; width: 1.32in; height: 2.62in; border-radius: 0.17in; background: #1b1b1d;
+.phone { position: absolute; top: 5.25in; left: 4.36in; width: 1.32in; height: 2.62in; border-radius: 0.17in; background: #1b1b1d;
   border: 2px solid #c9a24c; transform: rotate(4deg); padding: 0.06in; box-sizing: border-box; }
 .phone .screen { width: 100%; height: 100%; border-radius: 0.12in; overflow: hidden; background: #fbf6ee; position: relative; }
 .phone img { width: 100%; display: block; }
