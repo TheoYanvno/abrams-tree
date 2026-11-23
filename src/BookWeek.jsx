@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { weeks, WEEKS, route } from './lib/book.js';
 import { bookById, superbookLink } from './lib/books.js';
 import Translations from './Translations.jsx';
-import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from './data/study.js';
+import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife, TALKING } from './data/study.js';
 import { platesInWeek, leadFor, plateRef } from './lib/dore.js';
 import { EVENTS, placeById } from './lib/map.js';
 import { BOOK_ENDS } from './data/bookEnds.js';
@@ -75,6 +75,9 @@ function StudyNotes({ w }) {
       <h3>Pray it by heart: {title} <span className="muted">(week {step} of 4)</span></h3>
       <p>{text}</p>
       <p className="muted">{MEMORY_STEPS[step - 1]}</p>
+      <h3>Talking points</h3>
+      <p className="muted">Something to think about or talk over at the end of the week. There are no set answers.</p>
+      <ol>{TALKING[w.week - 1].map((q) => <li key={q}>{q}</li>)}</ol>
     </section>
   );
 }

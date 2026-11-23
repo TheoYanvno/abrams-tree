@@ -23,7 +23,7 @@ import { bookById, BOOKS } from '../src/lib/books.js';
 import { BOOK_ENDS } from '../src/data/bookEnds.js';
 import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD_TIME, GOD_DAY, span, ticks, percent }
   from '../src/lib/timeline.js';
-import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife } from '../src/data/study.js';
+import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife, TALKING } from '../src/data/study.js';
 import { ORTHODOXY } from '../src/data/orthodoxy.js';
 import { platesByChapter, leadFor, plateRef } from '../src/lib/dore.js';
 
@@ -391,12 +391,14 @@ function weekRight(w) {
     ${weekMap(w)}`);
 }
 
-/** The notes page that closes each week's reading. */
+/** The page that closes each week's reading: talking points to think about, and room for notes. */
 function weekNotes(w) {
   return sheet('wnotes', `<h2>Week ${w.week} notes</h2>
+    <div class="talk"><div class="label">Talking points</div><p class="small">Something to think about on your own or talk about with family or friends. There are no set answers.</p>
+      <ol>${TALKING[w.week - 1].map((t) => `<li>${esc(t)}</li>`).join('')}</ol></div>
     <div class="label">A verse to remember</div><div class="nlines">${lines(2)}</div>
-    <div class="label">What I learned this week</div><div class="nlines">${lines(6)}</div>
-    <div class="label">Questions for my priest or study group</div><div class="nlines">${lines(4)}</div>
+    <div class="label">What I learned this week</div><div class="nlines">${lines(4)}</div>
+    <div class="label">Questions for my priest or study group</div><div class="nlines">${lines(3)}</div>
     <div class="label">Prayers</div><div class="nlines grow">${lines(10)}</div>`);
 }
 
@@ -423,7 +425,7 @@ function volumeHtml(v, fillers, toc) {
     <ol class="how">
       <li><b>Start each week</b> with its two pages: the lesson of the week, a saint's words and life, a "Did you know?" and the lesson plan, then any new books, a prayer to learn by heart, and a map of the week's places that fills in as you go.</li>
       <li><b>At the end of each book</b> you'll find a short summary and a timeline showing where the book fits in the Bible's story, with the books you've read so far.</li>
-      <li><b>Write as you go:</b> every page of Scripture has three lines for notes at the foot, and each week ends with a notes page.</li>
+      <li><b>Write as you go:</b> every page of Scripture has three lines for notes at the foot, and each week ends with talking points to think about and a notes page.</li>
       <li><b>Read each day</b> in the pages that follow. Each day is marked; tick it when you've read it.</li>
       <li><b>Write it down</b> in the notes space beside each week.</li>
       <li><b>Learn a prayer</b> over four weeks: read it, then say part, then nearly all, then all of it by heart.</li>
@@ -525,7 +527,8 @@ p { margin: 0 0 6pt; }
 .wleft .fact { margin-bottom: 6pt; font-size: 8.3pt; line-height: 1.3; }
 .plan .days { margin: 1pt 0 3pt; font-size: 9pt; } .plan .days td { padding: 2.6pt 2pt; } .plan .each { font-size: 7.6pt; font-style: italic; color: #444; margin: 0; }
 .wnotes { display: flex; flex-direction: column; } .wnotes h2 { margin-bottom: 8pt; } .wnotes .label { margin-top: 8pt; } .wnotes .nlines .line { height: 0.3in; }
-.wnotes .grow { flex: 1; overflow: hidden; } .intros p { margin: 0 0 2.5pt; }
+.wnotes .grow { flex: 1; overflow: hidden; }
+.talk { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt; font-size: 8.8pt; line-height: 1.35; margin-bottom: 2pt; } .talk .small { font-size: 7.6pt; font-style: italic; color: #444; margin: 0 0 3pt; } .talk ol { margin: 0; padding-left: 14pt; } .talk li { margin-bottom: 3pt; } .intros p { margin: 0 0 2.5pt; }
 .fact { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt; font-size: 8.6pt; line-height: 1.33; overflow: hidden; }
 .fact p { margin: 0; }
 .fact figure { float: right; width: 1.25in; margin: 0 0 2pt 7pt; text-align: center; }

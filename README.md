@@ -20,7 +20,7 @@ A React Bible study guide: daily reading plans, prayers and prayer times, a worl
 - **📕 Study Bible:** the *AbrahamsTree Study Bible* prints the whole Bible (the World English Bible, with every book of the Orthodox Old Testament) in four 6 × 9 volumes of 13 weeks each, ready for Amazon KDP.
   - **Each week opens with two pages:** the week number, the lesson of the week, a saint's words and a short life of the saint, a "Did you know?" with an engraving by Gustave Doré, and the lesson plan with a checkbox for each day; then an introduction to any book that starts that week, a prayer to learn by heart over four weeks, and a map of that week's places, with open circles for every place the reading has already been.
   - **The end of every book:** a short summary and a timeline of the Bible's history with that book in black and the books read so far in grey.
-  - **Room to write:** three lines for notes at the foot of every page of Scripture, and a notes page at the end of every week.
+  - **Room to write:** three lines for notes at the foot of every page of Scripture, and a page at the end of every week with three talking points to think about and discuss, and room for notes.
   - **The books outside the Protestant Bible:** in the weeks that read them, the "Did you know?" explains when and why they were set aside, and why the Orthodox Church keeps them.
   - **Doré's engravings in the text:** 207 of Gustave Doré's Bible engravings sit beside the verses they show, and the app shows each week's pictures too.
   - **Then the Bible text itself,** day by day, in two columns.

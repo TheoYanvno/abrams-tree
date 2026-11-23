@@ -43,3 +43,10 @@ test('every week has a lesson, and every saint quoted has a short life', () => {
   for (const [, who] of QUOTES) assert.ok(saintLife(who), who);
   for (const [life] of Object.values(SAINTS)) assert.ok(life.length > 40);
 });
+
+import { TALKING } from '../src/data/study.js';
+
+test('every week ends with at least three talking points', () => {
+  assert.strictEqual(TALKING.length, 52);
+  for (const points of TALKING) assert.ok(points.length >= 3 && points.every((p) => p.endsWith('?') || p.endsWith('.')));
+});
