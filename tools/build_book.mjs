@@ -19,6 +19,7 @@ const QRLevel = require('./vendor/qrcode/QRErrorCorrectLevel.js');
 
 const OUT = 'book';
 const NAME = 'AbramsTree Study Book';
+const AUTHOR = 'Theo Yanvno';                                       // the pen name every book is published under
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const bookLabel = (id) => bookById(id)?.label ?? id;
 
@@ -52,13 +53,13 @@ const PAGES = {
       <div class="sub">A Bible-in-a-Year Study Book</div>
       <div class="rule"></div>
       <p class="tag">Read the whole Bible in 52 weeks, pray the hours, and walk through who lived when and where it happened, with a free app at every step.</p>
-      <div class="author">Anthony Evo</div>
+      <div class="author">${AUTHOR}</div>
     </div>`,
 
   copyright: () => `
     <div class="small bottom">
       <p><b>AbramsTree: A Bible-in-a-Year Study Book</b></p>
-      <p>Copyright © 2026 Anthony Evo. All rights reserved.</p>
+      <p>Copyright © 2026 ${AUTHOR}. All rights reserved.</p>
       <p>Scripture quotations are from the World English Bible, which is in the public domain. The prayers are the
       traditional prayers of the Orthodox Church. Maps are drawn from Natural Earth data, which is in the public domain.</p>
       <p>The reading plan follows the books of the Orthodox Bible in the order of SuperBook. Dates before Abraham are
@@ -322,7 +323,7 @@ const body = pages.map((p) => {
   const folio = ['blank', 'title', 'part'].includes(p.kind) ? '' : `<div class="folio">${p.n}</div>`;
   return `<section class="page ${side} ${p.kind}">${PAGES[p.kind](p)}${folio}</section>`;
 }).join('\n');
-const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${NAME}</title><style>${CSS}</style></head><body>${body}</body></html>`;
+const html = `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>${NAME}</title><meta name="author" content="${AUTHOR}"><style>${CSS}</style></head><body>${body}</body></html>`;
 
 await mkdir(OUT, { recursive: true });
 const htmlPath = `${OUT}/${NAME}.html`;
