@@ -52,3 +52,34 @@ export const centreOn = (point, w) => clampView({ x: point.x - w / 2, y: point.y
 
 /** The step after `index` when playing events through, or null at the end. */
 export const nextIndex = (index, count) => (index + 1 < count ? index + 1 : null);
+
+/** A view that shows two points with room around them, at least `minW` wide. */
+export function fitBoth(a, b, minW = 320, pad = 1.6) {
+  const w = Math.max(minW, Math.abs(a.x - b.x) * pad, Math.abs(a.y - b.y) * pad * (FULL.w / FULL.h));
+  return centreOn({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, w);
+}
+
+/**
+ * Footprints walking from a to b along a gentle curve: [{ x, y, angle, left }], one every `spacing` map
+ * units (at most `max` of them), stepping left and right of the path. The angle is the walking direction
+ * in degrees (0 = east, 90 = south, as on screen).
+ */
+export function footsteps(a, b, spacing = 8, max = 160) {
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const len = Math.hypot(dx, dy);
+  if (len < spacing) return [];
+  const bend = Math.min(len * 0.12, 40);                        // bow the path a little, like a road
+  const c = { x: (a.x + b.x) / 2 - (dy / len) * bend, y: (a.y + b.y) / 2 + (dx / len) * bend };
+  const at = (t) => ({ x: (1 - t) ** 2 * a.x + 2 * (1 - t) * t * c.x + t * t * b.x, y: (1 - t) ** 2 * a.y + 2 * (1 - t) * t * c.y + t * t * b.y });
+  const n = Math.min(max, Math.floor(len / spacing));
+  const side = spacing * 0.32;
+  const out = [];
+  for (let i = 1; i < n; i++) {
+    const t = i / n, p = at(t), q = at(Math.min(1, t + 0.01));
+    const ang = Math.atan2(q.y - p.y, q.x - p.x);
+    const left = i % 2 === 1;
+    const off = left ? -side : side;
+    out.push({ x: p.x - Math.sin(ang) * off, y: p.y + Math.cos(ang) * off, angle: (ang * 180) / Math.PI, left });
+  }
+  return out;
+}

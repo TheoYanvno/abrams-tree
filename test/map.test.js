@@ -68,3 +68,20 @@ test('every week of the reading plan has places on the map, and every book has i
     assert.ok(end && end.summary.length > 60 && end.span.length === 2 && end.events.length, b.id);
   }
 });
+
+import { footsteps, fitBoth } from '../src/lib/map.js';
+
+test('footprints walk from one place to the next, left and right', () => {
+  const steps = footsteps({ x: 0, y: 0 }, { x: 100, y: 0 }, 10);
+  assert.strictEqual(steps.length, 9);
+  assert.ok(steps.every((s, i) => s.left === (i % 2 === 0)));
+  assert.ok(steps.every((s, i) => i === 0 || s.x > steps[i - 1].x));      // always moving on toward b
+  assert.ok(Math.abs(steps[4].angle) < 5);                               // heading east in the middle
+  assert.deepStrictEqual(footsteps({ x: 0, y: 0 }, { x: 5, y: 0 }, 10), []);
+  assert.ok(footsteps({ x: 0, y: 0 }, { x: 9000, y: 0 }, 1).length <= 160);
+});
+
+test('a view that shows both places', () => {
+  const v = fitBoth({ x: 100, y: 100 }, { x: 500, y: 300 });
+  assert.ok(v.x <= 100 && v.x + v.w >= 500 && v.y <= 100 && v.y + v.h >= 300);
+});

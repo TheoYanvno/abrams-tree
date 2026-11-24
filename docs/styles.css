@@ -142,20 +142,33 @@ blockquote cite { display: block; font-style: normal; color: var(--muted); font-
 .requests li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-top: 1px solid rgba(217, 180, 94, .15); }
 .requests .link { margin-top: 0; }
 
-/* map (kept as parchment, like an old atlas) */
-.map-wrap { position: relative; }
-.map { display: block; width: 100%; height: auto; aspect-ratio: 916 / 560; border-radius: 12px; border: 1px solid var(--gold-lo); touch-action: none; cursor: grab; background: #b9cdc4; }
+/* map: drawn in ink on old parchment */
+.map-wrap { position: relative; padding: 6px; border-radius: 14px; background: #d9c08a; box-shadow: inset 0 0 0 1px #8a6424, inset 0 0 0 4px #e8d6a8, inset 0 0 0 5px #8a6424; }
+.map { display: block; width: 100%; height: auto; aspect-ratio: 916 / 560; border-radius: 9px; touch-action: none; cursor: grab;
+  background: #e9dcb8; box-shadow: inset 0 0 40px rgba(120, 80, 20, .45); }
 .map:active { cursor: grabbing; }
-.map .sea { fill: #b9cdc4; }
-.map .land { fill: #ecdcb4; stroke: #9c8a6a; }
-.map .lake { fill: #b9cdc4; stroke: #6a8ca6; }
-.map .river { fill: none; stroke: #6a8ca6; }
+.map .sea { fill: #cdd3bf; }
+.map .wave { fill: none; stroke: #5f6f62; opacity: .4; }
+.map .coast-shade { fill: none; stroke: #6f7d6c; opacity: .35; stroke-linejoin: round; }
+.map .land { fill: #f3e7c6; stroke: #4a3418; stroke-linejoin: round; }
+.map .lake { fill: #cdd3bf; stroke: #4a3418; }
+.map .river { fill: none; stroke: #5b6f86; stroke-linecap: round; opacity: .85; }
 .map .place { cursor: pointer; }
-.map .place circle { fill: #9b4a24; stroke: #fff; }
-.map .place.on circle { fill: #6b1515; }
-.map .place text { fill: #2b2118; stroke: #f3e7c8; paint-order: stroke; font-family: Georgia, serif; }
-.zoom { position: absolute; right: 10px; top: 10px; display: grid; gap: 6px; }
-.zoom button { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--gold-lo); background: #f3e7c8; color: #2b2118; font-size: 1.2rem; }
+.map .place circle { fill: #fbf3dc; stroke: #3b2a12; }
+.map .place circle.dot { fill: #3b2a12; stroke: none; }
+.map .place.on circle { fill: #f2d9a0; stroke: #8e1b12; }
+.map .place.on circle.dot { fill: #8e1b12; }
+.map .place text { fill: #3b2a12; stroke: #f3e7c6; paint-order: stroke; font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; }
+.map .step { fill: #6b3a16; opacity: .78; }
+.map .step.walking { opacity: 0; animation: step-in .35s ease-out forwards; }
+@keyframes step-in { from { opacity: 0; transform-box: fill-box; } to { opacity: .85; } }
+@media (prefers-reduced-motion: reduce) { .map .step.walking { animation: none; opacity: .78; } }
+.compass { position: absolute; left: 14px; bottom: 14px; width: 54px; height: 54px; pointer-events: none; }
+.compass circle { fill: rgba(243, 231, 198, .7); stroke: #4a3418; stroke-width: 1; }
+.compass path { fill: #4a3418; } .compass .needle { fill: #8e1b12; }
+.compass text { font: italic 700 11px 'Cormorant Garamond', Georgia, serif; fill: #3b2a12; }
+.zoom { position: absolute; right: 14px; top: 14px; display: grid; gap: 6px; }
+.zoom button { width: 36px; height: 36px; border-radius: 8px; border: 1px solid #8a6424; background: #f3e7c6; color: #3b2a12; font-size: 1.2rem; }
 .now-playing { margin: 10px 0 0; }
 .events li { margin: 4px 0; }
 .events li.on { font-weight: bold; color: var(--gold-hi); }
