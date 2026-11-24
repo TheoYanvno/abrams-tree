@@ -4,7 +4,7 @@ A React Bible study guide in deep green and gold: daily reading plans, the whole
 
 **Live app:** [theoyanvno.github.io/abrams-tree](https://theoyanvno.github.io/abrams-tree/)
 
-**Status:** finished. Reading plans, translations side by side, prayers, the map and the timeline all work.
+**Status:** finished. Reading plans, the Bible reader, translations side by side, prayers, the map with its historical context, the timeline from Adam to St. Paul, the Church calendar and the four-volume Study Bible all work.
 
 ## What it does
 
