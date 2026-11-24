@@ -14,7 +14,8 @@ A React Bible study guide in deep green and gold: daily reading plans, the whole
 - **Compare translations:** read the day's chapters in two public-domain translations side by side (World English Bible, King James, American Standard, Douay-Rheims, Young's Literal, Bible in Basic English), lined up verse by verse. Tap a verse to highlight it.
 - **🙏 Pray:** the Orthodox hours of prayer through the day (morning, the Third, Sixth and Ninth Hours, evening and before sleep), each with a verse and the traditional prayers. Keep a prayer list, mark prayers answered and look back at them.
 - **Prayer times:** choose the hours you want and download a calendar file. Your phone or computer then reminds you every day, even when AbrahamsTree is closed. While the page is open it can also show a notification.
-- **🗺️ Map:** 51 events at 42 places, from Abram leaving Ur to John on Patmos. Drag to pan, scroll or use + and − to zoom, filter by era or book, and press **Play in order** to fly through them one by one while a trail of footprints walks from each place to the next. The map is drawn like an old atlas: ink coastlines on parchment, wavy sea lines and a compass rose. Click a place to see what happened there, with links to each chapter. It also works from the keyboard (arrow keys and + / −).
+- **🗺️ Map:** 211 events at 88 places, from Noah's ark to the letter to Laodicea. Drag to pan, scroll or use + and − to zoom, filter by era or book, and press **Play in order** to fly through them one by one while a trail of footprints walks from each place to the next. The map is drawn like an old atlas: ink coastlines on parchment, wavy sea lines and a compass rose. Click a place to see what happened there, with links to each chapter. It also works from the keyboard (arrow keys and + / −).
+- **🏛️ Historical context:** under the map, a card for each of 13 periods, from Mesopotamia before Abraham to the early Church under Rome. Each one says which kingdom or empire held the region, who was in charge, the main culture, the religion of the region, and how the Hebrews, the Jews and later the Christians were seen by the people around them, with the Scriptures that show it. It follows along while the journey plays, and you can pick any period the chosen era passes through.
 - **⏳ Timeline:** when each person lived, drawn as bars across the years.
   - **Adam to St. Paul:** the whole story on one line, from Adam to the apostles Peter, Paul and John. The Genesis years are joined to the later dates at Abraham, so every date on it is approximate.
   - **Adam to Joseph:** years counted from creation, added up from the ages Genesis 5 and 11 give for each father and son. It shows the Flood in year 1,656, Methuselah dying that same year, and Shem still alive when Isaac was born.
@@ -40,7 +41,7 @@ A React Bible study guide in deep green and gold: daily reading plans, the whole
 ```bash
 npm install
 npm start       # builds and serves it at http://localhost:8000
-npm test        # plans, progress, prayers, translations, the map, the timeline, the calendar and the SuperBook sync
+npm test        # plans, progress, prayers, translations, the map, the historical periods, the timeline, the calendar and the SuperBook sync
 npm run build   # builds the site into docs/ for GitHub Pages
 npm run book    # builds the four Study Bible volumes into book/ and their page numbers into src/data/bookPages.json
 npm run cover   # builds each volume's KDP paperback cover (back, spine and front) into book/
@@ -57,6 +58,7 @@ It works the same on Windows, macOS and Linux (in the VS Code terminal on Window
 | `src/lib/translations.js` | Chapters from bible-api.com, cached, with clear errors, lined up verse by verse; highlights |
 | `src/lib/prayers.js` | The hours of prayer, the prayer list, the next reminder, and the `.ics` calendar file |
 | `src/lib/map.js`, `src/data/places.js` | Places and events, filtering, and the pan and zoom maths |
+| `src/data/history.js` | The 13 historical periods and which period each map event belongs to |
 | `src/lib/timeline.js`, `src/data/people.js` | Lives added up from Genesis, BC and AD dates, who was alive together, and God's time (a thousand years to a day) |
 | `src/lib/book.js`, `src/data/study.js` | The weeks of the plan, the links the QR codes open, the volume and page for each, and the study notes (introductions, quotes, prayers to learn, facts) |
 | `tools/parse_web.py`, `tools/build_book.mjs`, `tools/build_cover.mjs` | The World English Bible put into the Orthodox order, and the four volumes and their covers built from it |

@@ -236,3 +236,13 @@ blockquote cite { display: block; font-style: normal; color: var(--muted); font-
 .stat-grid div { display: grid; text-align: center; padding: 12px 6px; border: 1px solid var(--line); border-radius: 12px; background: rgba(0, 0, 0, .18); }
 .stat-grid strong { font: 700 1.7rem var(--serif); color: var(--gold-hi); }
 .stat-grid span { font-size: .85rem; color: var(--muted); }
+
+/* Historical context on the map page */
+.history .chips { display: flex; gap: 6px; margin: 4px -16px 14px; padding: 0 16px 6px; overflow-x: auto; scrollbar-width: thin; }
+.history .chip { flex: none; white-space: nowrap; }
+.history .chip { font-size: .85rem; }
+.history h3 { margin: 0; font-family: 'Cinzel', serif; color: var(--gold-hi); }
+.history > .muted { margin: 2px 0 10px; }
+.history dl { margin: 0; display: grid; gap: 4px; }
+.history dt { font-weight: 600; color: var(--gold-hi); margin-top: 8px; }
+.history dd { margin: 0; line-height: 1.5; }

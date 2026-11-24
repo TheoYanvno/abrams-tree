@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BASEMAP, PLACES, ERAS, FULL, project, placeById, filterEvents, eventBooks, eventsAt, zoomAt, pan, centreOn, nextIndex, fitBoth, footsteps } from './lib/map.js';
 import { bookById, superbookLink } from './lib/books.js';
+import { periodIdFor, periodById, peopleOf } from './data/history.js';
 
 const PLAY_MS = 3000;
 const WALK_MS = 1800;                                   // how long the footprints take to walk to the next place
@@ -16,6 +17,7 @@ export default function BibleMap({ route = {} }) {
   const [playing, setPlaying] = useState(null);          // index into the filtered events, or null
   const [legs, setLegs] = useState([]);                  // the journey so far: [{ from, to }] in map units
   const [upTo, setUpTo] = useState(null);                // the last event reached on the journey, or null for every place
+  const [periodId, setPeriodId] = useState(null);       // the history period chosen by hand
   const svg = useRef(null);
   const drag = useRef(null);
 
@@ -23,6 +25,9 @@ export default function BibleMap({ route = {} }) {
   const shown = useMemo(() => new Set(events.map((e) => e.place)), [events]);
   const current = playing !== null ? events[playing] : null;
   const place = placeId && placeById(placeId);
+  // The history periods the chosen events pass through, in story order; the card follows the journey while it plays.
+  const periods = useMemo(() => [...new Set(events.map(periodIdFor))].filter(Boolean), [events]);
+  const period = periodById((current && periodIdFor(current)) || (periods.includes(periodId) ? periodId : periods[0]));
   const unit = view.w / FULL.w;                          // shrink markers and labels as you zoom in
   // While the journey plays (and after, until it is reset) only the places reached so far are drawn.
   const reached = useMemo(() => (upTo === null ? null : new Set(events.slice(0, upTo + 1).map((e) => e.place))), [upTo, events]);
@@ -75,7 +80,12 @@ export default function BibleMap({ route = {} }) {
   };
   const up = () => { setTimeout(() => { drag.current = null; }, 0); };
   const leave = () => { if (drag.current && !drag.current.moved) drag.current = null; };
-  const choose = (id) => { if (!drag.current?.moved) { setPlaceId(id); setPlaying(null); } };
+  const choose = (id) => {
+    if (drag.current?.moved) return;
+    setPlaceId(id); setPlaying(null);
+    const first = events.find((e) => e.place === id);
+    if (first) setPeriodId(periodIdFor(first));
+  };
   const keys = (e) => {
     const step = view.w * 0.1;
     const moves = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
@@ -171,6 +181,30 @@ export default function BibleMap({ route = {} }) {
         {current && <p className="now-playing">{playing + 1} of {events.length}: <strong>{current.title}</strong> ({bookById(current.book).label} {current.chapter})</p>}
       </section>
 
+      {period && (
+        <section className="card history" aria-labelledby="history">
+          <h2 id="history">Historical context</h2>
+          {periods.length > 1 && (
+            <div className="chips" role="group" aria-label="Choose a period">
+              {periods.map((id) => (
+                <button key={id} className={id === period.id ? 'chip on' : 'chip'} aria-pressed={id === period.id}
+                  onClick={() => { setPlaying(null); setPeriodId(id); }}>{periodById(id).name}</button>
+              ))}
+            </div>
+          )}
+          <h3>{period.name}</h3>
+          <p className="muted">{period.years}</p>
+          <dl>
+            <dt>Kingdom or empire</dt><dd>{period.power}</dd>
+            <dt>Who was in charge</dt><dd>{period.rulers}</dd>
+            <dt>Main culture</dt><dd>{period.culture}</dd>
+            <dt>Religion in the region</dt><dd>{period.religion}</dd>
+            <dt>How {peopleOf(period.id)} were seen</dt><dd>{period.seen}</dd>
+            <dt>Read</dt><dd>{period.scripture}</dd>
+          </dl>
+        </section>
+      )}
+
       {place && (
         <section className="card" aria-labelledby="place">
           <h2 id="place">{place.name}</h2>
@@ -189,7 +223,7 @@ export default function BibleMap({ route = {} }) {
         <ol className="events">
           {events.map((e, i) => (
             <li key={e.id} className={current?.id === e.id ? 'on' : undefined}>
-              <button className="link" onClick={() => { setPlaying(null); setPlaceId(e.place); setView(centreOn(project(placeById(e.place)), 320)); }}>{e.title}</button>
+              <button className="link" onClick={() => { setPlaying(null); setPlaceId(e.place); setPeriodId(periodIdFor(e)); setView(centreOn(project(placeById(e.place)), 320)); }}>{e.title}</button>
               {' '}<span className="muted">{placeById(e.place).name} · {bookById(e.book).label} {e.chapter}</span>
             </li>
           ))}
