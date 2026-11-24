@@ -1,6 +1,6 @@
 # 📜 AbrahamsTree
 
-A React Bible study guide in deep green and gold: daily reading plans, the whole Bible to read, prayers and prayer times, a world map of where the events of the Bible happened, a timeline of when the people of the Bible lived, and the Church calendar.
+A React Bible study guide in deep red and gold, matching the Study Bible covers: daily reading plans, the whole Bible to read, prayers and prayer times, a world map of where the events of the Bible happened, a timeline of when the people of the Bible lived, and the Church calendar.
 
 **Live app:** [theoyanvno.github.io/abrams-tree](https://theoyanvno.github.io/abrams-tree/)
 
