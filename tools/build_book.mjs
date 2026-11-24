@@ -24,7 +24,7 @@ import { BOOK_ENDS } from '../src/data/bookEnds.js';
 import { genesisPeople, floodYear, laterPeople, formatGodTime, creationWeek, GOD_TIME, GOD_DAY, span, ticks, percent }
   from '../src/lib/timeline.js';
 import { INTROS, QUOTES, FACTS, MEMORY_STEPS, memoryFor, LESSONS, saintLife, TALKING } from '../src/data/study.js';
-import { ORTHODOXY } from '../src/data/orthodoxy.js';
+import { ORTHODOXY, CHURCH } from '../src/data/orthodoxy.js';
 import { platesByChapter, leadFor, plateRef } from '../src/lib/dore.js';
 
 const require = createRequire(import.meta.url);
@@ -443,10 +443,10 @@ function volumeHtml(v, fillers, toc) {
     out.push(weekLeft(w), weekRight(w));
     out.push(`<section class="reading">${readingHtml(w)}</section>`, weekNotes(w));
   }
-  // The Orthodox Faith: what the Church is, its history, beliefs and way of life, and how to become Orthodox.
+  // The Orthodox Faith: what the Church is, its history, beliefs and way of life, its services and prayers, and how to become Orthodox.
   const O = ORTHODOXY;
   out.push(sheet('part', `${marker('FAITH')}<div class="partno">Come and see</div><h1>The Orthodox Faith</h1><div class="rule"></div>
-    <p>What the Orthodox Church is, where it comes from, what it believes, how it lives, and how to become Orthodox.</p>`, true));
+    <p>What the Orthodox Church is, where it comes from, what it believes, how it lives, how its services work, and how to become Orthodox.</p>`, true));
   const refs = (r) => (r ? `<div class="refs"><span>Scripture:</span> ${esc(r[0])}<br><span>Saints and the Church:</span> ${esc(r[1])}</div>` : '');
   const items = (list) => `<dl>${list.map(([k, t, r]) => `<dt>${esc(k)}</dt><dd>${esc(t)}${refs(r)}</dd>`).join('')}</dl>`;
   out.push(`<section class="faith">
@@ -462,6 +462,15 @@ function volumeHtml(v, fillers, toc) {
     <h3>Other feasts through the year</h3>
     <dl>${O.otherFeasts.map(([when, name, r]) => `<dt>${esc(name)} <span class="when">${esc(when)}</span></dt><dd>${refs(r)}</dd>`).join('')}</dl>
     <h3>The fasts</h3>${items(O.fasts)}
+    <h2>Going to church</h2><p>${esc(CHURCH.intro)}</p>
+    <h3>The Divine Liturgy, step by step</h3>
+    <ol class="steps lit">${CHURCH.liturgy.map(([k, t, r]) => `<li><b>${esc(k)}.</b> ${esc(t)}${refs(r)}</li>`).join('')}</ol>
+    <h3>The prayers of the Liturgy</h3>
+    <dl>${CHURCH.prayers.map(([k, t, r]) => `<dt>${esc(k)}</dt><dd class="prayer">${esc(t)}${refs(r)}</dd>`).join('')}</dl>
+    <h3>Vespers</h3><p>${esc(CHURCH.vespers)}</p>${refs(CHURCH.vespersRefs)}
+    <h3>Matins</h3><p>${esc(CHURCH.matins)}</p>${refs(CHURCH.matinsRefs)}
+    <h3>Your first visit</h3>${items(CHURCH.visit)}
+    <h3>Practices at home</h3>${items(CHURCH.home)}
     <h2>How to become Orthodox, step by step</h2><p class="note">${esc(O.joinNote)}</p>
     <ol class="steps">${O.join.map(([k, t, r]) => `<li><b>${esc(k)}.</b> ${esc(t)} <span class="tick">☐</span>${refs(r)}</li>`).join('')}</ol>
     <div class="label">My notes and questions for the priest</div>${lines(8)}
@@ -572,11 +581,12 @@ blockquote cite { display: block; font-style: normal; font-size: 8.5pt; margin-t
 .faith h2 { font-size: 13pt; margin: 12pt 0 5pt; break-after: avoid; border-bottom: 1px solid #111; padding-bottom: 2pt; }
 .faith h2:first-child { margin-top: 0; }
 .faith dl { margin: 0; } .faith dt { font-weight: bold; margin-top: 5pt; break-after: avoid; } .faith dd { margin: 1pt 0 0 0.18in; }
-.faith .note { font-style: italic; } .faith .steps { padding-left: 0.22in; } .faith .steps li { margin-bottom: 5pt; break-inside: avoid; }
+.faith .note { font-style: italic; } .faith .steps { padding-left: 0.22in; } .faith .steps li { margin-bottom: 5pt; break-inside: avoid; } .faith .steps.lit li { break-inside: auto; orphans: 3; widows: 3; }
 .faith .tick { float: right; margin-left: 6pt; }
 .faith h3 { font-size: 11pt; margin: 9pt 0 2pt; break-after: avoid; }
 .faith .refs { font-size: 7.8pt; line-height: 1.3; color: #333; font-style: italic; margin: 1.5pt 0 0; break-before: avoid; }
 .faith .refs span { font-style: normal; font-weight: bold; color: #555; font-size: 7pt; text-transform: uppercase; letter-spacing: .06em; }
+.faith dd.prayer { font-style: italic; } .faith dd.prayer .refs { font-style: italic; }
 .faith .when { font-weight: normal; font-style: italic; color: #555; font-size: 8.5pt; margin-left: 4pt; }
 .day { margin-bottom: 8pt; }
 .bookend { border: 1.2px solid #111; border-radius: 6pt; padding: 6pt 8pt 4pt; margin: 6pt 0 8pt; break-inside: avoid; font-size: 8.4pt; line-height: 1.3; }

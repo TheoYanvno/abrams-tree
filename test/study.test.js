@@ -50,3 +50,11 @@ test('every week ends with at least three talking points', () => {
   assert.strictEqual(TALKING.length, 52);
   for (const points of TALKING) assert.ok(points.length >= 3 && points.every((p) => p.endsWith('?') || p.endsWith('.')));
 });
+
+import { CHURCH } from '../src/data/orthodoxy.js';
+
+test('going to church: the Liturgy step by step and its prayers, each with Scripture and saints', () => {
+  assert.strictEqual(CHURCH.liturgy.length, 11);
+  for (const list of [CHURCH.liturgy, CHURCH.prayers, CHURCH.visit, CHURCH.home]) for (const [k, t, [sc, sa]] of list) assert.ok(k && t && sc && sa, k);
+  assert.ok(CHURCH.prayers.some(([k]) => k === 'The Nicene Creed'));
+});
