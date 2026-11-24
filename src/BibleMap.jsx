@@ -5,7 +5,7 @@ import { bookById, superbookLink } from './lib/books.js';
 const PLAY_MS = 3000;
 const WALK_MS = 1800;                                   // how long the footprints take to walk to the next place
 
-// A bare footprint, heel at the bottom, pointing up, 10 by 16 units around its middle.
+// A sandal print: the wide sole leads and the small heel follows. Drawn pointing down; it is turned to face the way of travel.
 const FOOT = 'M0 -1.5c2.6 0 3.6 2.4 3.4 4.9-.2 2.6-1.3 4.6-3.4 4.6s-3.2-2-3.4-4.6C-3.6.9-2.6-1.5 0-1.5zM-.2-3.2c-1.9 0-3-1.6-2.8-3.4.2-1.6 1.4-2.4 2.8-2.4 1.6 0 2.8 1 2.8 2.7s-1 3.1-2.8 3.1z';
 
 export default function BibleMap({ route = {} }) {
@@ -15,6 +15,7 @@ export default function BibleMap({ route = {} }) {
   const [placeId, setPlaceId] = useState(null);
   const [playing, setPlaying] = useState(null);          // index into the filtered events, or null
   const [legs, setLegs] = useState([]);                  // the journey so far: [{ from, to }] in map units
+  const [upTo, setUpTo] = useState(null);                // the last event reached on the journey, or null for every place
   const svg = useRef(null);
   const drag = useRef(null);
 
@@ -23,6 +24,8 @@ export default function BibleMap({ route = {} }) {
   const current = playing !== null ? events[playing] : null;
   const place = placeId && placeById(placeId);
   const unit = view.w / FULL.w;                          // shrink markers and labels as you zoom in
+  // While the journey plays (and after, until it is reset) only the places reached so far are drawn.
+  const reached = useMemo(() => (upTo === null ? null : new Set(events.slice(0, upTo + 1).map((e) => e.place))), [upTo, events]);
 
   // Play the events through in order: each one is selected and the map flies to it.
   useEffect(() => {
@@ -33,6 +36,7 @@ export default function BibleMap({ route = {} }) {
     const here = project(placeById(e.place));
     const before = playing > 0 && events[playing - 1].place !== e.place ? project(placeById(events[playing - 1].place)) : null;
     if (playing === 0) setLegs([]);
+    setUpTo(playing);
     if (before) {
       setLegs((l) => [...l, { from: before, to: here }]);
       setView(fitBoth(before, here, Math.min(view.w, 320)));
@@ -40,7 +44,8 @@ export default function BibleMap({ route = {} }) {
     const id = setTimeout(() => setPlaying((i) => (i === null ? null : nextIndex(i, events.length))), PLAY_MS);
     return () => clearTimeout(id);
   }, [playing, events]);
-  useEffect(() => { setPlaying(null); setLegs([]); }, [era, book]);
+  useEffect(() => { setPlaying(null); setLegs([]); setUpTo(null); }, [era, book]);
+  const showAll = () => { setPlaying(null); setLegs([]); setUpTo(null); setView(FULL); };
 
   // Map units per screen pixel, and a screen point in map units.
   const ratio = () => view.w / (svg.current?.clientWidth || FULL.w);
@@ -99,6 +104,7 @@ export default function BibleMap({ route = {} }) {
           <button className="primary" onClick={() => setPlaying(playing === null ? 0 : null)} disabled={!events.length}>
             {playing === null ? '▶ Play in order' : '⏸ Stop'}
           </button>
+          {upTo !== null && playing === null && <button onClick={showAll}>Show every place</button>}
         </div>
         <div className="map-wrap">
           <svg
@@ -131,12 +137,12 @@ export default function BibleMap({ route = {} }) {
                 const newest = li === legs.length - 1 && playing !== null;
                 return steps.map((s, i) => (
                   <use key={`${li}-${i}`} href="#foot" className={newest ? 'step walking' : 'step'}
-                    transform={`translate(${s.x} ${s.y}) rotate(${s.angle + 90}) scale(${0.42 * unit}) scale(${s.left ? -1 : 1} 1)`}
+                    transform={`translate(${s.x} ${s.y}) rotate(${s.angle - 90}) scale(${0.42 * unit}) scale(${s.left ? -1 : 1} 1)`}
                     style={newest ? { animationDelay: `${(i / steps.length) * WALK_MS}ms` } : undefined} />
                 ));
               })}
             </g>
-            {PLACES.filter((p) => shown.has(p.id)).map((p) => {
+            {PLACES.filter((p) => shown.has(p.id) && (!reached || reached.has(p.id))).map((p) => {
               const { x, y } = project(p);
               const on = p.id === placeId;
               return (
