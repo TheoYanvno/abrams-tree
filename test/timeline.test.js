@@ -88,3 +88,15 @@ test('six days of making and a day of rest: 7,000 of our years', () => {
   assert.ok(week.at(-1).rest && week.slice(0, 6).every((d) => !d.rest));
   assert.deepStrictEqual([1, 2, 3, 4, 11, 12, 13, 21, 22].map(ordinal), ['1st', '2nd', '3rd', '4th', '11th', '12th', '13th', '21st', '22nd']);
 });
+
+import { wholeStory, wholeStoryFlood } from '../src/lib/timeline.js';
+
+test('the whole story runs from Adam to St. Paul on one scale', () => {
+  const all = wholeStory();
+  assert.strictEqual(all[0].id, 'adam');
+  assert.ok(all.some((p) => p.id === 'paul'));
+  assert.strictEqual(all.filter((p) => p.id === 'abraham').length, 1);
+  assert.strictEqual(all.find((p) => p.id === 'abraham').born, -2166);
+  assert.strictEqual(all.find((p) => p.id === 'adam').born, -2166 - genesisPeople().find((p) => p.id === 'abraham').born);
+  assert.ok(wholeStoryFlood() < -2166 && wholeStoryFlood() > -4114);
+});

@@ -35,6 +35,22 @@ export const laterPeople = (rows = LATER) =>
     id, name, born, died, lived: lifespan(born, died), about, book, chapter, note,
   }));
 
+/**
+ * The whole story, Adam to St. Paul and St. John, on one BC/AD scale. The Genesis years are moved so that
+ * Abraham's birth falls where the later chart puts it (c. 2166 BC), which makes every Genesis date
+ * approximate; the people in both charts appear once.
+ */
+export function wholeStory(genesis = genesisPeople(), later = laterPeople()) {
+  const shift = later.find((p) => p.id === 'abraham').born - genesis.find((p) => p.id === 'abraham').born;
+  const early = genesis.map((p) => ({ ...p, born: p.born + shift, died: p.died + shift, about: true }));
+  const seen = new Set(early.map((p) => p.id));
+  return [...early, ...later.filter((p) => !seen.has(p.id))].sort((a, b) => a.born - b.born);
+}
+
+/** The year of the Flood on the BC/AD scale of wholeStory(). */
+export const wholeStoryFlood = (genesis = genesisPeople(), later = laterPeople()) =>
+  floodYear(genesis) + later.find((p) => p.id === 'abraham').born - genesis.find((p) => p.id === 'abraham').born;
+
 /** Years between two years, where negatives are BC; there was no year 0, so 1 BC to AD 1 is one year. */
 export const lifespan = (born, died) => died - born - (born < 0 && died > 0 ? 1 : 0);
 

@@ -1,13 +1,23 @@
 import { useEffect, useMemo, useState } from 'react';
-import { genesisPeople, floodYear, laterPeople, formatBcAd, formatFromCreation, formatGodTime, godDays, contemporaries,
+import { genesisPeople, floodYear, laterPeople, wholeStory, wholeStoryFlood, formatBcAd, formatFromCreation, formatGodTime, godDays, contemporaries,
   span, percent, ticks, creationWeek, ordinal, GOD_TIME, GOD_DAY } from './lib/timeline.js';
 import { bookById, superbookLink } from './lib/books.js';
 
 const GENESIS = genesisPeople();
 const WEEK = creationWeek();
 const LATER = laterPeople();
+const ALL = wholeStory();
 
 const CHARTS = {
+  all: {
+    label: 'Adam to St. Paul',
+    people: ALL,
+    step: 100,
+    tick: 1000,
+    year: (y, about) => formatBcAd(y, about),
+    short: (y) => (y < 0 ? `${-y} BC` : y === 0 ? 'BC | AD' : `AD ${y}`),
+    intro: 'The whole story on one line, from Adam to the apostles Peter, Paul and John. The Genesis years are added up from the ages Genesis gives and joined to the later dates at Abraham, so every date here is approximate.',
+  },
   genesis: {
     label: 'Adam to Joseph',
     people: GENESIS,
@@ -38,7 +48,7 @@ function dayBands(chart, s) {
 }
 
 export default function Timeline({ route = {} }) {
-  const start = CHARTS[route.kind] ? route.kind : 'genesis';         // #timeline/genesis, #timeline/later
+  const start = CHARTS[route.kind] ? route.kind : 'all';             // #timeline, #timeline/genesis, #timeline/later
   const [chart, setChart] = useState(start);
   const [selectedId, setSelectedId] = useState(CHARTS[start].people[0].id);
   useEffect(() => {                                                  // #timeline/week opens at the week of creation
@@ -50,7 +60,7 @@ export default function Timeline({ route = {} }) {
   const person = c.people.find((p) => p.id === selectedId) ?? c.people[0];
   const together = useMemo(() => contemporaries(person, c.people), [person, c]);
   const withIds = new Set(together.map((p) => p.id));
-  const flood = chart === 'genesis' ? floodYear(GENESIS) : null;
+  const flood = chart === 'genesis' ? floodYear(GENESIS) : chart === 'all' ? wholeStoryFlood() : null;
   const years = (p) => `${c.year(p.born, p.about)} – ${c.year(p.died, p.about)}`;
   const pick = setSelectedId;
 
@@ -101,7 +111,7 @@ export default function Timeline({ route = {} }) {
             </div>
           </div>
         </div>
-        {flood !== null && <p className="muted small"><span className="flood-key" /> The Flood, in year {flood.toLocaleString('en-US')} (Genesis 7). The number on each bar is how many years that person lived.</p>}
+        {flood !== null && <p className="muted small"><span className="flood-key" /> The Flood, {chart === 'all' ? c.year(flood, true) : `in year ${flood.toLocaleString('en-US')}`} (Genesis 7). The number on each bar is how many years that person lived.</p>}
         {flood === null && <p className="muted small">The number on each bar is how many years that person lived.</p>}
       </section>
 
